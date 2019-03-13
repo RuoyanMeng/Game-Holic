@@ -1,57 +1,66 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+//import { Link } from 'react-router-dom';
+//import { withRouter } from 'react-router-dom'
 
+import * as actions from '../Actions/index'
 import GameGrid from './GameGrid';
 import SideBar from './SideBar';
-import Search from './Search';
-import { resetErrorMessage } from '../Actions/index'
+//import { type } from 'os';
+//import { resetErrorMessage } from '../Actions/index'
 
-
-
-//import { Link } from 'react-router-dom';
 
 class Main extends Component {
   static propTypes = {
-    // Injected by React Redux
-    errorMessage: PropTypes.string,
-    resetErrorMessage: PropTypes.func.isRequired,
-    inputValue: PropTypes.string.isRequired,
+
+    //onChange: PropTypes.func.isRequired,
+    Keyword: PropTypes.string.isRequired,
+    //types: PropTypes.string.isRequired,
+    games: PropTypes.array.isRequired,
     // Injected by React Router
-    children: PropTypes.node
+    //children: PropTypes.node
   }
 
-  handleDismissClick = e => {
-    this.props.resetErrorMessage()
-    e.preventDefault()
-  }
-
-  handleChange = nextValue => {
-    this.props.history.push(`/${nextValue}`)
-  }
-
-  renderErrorMessage() {
-    const { errorMessage } = this.props
-    if (!errorMessage) {
-      return null
+  constructor(props) {
+    super(props);
+    this.state={
+      Keyword:"halo"
     }
-
-    return (
-      <p style={{ backgroundColor: '#e99', padding: 10 }}>
-        <b>{errorMessage}</b>
-        {' '}
-        <button onClick={this.handleDismissClick}>
-          Dismiss
-        </button>
-      </p>
-    )
   }
+
+
+
+
+  componentDidMount() {
+    this.props.actions.getAllGames(this.state.Keyword)
+  }
+
+  // onInputChanged = e => {
+  //   this.props.actions.changeInputValue(e.target.value)
+  // };
+
+  
+
+
 
   render() {
+    const { games } = this.props
     return (
       <div>
-        <Search />
+        {/* search here*/}
+        <input type="text" placeholder="Search food here..." value={this.props.keyword}
+          onChange={
+            (e) => this.setState({Keyword:e.target.value})
+          }
+        />
+        <button 
+          onClick={
+            () =>  this.componentDidMount() 
+          }
+        >GO!</button>
+
         <GameGrid />
         <SideBar />
       </div>
@@ -59,12 +68,18 @@ class Main extends Component {
   }
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  errorMessage: state.errorMessage,
-  inputValue: ownProps.location.pathname.substring(1)
-})
+const mapStateToProps = (state,ownProps) => ({
+  //errorMessage: state.errorMessage,
+  games: state.games,
+  Keyword: ownProps.Keyword
+
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
 
 
-export default withRouter(connect(mapStateToProps, {
-  resetErrorMessage
-})(Main))
+export default connect(mapStateToProps,mapDispatchToProps)(Main)

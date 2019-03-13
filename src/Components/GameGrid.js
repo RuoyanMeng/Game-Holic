@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 class GameGrid extends Component{
 
+  static propTypes = {
+    games:PropTypes.array.isRequired,
+    // Injected by React Router
+    //children: PropTypes.node
+  }
 
 
   render() {

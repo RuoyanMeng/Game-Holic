@@ -14,9 +14,9 @@ export function loadGameSuccess(games) {
     };
 }
 
-export function getAllGames(inputValue, type) {
+export function getAllGames(inputValue) {
     return function (dispatch) {
-        gamesApi.getAllGames(inputValue, type).then(games => {
+        gamesApi.getAllGames(inputValue).then(games => {
             dispatch(loadGameSuccess(games));
         }).catch(error => {
             throw (error);
@@ -26,19 +26,30 @@ export function getAllGames(inputValue, type) {
 
 export function loadSingleGameSuccess(game) {
     return {
-        type:types.LOAD_SINGLEGAME_SUCCESS, game
+        type: types.LOAD_SINGLEGAME_SUCCESS, game
     };
 }
 
-export function getSingleGame(id){
-    return function(dispatch){
-        gamesApi.getGame(id).then(game=>{
+export function getSingleGame(id) {
+    return function (dispatch) {
+        gamesApi.getGame(id).then(game => {
             dispatch(loadSingleGameSuccess(game));
         }).catch(error => {
             throw (error);
         });
     }
 }
+
+export function changeInputValue(input) {
+    return function (dispatch) {
+        dispatch({
+            type: types.GET_INPUT_VALUE,
+            inputValue:input
+        })
+    }
+}
+
+
 
 
 

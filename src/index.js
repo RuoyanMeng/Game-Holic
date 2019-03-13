@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 import configureStore from './Store/configureStore';
 
-const store = configureStore;
+const store = configureStore();
 
 
 ReactDOM.render(

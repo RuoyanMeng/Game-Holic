@@ -4,10 +4,9 @@ import allGames from './getAllGames'
 import singleGame from './getSingleGame'
 
 
-
 const rootReducer = combineReducers({
     allGames,
-    singleGame,
+    singleGame
 });
 
 export default rootReducer;

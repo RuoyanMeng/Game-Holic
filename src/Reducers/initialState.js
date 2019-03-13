@@ -1,7 +1,7 @@
-export default {
+
+const initialState={
     games:[],
     game:[],
-    wishList:[],
-    inputValue,
-    type
+    wishList:[]
   }
+export default initialState

@@ -15,10 +15,9 @@ import rootReducer from '../Reducers/Index';
 //   playlist:[]
 // };
 
-function configureStore(){ 
-  return createStore(rootReducer, applyMiddleware(thunk));
+export default function configureStore() {
+  return createStore(
+    rootReducer,
+    applyMiddleware(thunk)
+  );
 }
-
-//export const _history = syncHistoryWithStore(history, store);
-
-export default configureStore;
