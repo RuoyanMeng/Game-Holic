@@ -40,14 +40,7 @@ export function getSingleGame(id) {
     }
 }
 
-export function changeInputValue(input) {
-    return function (dispatch) {
-        dispatch({
-            type: types.GET_INPUT_VALUE,
-            inputValue:input
-        })
-    }
-}
+
 
 
 

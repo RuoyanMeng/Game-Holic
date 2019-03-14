@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 // Import Components
-//import App from './components/App';
 import Main from './Components/Main';
 import Single from './Components/Single';
 // import GameGrid from './Components/GameGrid';

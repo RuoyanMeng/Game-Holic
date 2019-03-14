@@ -8,15 +8,11 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../Actions/index'
 import GameGrid from './GameGrid';
 import SideBar from './SideBar';
-//import { type } from 'os';
-//import { resetErrorMessage } from '../Actions/index'
+
 
 
 class Main extends Component {
   static propTypes = {
-
-    //onChange: PropTypes.func.isRequired,
-    Keyword: PropTypes.string.isRequired,
     //types: PropTypes.string.isRequired,
     games: PropTypes.array.isRequired,
     // Injected by React Router
@@ -25,55 +21,49 @@ class Main extends Component {
 
   constructor(props) {
     super(props);
-    this.state={
-      Keyword:"halo"
-    }
+    this.state = {
+      status: "LOADING",
+      keyWord: ""
+    };
   }
 
-
-
-
-  componentDidMount() {
-    this.props.actions.getAllGames(this.state.Keyword)
+  componentWillMount() {
+    console.log(this.state.keyWord)
+    this.props.actions.getAllGames(`${this.state.keyWord}`)
+    //console.log(this.props.num)
   }
-
-  // onInputChanged = e => {
-  //   this.props.actions.changeInputValue(e.target.value)
-  // };
-
-  
 
 
 
   render() {
-    const { games } = this.props
+    const { games, num } = this.props
     return (
       <div>
         {/* search here*/}
-        <input type="text" placeholder="Search food here..." value={this.props.keyword}
+        <input type="text" placeholder="Search food here..." value={this.state.keyWord}
           onChange={
-            (e) => this.setState({Keyword:e.target.value})
+            (e) => this.setState({ keyWord: e.target.value })
           }
         />
-        <button 
+        <button
           onClick={
-            () =>  this.componentDidMount() 
+            () => this.componentWillMount()
           }
         >GO!</button>
-
-        <GameGrid />
+        <GameGrid games={games} />
         <SideBar />
       </div>
     )
   }
 };
 
-const mapStateToProps = (state,ownProps) => ({
-  //errorMessage: state.errorMessage,
-  games: state.games,
-  Keyword: ownProps.Keyword
 
-});
+const mapStateToProps = (state) => {
+  //console.log(state)
+  return {
+    games: state.allGames.games
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -82,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
