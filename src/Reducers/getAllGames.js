@@ -1,13 +1,26 @@
-import initialState from './initialState'
 
-export default function getAllGamesReducer(state = initialState.games, action) {
-    if (action.type === "LOAD_GAMES_SUCCESS") {
-        console.log(action.games)
-        return Object.assign({}, state, {
-          games: action.games
-        })
-        
-      } else {
-        return state
+
+const initialState = {
+  games: [],
+  isFetching: "LOADING"
+}
+
+export default function getAllGamesReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'LOAD_GAMES_SUCCESS':
+      return {
+        ...state,
+        isFetching: "LOADED",
+        games: action.games
       }
+    case 'ERROR_MESSAGE':
+      return {
+        ...state,
+        idFeching: "ERROR"
+      }
+    default:
+      return state
+
+  }
+
 }

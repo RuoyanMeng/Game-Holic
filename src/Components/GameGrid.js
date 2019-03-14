@@ -6,27 +6,17 @@ class GameGrid extends Component {
 
   static propTypes = {
     games: PropTypes.array.isRequired,
-    // Injected by React Router
-    //children: PropTypes.node
+    isFetching: PropTypes.string.isRequired
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      status: "LOADING"
-      
+      status: this.props.isFetching
     }
 
   }
   componentDidMount() {
-    
-    if (this.props.games === undefined) {
-      console.log(this.props.games)
-    } else {
-      this.setState({
-        status: "LOADED"
-      });
-    }
 
   }
 
@@ -40,8 +30,12 @@ class GameGrid extends Component {
       case "LOADED":
         gameList = this.props.games.map(game => {
           return (
-            <div>
-              <h1>{game.name}</h1>
+            // set card styles here, add any thing you need in this div
+            //{pathname:"/GameDetails",search:`${game.id}`}
+            <div key={game.id}>
+              <Link to={`/GameDetails/${game.id}`}>
+                <h1>{game.name}</h1>
+              </Link>
             </div>
           )
         });
@@ -56,10 +50,8 @@ class GameGrid extends Component {
       <div>
         <h1>this is card container</h1>
         <div className="GameCard">
-          <Link to={"/GameDetails"}>
-            <h1>aaa</h1>
-            {gameList}
-          </Link>
+          <h1>Here </h1>
+          {gameList}
         </div>
       </div>
     )

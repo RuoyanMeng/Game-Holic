@@ -39,6 +39,7 @@ class GamesApi {
   }
 
   static getGame = (id) => {
+    let idQuery = "where id = " + `${id}` + ";";
     return axios({
       url: "/games",
       baseURL: BASE_URL,
@@ -47,15 +48,16 @@ class GamesApi {
         'Accept': 'application/json',
         'user-key': API_KEY
       },
-      data: "fields*;" + "where id =" + id + ";"
-        .then(response => {
-          console.log(response.data);
-          return response.data;
-        })
-        .catch(err => {
-          console.error(err);
-        })
+      //if need more info about game attribute, go to https://api-docs.igdb.com/, you can add elements follow the API doc
+      data: "fields name,rating,popularity,cover,platforms;" + idQuery
     })
+      .then(response => {
+        //console.log(response.data);
+        return response.data;
+      })
+      .catch(err => {
+        console.error(err);
+      })
 
 
   }
