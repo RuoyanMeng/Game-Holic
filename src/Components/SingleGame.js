@@ -61,7 +61,7 @@ class GameGrid extends Component {
 
         return (
             <div>
-                <Link to="/Home" >Back to Search</Link>
+                <Link to="/" >Back to Search</Link>
                 <h1>this is game: {this.state.currentId}</h1>
                 <h1>Name:{this.props.game.name} </h1>
                 {gameDetails}

@@ -9,7 +9,7 @@ class SideBar extends Component{
         <h1>
           this is SideBar
         </h1>
-        <Link to="/Home" >Home</Link>
+        <Link to="/" >Home</Link>
         <Link to="/WishList">Wish List</Link>
       </div>
     )

@@ -28,7 +28,7 @@ class App extends Component {
         </header>
         {/* Rended diffrent component based on the path */}
 
-        <Route exact path="/Home" component={Main} />
+        <Route exact path="/" component={Main} />
         <Route path="/GameDetails/:id" component={SingleGame}/>
         <Route path="/WishList" component={WishList}/>
       </div>
