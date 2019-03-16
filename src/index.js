@@ -18,7 +18,7 @@ const store = configureStore();
 
 render(
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter >
             <App />
         </BrowserRouter>
     </Provider>,

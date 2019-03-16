@@ -15,6 +15,7 @@ export function loadGameSuccess(games) {
 }
 
 export function getAllGames(inputValue) {
+    //console.log(inputValue)
     return function (dispatch) {
         gamesApi.getAllGames(inputValue).then(games => {
             dispatch(loadGameSuccess(games));

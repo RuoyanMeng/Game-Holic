@@ -1,7 +1,6 @@
 import API_KEY from '../APIKEY';
 import axios from 'axios';
 const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com';
-
 class GamesApi {
   /**
      * Do an API call to the search API endpoint.
@@ -30,7 +29,7 @@ class GamesApi {
       data: 'fields *;' + search + ' limit 20;'
     })
       .then(response => {
-        //console.log(response.data);
+        console.log(response.data);
         return response.data;
       })
       .catch(err => {
