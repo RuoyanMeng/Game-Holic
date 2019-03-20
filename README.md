@@ -5,6 +5,7 @@ Our project is using React and Redux dealing with data and interaction, so we sp
 We are now able to use React Redux to process data and implement interactive functions quickly. So the next stage we will focus on adding more features like more options for the searching, different types of game list, back-end develops and improves our UI design.
 
 File Structure
+```
 ├── README.md
 ├── package-lock.json
 ├── package.json
@@ -41,7 +42,7 @@ File Structure
     │   └── wishlist.css
     ├── index.js // Render hole APP
     └── serviceWorker.js
-
+```
 
 To start a local version, download and run
  ## npm install
