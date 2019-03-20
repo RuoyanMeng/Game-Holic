@@ -33,20 +33,12 @@ export function loadSingleGameSuccess(game) {
     };
 }
 
-export function loadSingleGameCoverSuccess(game) {
-    return {
-        type: types.LOAD_SINGLEGAMECOVER_SUCCESS, game
-    };
-}
 
 export function getSingleGame(id) {
     return function (dispatch) {
         gamesApi.getGame(id).then(game => {
             console.log(game,'game')
             dispatch(loadSingleGameSuccess(game));
-            if (game.length > 0 && game[0].cover) {
-                dispatch(getSingleGameCover(game[0].cover))
-            }
         }).catch(error => {
             dispatch(errorMessage);
             throw (error);
@@ -54,17 +46,7 @@ export function getSingleGame(id) {
     }
 }
 
-export function getSingleGameCover(id) {
-    return function (dispatch) {
-        gamesApi.getGameCover(id).then(game => {
-            console.log(game,'cover')
-            dispatch(loadSingleGameCoverSuccess(game));
-        }).catch(error => {
-            dispatch(errorMessage);
-            throw (error);
-        });
-    }
-}
+
 
 export function addItemToWishList(briefGameInfo){
     return{

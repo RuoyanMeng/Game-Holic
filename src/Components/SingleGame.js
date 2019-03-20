@@ -13,7 +13,6 @@ import SideBar from "./SideBar";
 class GameGrid extends Component {
   static propTypes = {
     game: PropTypes.object.isRequired,
-    gameCover: PropTypes.string.isRequired,
     isFetching: PropTypes.string.isRequired
     // Injected by React Router
     //children: PropTypes.node
@@ -28,7 +27,7 @@ class GameGrid extends Component {
   componentDidMount() {
     console.log(this.state.currentId);
     this.props.actions.getSingleGame(`${this.state.currentId}`);
-    //this.props.actions.getSingleGameCover('30672')
+
   }
 
   addWishListClick() {
@@ -59,10 +58,10 @@ class GameGrid extends Component {
                 </div>
               </Col>
               <Col span={8}>
-                <h2>Popularity:</h2>
-                {this.props.game.popularity && (
+                <h2>RATE:</h2>
+                {this.props.game.rating && (
                   <p className="game-popularity">
-                    {this.props.game.popularity.toFixed(2)}
+                    {this.props.game.rating.toFixed(2)}
                   </p>
                 )}
               </Col>
@@ -93,10 +92,10 @@ class GameGrid extends Component {
               )}
               <Row>
                 <Col span={8}>
-                  {this.props.gameCover && (
+                  {this.props.game.cover && (
                     <img
                       className="game-cover"
-                      src={this.props.gameCover}
+                      src={"https:"+this.props.game.cover.url}
                       alt={this.props.game.name}
                     />
                   )}
@@ -123,8 +122,7 @@ const mapStateToProps = state => {
   return {
     //wishlist:state.wishlist,
     isFetching: state.singleGame.isFetching,
-    game: state.singleGame.game,
-    gameCover: state.singleGameCover.gameCover
+    game: state.singleGame.game
   };
 };
 

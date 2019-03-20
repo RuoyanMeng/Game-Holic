@@ -26,7 +26,7 @@ class GamesApi {
         'Accept': 'application/json',
         'user-key': API_KEY
       },
-      data: 'fields *;' + search + ' limit 20;'
+      data: 'fields *;' + search + ' limit 20;'+"sort popularity desc;"
     })
       .then(response => {
         console.log(response.data);
@@ -48,34 +48,10 @@ class GamesApi {
         'user-key': API_KEY
       },
       //if need more info about game attribute, go to https://api-docs.igdb.com/, you can add elements follow the API doc
-      data: "fields *;" + idQuery
+      data: "fields *, cover.*;" + idQuery
     })
       .then(response => {
         //console.log(response.data);
-        return response.data;
-      })
-      .catch(err => {
-        console.error(err);
-      })
-
-
-  }
-
-  static getGameCover = (id) => {
-    let idQuery = "where id = " + `${id}` + ";";
-    return axios({
-      url: "/covers",
-      baseURL: BASE_URL,
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'user-key': API_KEY
-      },
-      //if need more info about game attribute, go to https://api-docs.igdb.com/, you can add elements follow the API doc
-      data: "fields alpha_channel,animated,game,height,image_id,url,width;" + idQuery
-    })
-      .then(response => {
-        console.log(response.data);
         return response.data;
       })
       .catch(err => {
