@@ -1,0 +1,25 @@
+.back-to {
+    float: right;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 40px;
+}
+.game-content {
+    margin-top: 40px;
+    text-align: left;
+}
+.game-cover {
+    margin: 20px 0;
+    width: 100%;
+}
+.game-detail-card {
+    margin-top: 20px;
+    font-size: 20px;
+}
+.game-summary {
+    padding: 0 20px;
+}
+.game-popularity {
+    color: orange;
+    font-weight: bold;
+}

@@ -1,0 +1,9 @@
+.sidebar {
+    border-right-color: aliceblue;
+}
+
+.sidebar-list {
+    padding: 20%;
+    width: 100%;
+    text-align: left;
+}

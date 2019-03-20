@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
+import "../Styles/gamegrid.css";
 
 class GameGrid extends Component {
 
@@ -28,14 +29,13 @@ class GameGrid extends Component {
         gameList = <em>Loading...</em>;
         break;
       case "LOADED":
-        gameList = this.props.games.map(game => {
+        gameList = this.props.games && this.props.games.map(game => {
           return (
             // set card styles here, add any thing you need in this div
             //{pathname:"/GameDetails",search:`${game.id}`}
-            <div key={game.id}>
-              <Link to={`/GameDetails/${game.id}`}>
-                <h1>{game.name}</h1>
-              </Link>
+            <div key={game.id} className="game-item">
+              <Link to={`/GameDetails/${game.id}`} className="game-name">{game.name}</Link>
+              <p>{game.summary}</p>
             </div>
           )
         });
@@ -48,9 +48,8 @@ class GameGrid extends Component {
 
     return (
       <div>
-        <h1>this is card container</h1>
         <div className="GameCard">
-          <h1>Here </h1>
+          <h1>Game List </h1>
           {gameList}
         </div>
       </div>

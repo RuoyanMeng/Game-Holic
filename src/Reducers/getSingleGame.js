@@ -3,18 +3,18 @@ const initialState = {
   isFetching:"LOADING"
 }
 
-export default function getAllGamesReducer(state = initialState, action) {
+export default function getSingleGameReducer(state = initialState, action) {
   switch (action.type) {
     case 'LOAD_SINGLEGAME_SUCCESS':
       return {
         ...state,
         isFetching: "LOADED",
-        game: action.game[0]
+        game: action.game.length > 0 ? action.game[0] : {}
       }
     case 'ERROR_MESSAGE':
       return {
         ...state,
-        idFeching: "ERROR"
+        isFeching: "ERROR"
       }
     default:
       return state

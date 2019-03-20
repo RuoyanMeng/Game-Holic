@@ -1,0 +1,13 @@
+.GameCard {
+    padding: 0 10%;
+    text-align: left;
+}
+
+.game-item {
+    width: 80%;
+    margin: 40px 0;
+}
+
+.game-item .game-name {
+    font-size: 20px;
+}
