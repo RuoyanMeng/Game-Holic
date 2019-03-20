@@ -1,4 +1,6 @@
 Game Holic
+The project is now deployed on https://game-holic-bfb01.firebaseapp.com/
+To start a local version, download and run ## npm install, ## npm start
 
 Our project is using React and Redux dealing with data and interaction, so we spend a lot of time exploring how Redux works. For now, We have finished the data flow based React Redux and some interaction like search, add wishlist etc. And a very simple UI to present the functions we have done. 
 
@@ -44,12 +46,9 @@ File Structure
     └── serviceWorker.js
 ```
 
-To start a local version, download and run
- ## npm install
 
- ## npm start
 
-The project is now deployed on https://game-holic-bfb01.firebaseapp.com/
+
 
 
 
