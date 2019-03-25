@@ -1,25 +1,78 @@
 .back-to {
     float: right;
-    height: 40px;
+    height: 70px;
     line-height: 40px;
     margin-right: 40px;
+    background-image: url('./img/btngun.png');
+    background-size: 100%;
+    background-color: transparent;
 }
+
+.back-to:hover {
+    height: 80px;
+    background-size: 110%;
+}
+
 .game-content {
     margin-top: 40px;
     text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-style: italic;
 }
+
+.game-content h1 {
+    font-size: 40px;
+    font-style: normal;
+    color: rgb(28, 39, 104);
+    text-shadow: 2px 2px 4px black;
+    font-weight: bold;
+}
+
+.game-content h2 {
+    font-size: 30px;
+    font-style: normal;
+    color: rgb(28, 39, 104);
+    text-shadow: 2px 2px 4px black;
+}
+
 .game-cover {
     margin: 20px 0;
     width: 100%;
 }
+
 .game-detail-card {
     margin-top: 20px;
     font-size: 20px;
 }
+
 .game-summary {
     padding: 0 20px;
 }
+
 .game-popularity {
-    color: orange;
+    color: gold;
     font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+    text-shadow: 2px 2px 4px rgb(51, 48, 48);
+}
+
+html:hover .game-content button {
+    animation-name: addtowishlist;
+    animation-duration: 450ms;
+    animation-delay: 50ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+}
+
+@keyframes addtowishlist {
+    to {
+        background-color: lightskyblue;
+    }
+}
+
+.game-content button:hover {
+    animation-play-state: paused;
 }
