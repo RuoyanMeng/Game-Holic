@@ -1,6 +1,15 @@
 .GameCard {
     padding: 0 10%;
     text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+.GameCard h1 {
+    color: rgb(28, 39, 104);
+    text-shadow: 2px 2px 4px black;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
 }
 
 .game-item {
@@ -10,4 +19,9 @@
 
 .game-item .game-name {
     font-size: 20px;
+    text-shadow: 1px 1px 2px black;
+}
+
+.game-item .game-name:hover {
+    font-size: 22px;
 }

@@ -17,12 +17,13 @@
     font-size: calc(10px + 2vmin);
     color: white;
     height: 9rem;
+    background-image: url('./img/banner.jpg');
 }
 
 .App-title {
     width: 30%;
     color: transparent;
-    background-image: url('./img/titlebg.png');
+    background-image: url('./img/logo1.png');
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
