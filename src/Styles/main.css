@@ -1,4 +1,8 @@
+.main-wrap {
+    border-left: 1px solid #eee;
+    overflow: hidden;
+}
 .search-input {
     width: 80%;
-    margin: 5% 10%;
+    margin: 5% 5%;
 }

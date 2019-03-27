@@ -59,17 +59,20 @@ class Main extends Component {
     return (
       <div>
         <Row>
-          <Col span={6}>
+          <Col span={4}>
             <SideBar />
           </Col>
-          <Col span={18}>
-            <Search
-              className="search-input"
-              placeholder="input search text"
-              onSearch={value => this.props.actions.getAllGames(value)}
-              enterButton
-            />
-            {gameGrid}
+          <Col span={20}>
+            <div className="main-wrap">
+              <Search
+                className="search-input"
+                placeholder="input search text"
+                onSearch={value => this.props.actions.getAllGames(value)}
+                enterButton
+              />
+              {gameGrid}
+            </div>
+
           </Col>
         </Row>
       </div>

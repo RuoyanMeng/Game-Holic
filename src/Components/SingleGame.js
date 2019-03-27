@@ -77,37 +77,40 @@ class GameGrid extends Component {
     return (
       <div>
         <Row>
-          <Col span={6}>
+          <Col span={4}>
             <SideBar />
           </Col>
 
-          <Col span={18}>
-            <Link to="/" className="back-to">
-              Back to Search
+          <Col span={20}>
+            <div className="main-wrap">
+              <Link to="/" className="back-to">
+                Back to Search
             </Link>
-            <div className="game-content">
-              {/* <h1 className="single-game-title">this is game: {this.state.currentId}</h1> */}
-              {this.props.game.name && (
-                <h1 className="single-game-title">{this.props.game.name} </h1>
-              )}
-              <Row>
-                <Col span={8}>
-                  {this.props.game.cover && (
-                    <img
-                      className="game-cover"
-                      src={"https:"+this.props.game.cover.url}
-                      alt={this.props.game.name}
-                    />
-                  )}
-                </Col>
-                <Col span={16}>{gameDetails}</Col>
-              </Row>
-              {this.props.game.name && (
-                <Button type="primary" onClick={() => this.addWishListClick()}>
-                  Add to Wishlist
+              <div className="game-content">
+                {/* <h1 className="single-game-title">this is game: {this.state.currentId}</h1> */}
+                {this.props.game.name && (
+                  <h1 className="single-game-title">{this.props.game.name} </h1>
+                )}
+                <Row>
+                  <Col span={4}>
+                    {this.props.game.cover && (
+                      <img
+                        className="game-cover"
+                        src={"https:" + this.props.game.cover.url}
+                        alt={this.props.game.name}
+                      />
+                    )}
+                  </Col>
+                  <Col span={20}>{gameDetails}</Col>
+                </Row>
+                {this.props.game.name && (
+                  <Button type="primary" onClick={() => this.addWishListClick()}>
+                    Add to Wishlist
                 </Button>
-              )}
+                )}
+              </div>
             </div>
+
           </Col>
         </Row>
       </div>
