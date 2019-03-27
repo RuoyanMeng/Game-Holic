@@ -12,7 +12,7 @@ class GamesApi {
     let _url = null;
     if (query === "") {
       _url = "/games";
-      search = '';
+      search = "sort popularity desc;";
     } else {
       _url = "/search";
       search = "search " + `"${query}"` + ";";
@@ -26,7 +26,7 @@ class GamesApi {
         'Accept': 'application/json',
         'user-key': API_KEY
       },
-      data: 'fields *;' + search + ' limit 20;'+"sort popularity desc;"
+      data: 'fields *;' + search + ' limit 20;'
     })
       .then(response => {
         console.log(response.data);
