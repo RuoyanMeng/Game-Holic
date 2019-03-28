@@ -1,8 +1,12 @@
 .main-wrap {
-    border-left: 1px solid #eee;
-    overflow: hidden;
+    border-left: 1px solid rgb(238, 238, 238, 0.8);
+    padding-left: 0px;
 }
+
 .search-input {
     width: 80%;
     margin: 5% 5%;
+    margin-top: 10px;
+    padding-right: 0px;
+    opacity: 0.6;
 }

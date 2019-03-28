@@ -9,7 +9,6 @@
 }
 
 .App-header {
-    background-color: #282c34;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,16 +16,20 @@
     font-size: calc(10px + 2vmin);
     color: white;
     height: 9rem;
-    background-image: url('./img/banner.jpg');
+    background-image: url('./img/logo1.png'), url('./img/LOGO.png');
+    background-repeat: no-repeat, no-repeat;
+    background-size: 30%, 10%;
+    background-position: 10%, 4%;
+    /* background-image: url('./img/banner.jpg'); */
 }
 
 .App-title {
     width: 30%;
     color: transparent;
-    background-image: url('./img/logo1.png');
+    /* background-image: url('./img/logo1.png');
     background-repeat: no-repeat;
     background-size: 100%;
-    background-position: center;
+    background-position: left; */
 }
 
 .App-link {

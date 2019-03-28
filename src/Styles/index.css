@@ -4,8 +4,8 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-image: url('./img/logo2.png'), url('./img/bgp.jpg');
-    background-size: 20%, 100% 100%;
+    background-image: url('./img/logo1.png'), url('./img/bgun.jpg');
+    background-size: 20%, cover;
     background-repeat: no-repeat;
     background-position: right bottom, center;
     background-attachment: fixed;
