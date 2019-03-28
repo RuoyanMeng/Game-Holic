@@ -1,6 +1,13 @@
 .sidebar {
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
+    border-right: 1px solid white;
+    border-radius: 25px;
+    box-shadow: 3px 0px 3px grey;
+    height: 100%;
+    padding-bottom: 100%;
+    margin-right: 30px;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-list {

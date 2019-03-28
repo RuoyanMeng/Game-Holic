@@ -3,6 +3,8 @@
     text-align: left;
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
+    color: rgb(117, 118, 173);
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
 }
 
 .GameCard h1 {
@@ -11,20 +13,27 @@
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
     margin-top: 0px;
-    padding-bottom: 40%;
     font-variant: small-caps;
 }
 
 .game-item {
     width: 80%;
     margin: 40px 0;
+    font-style: oblique;
 }
 
 .game-item .game-name {
-    font-size: 2vw;
-    text-shadow: 1px 1px 2px black;
+    font-size: 1.5vw;
+    color: silver;
+    text-shadow: 1px 1px 2px white;
+    font-style: normal;
 }
 
 .game-item .game-name:hover {
-    font-size: 2.2vw;
+    font-size: 1.8vw;
+    color: rgb(109, 0, 0);
+}
+
+a:active {
+    color: lightcoral;
 }
