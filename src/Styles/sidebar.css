@@ -4,7 +4,8 @@
 }
 
 .sidebar-list {
-    padding: 10%;
+    padding-left: 2vw;
+    padding-top: 2vh;
     width: 100%;
     text-align: left;
     font-size: 2vw;
