@@ -20,6 +20,12 @@
     font-variant: small-caps;
 }
 
+.sidebar-list span {
+    color: rgb(109, 0, 0);
+    margin: 0;
+    padding: 0;
+}
+
 .sidebar-list a {
     color: silver;
 }

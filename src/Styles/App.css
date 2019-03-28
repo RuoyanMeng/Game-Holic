@@ -16,10 +16,10 @@
     font-size: calc(10px + 2vmin);
     color: white;
     height: 9rem;
-    background-image: url('./img/logo1.png'), url('./img/LOGO.png');
+    background-image: url('./img/logo1.png'), url('./img/logo11.png');
     background-repeat: no-repeat, no-repeat;
-    background-size: 30%, 10%;
-    background-position: 10%, 4%;
+    background-size: 30%, 8%;
+    background-position: 10%, 5%;
     /* background-image: url('./img/banner.jpg'); */
 }
 

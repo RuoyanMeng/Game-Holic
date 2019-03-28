@@ -45,12 +45,12 @@
         font-size: 2vw;
         font-style: normal;
         color: silver;
-        text-shadow: 2px 2px 4px white;
+        text-shadow: 10px 6px 10px rgb(82, 0, 0);
         font-variant: small-caps;
     }
     
     .game-cover {
-        margin: 20px 0;
+        margin: 35px 0;
         width: 100%;
     }
     
