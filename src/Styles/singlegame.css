@@ -73,6 +73,10 @@
         text-shadow: 2px 2px 4px rgb(51, 48, 48);
     }
     
+    .game-content button {
+        background-color: rgb(117, 118, 173);
+    }
+    
     html:hover .game-content button {
         animation-name: addtowishlist;
         animation-duration: 450ms;

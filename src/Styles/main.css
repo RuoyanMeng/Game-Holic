@@ -11,13 +11,13 @@
     opacity: 0.6;
 }
 
-.main-wrap button {
+.search-input button {
     margin-left: 0px;
     background-color: rgba(94, 3, 3, 0.856);
     border: 1px solid rgba(0, 0, 0, 0.856);
     box-shadow: 2px 2px 4px grey;
 }
 
-.main-wrap button:hover {
+.search-input button:hover {
     background-color: lightcoral;
 }
