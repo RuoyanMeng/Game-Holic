@@ -50,6 +50,7 @@ export const addItemToWishList = (briefGameInfo) =>{
         firestore.collection('wishlist').add({
             ...briefGameInfo
           }).then(() => {
+            console.log("Document successfully added!");
             dispatch({ type: types.ADD_WISHLIST_SUCCESS });
           }).catch(err => {
             dispatch({ type: types.ADD_WISHLIST_ERROR }, err);
@@ -57,10 +58,16 @@ export const addItemToWishList = (briefGameInfo) =>{
     }
 }
 
-export function removeItemFromWishList(briefGameInfo){
-    return{
-        type:types.REMOVE_WISHLIST_ITEM,briefGameInfo
-    };
+export function removeItemFromWishList(id){
+    return (dispatch,getState, {getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('wishlist').doc(id).delete().then(() => {
+            console.log("Document successfully deleted!");
+            dispatch({ type:types.REMOVE_WISHLIST_SUCCESS });
+          }).catch(err => {
+            dispatch({ type: types.REMOVE_WISHLIST_ERROR }, err);
+          });
+    }
 }
 
 

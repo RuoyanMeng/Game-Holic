@@ -35,6 +35,7 @@ class WishList extends Component {
         //why if statement not working?
         if(this.props.wishlist){
             wish_list = this.props.wishlist.map(item=>{
+                //console.log(item.id);
                 return(
                     //Need a table here to list all games
                     <div key={item.gameID}>
