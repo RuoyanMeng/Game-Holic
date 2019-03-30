@@ -16,7 +16,7 @@ export default function getAllGamesReducer(state = initialState, action) {
     case 'ERROR_MESSAGE':
       return {
         ...state,
-        isFeching: "ERROR"
+        idFeching: "ERROR"
       }
     default:
       return state

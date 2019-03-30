@@ -45,10 +45,3 @@ File Structure
     ├── index.js // Render hole APP
     └── serviceWorker.js
 ```
-
-
-
-
-
-
-

@@ -33,11 +33,9 @@ export function loadSingleGameSuccess(game) {
     };
 }
 
-
 export function getSingleGame(id) {
     return function (dispatch) {
         gamesApi.getGame(id).then(game => {
-            console.log(game,'game')
             dispatch(loadSingleGameSuccess(game));
         }).catch(error => {
             dispatch(errorMessage);
@@ -46,12 +44,17 @@ export function getSingleGame(id) {
     }
 }
 
-
-
-export function addItemToWishList(briefGameInfo){
-    return{
-        type:types.ADD_WISHLIST,briefGameInfo
-    };
+export const addItemToWishList = (briefGameInfo) =>{
+    return (dispatch,getState, {getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('wishlist').add({
+            ...briefGameInfo
+          }).then(() => {
+            dispatch({ type: types.ADD_WISHLIST_SUCCESS });
+          }).catch(err => {
+            dispatch({ type: types.ADD_WISHLIST_ERROR }, err);
+          });
+    }
 }
 
 export function removeItemFromWishList(briefGameInfo){

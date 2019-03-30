@@ -6,31 +6,25 @@ import { Route } from 'react-router-dom';
 // Import Components
 import Main from './Components/Main';
 import SingleGame from './Components/SingleGame';
-import WishList from './Components/WishList'
-// import GameGrid from './Components/GameGrid';
+import UserIndex from './Components/UserIndex';
+import LogIn from './Components/auth/LogIn';
+import SignUp from './Components/auth/SignUp';
+import Search from './Components/Search';
 
 import './Styles/App.css';
 
-class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: "Game Holic"
-    };
-  }
+class App extends Component {
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">{this.state.title}</h1>
-        </header>
-        {/* Rended diffrent component based on the path */}
-
         <Route exact path="/" component={Main} />
         <Route path="/GameDetails/:id" component={SingleGame}/>
-        <Route path="/WishList" component={WishList}/>
+        <Route path="/Search" component={Search}/>
+        <Route path="/UserIndex" component={UserIndex}/>
+        <Route path="/LogIn" component={LogIn}/>
+        <Route path="/SignUp" component={SignUp}/>
       </div>
 
 
