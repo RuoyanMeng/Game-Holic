@@ -1,0 +1,34 @@
+.main-wrap {
+    position: relative;
+    width: 100%;
+    background: #222;
+    overflow: hidden;
+    .main-center {
+        width: 1120px;
+        margin: 0 auto;
+        .main-background {
+            width: 1920px;
+            height: 1080px;
+            margin-left: -400px;
+            background-image: url(../img/background.png);
+            background-size: cover;
+            text-align: left;
+            overflow: hidden;
+            .banner-info {
+                width: 600px;
+                margin: 400px 0 0 400px;
+            }
+            h1, h2 {
+                color: #fff;
+                font-weight: bold;
+            }
+            h1 {
+                font-size: 40px;
+            }
+            h2 {
+                font-size: 30px;
+                line-height: 60px;
+            }
+        }
+    }
+}

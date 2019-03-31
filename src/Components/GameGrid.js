@@ -34,7 +34,7 @@ class GameGrid extends Component {
             //{pathname:"/GameDetails",search:`${game.id}`}
             <div key={game.id}>
               <Link to={`/GameDetails/${game.id}`}>
-                <h1>{game.name}</h1>
+                <img src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${game.image_id}.jpg`} width="100"/>
               </Link>
             </div>
           )

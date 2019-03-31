@@ -11,7 +11,7 @@ class GamesApi {
     let search = null;
     let _url = null;
     if (query === "") {
-      _url = "/games";
+      _url = "/covers";
       search = "sort popularity desc;";
     } else {
       _url = "/search";
