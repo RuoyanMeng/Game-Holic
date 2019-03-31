@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Affix, Input, Button } from "antd";
+
 import "./header.scss";
 
 const Search = Input.Search;
@@ -20,18 +21,18 @@ class Header extends Component {
       <div className="header">
         <Affix>
           <div className="header-wrap">
-            <h1>Game Holic</h1>
+            <h1>GameHolic</h1>
             <div className="search-wrap">
               <Search
                 type="text"
-                placeholder="Search Game here..."
-                style={{ width: 500 }}
+                placeholder="Find your fancy game here..."
+                style={{ width: 650 }}
                 onSearch={value => this.searchGame(value)}
               />
             </div>
 
-            <Button type="primary" className="btn-login">
-              <Link to="/LogIn">LogIn</Link>
+            <Button type="dashed" className="btn-login" shape="round" ghost>
+              <Link to="/LogIn">Log In</Link>
             </Button>
           </div>
         </Affix>

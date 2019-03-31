@@ -15,19 +15,29 @@
             text-align: left;
             overflow: hidden;
             .banner-info {
-                width: 600px;
-                margin: 400px 0 0 400px;
+                width: 756px;
+                margin: 274px 0 0 350px;
             }
             h1, h2 {
                 color: #fff;
                 font-weight: bold;
             }
             h1 {
-                font-size: 40px;
+                font-size: 72px;
+               
             }
             h2 {
-                font-size: 30px;
+                font-size: 34px;
                 line-height: 60px;
+                font-style: italic;
+            }            
+        }
+
+        .list-title{
+            h2 {
+                float: center;
+                color: #fff;
+                font-size: 40px;
             }
         }
     }

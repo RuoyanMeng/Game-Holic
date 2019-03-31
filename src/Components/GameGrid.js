@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
+import "./gamegrid.scss";
+
 class GameGrid extends Component {
 
   static propTypes = {
@@ -32,9 +34,9 @@ class GameGrid extends Component {
           return (
             // set card styles here, add any thing you need in this div
             //{pathname:"/GameDetails",search:`${game.id}`}
-            <div key={game.id}>
+            <div key={game.id} className="game-item">
               <Link to={`/GameDetails/${game.id}`}>
-                <img src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${game.image_id}.jpg`} width="100"/>
+                <img src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${game.image_id}.jpg`} width="160" className="game-img"/>
               </Link>
             </div>
           )
@@ -47,10 +49,12 @@ class GameGrid extends Component {
     }
 
     return (
-      <div>
-        <h1>this is card container</h1>
+      <div className="Game-wrap">
+        <div className="list-title">
+          <h2>Trendy Games</h2>
+        </div>
+
         <div className="GameCard">
-          <h1>Here </h1>
           {gameList}
         </div>
       </div>
