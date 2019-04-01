@@ -1,9 +1,10 @@
 const initialState = {
   game: {},
-  isFetching:"LOADING"
+  isFetching: "LOADING",
+  playStatus: ''
 }
 
-export default function getAllGamesReducer(state = initialState, action) {
+export default function getSingleGameReducer(state = initialState, action) {
   switch (action.type) {
     case 'LOAD_SINGLEGAME_SUCCESS':
       return {
@@ -15,6 +16,12 @@ export default function getAllGamesReducer(state = initialState, action) {
       return {
         ...state,
         idFeching: "ERROR"
+      }
+    case 'GET_PLAYSTATUS_SUCCESS':
+      console.log(action.playStatus)
+      return {
+        ...state,
+        playStatus: action.playStatus
       }
     default:
       return state

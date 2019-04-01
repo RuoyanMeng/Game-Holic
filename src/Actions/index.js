@@ -52,7 +52,7 @@ export const addItemToList = (briefGameInfo) => {
         const firestore = getFirestore();
         firestore.collection('users').doc(uid).collection('games').doc(gameId).set({
             listType: listType,
-            gameId : briefGameInfo.gameID
+            gameId: briefGameInfo.gameID
         }).then(() => {
             console.log("game listType added!");
         });
@@ -78,6 +78,35 @@ export function removeItemFromWishList(id) {
         });
     }
 }
+
+export function getPlayStatus(id) {
+    return (dispatch, getState, { getFirestore }) => {
+        const firestore = getFirestore();
+        var playStatus = null;
+        firestore.collection('users').doc(id.uid).collection('games').where('gameId', '==', id.gameID).get().then(games => {
+            console.log(games.size);
+            if(games.size==0){
+                console.log("GET PLAYSTATUS SUCCESS: None!");
+                playStatus = 'None'
+                dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
+            }else{
+                games.forEach(game => {
+                    console.log("GET_PLAYSTATUS_SUCCESS!");
+                    playStatus = game.data().listType
+                    console.log(playStatus)
+                    dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
+                })
+            }
+            
+        }).catch(err => {
+            //dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
+        });
+
+    }
+}
+
+
+
 
 
 
