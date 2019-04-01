@@ -1,0 +1,60 @@
+.game-wrap{
+    position: relative;
+    width: 100%;
+    background: #222;
+    overflow: hidden;
+
+    .game-center {
+        width: 1350px;
+        height: 1080px;
+        margin: 0 auto;
+        // .game-background {
+        //     width: 1920px;
+        //     height: 1080px;
+        //     margin-left: -400px;
+        // }
+        .back-to {
+            float: right;
+            height: 40px;
+            line-height: 40px;
+            margin-right: 170px;
+            margin-top: 25px;
+        }
+        .game-content {
+            margin-top: 110px;
+            text-align: left;
+            .single-game-title {
+                color: #fff;
+                font-size:50px;
+                font-weight: bold;
+            }
+            .game-cover {
+                margin: 25px 0;
+                width: 100%;
+            }
+            .game-detail-card {
+                margin-top: 20px;
+                font-size: 20px;
+                h2, p{
+                    color: #fff;
+                }
+            }
+            .game-summary {
+                padding: 0 20px;
+                
+            }
+            .game-popularity {
+                color: orange;
+                font-weight: bold;
+            }
+        }
+       
+        
+    }
+    
+    
+
+
+
+}
+
