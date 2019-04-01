@@ -1,8 +1,8 @@
 const initialState = {
-    wishlist: {}
+    gamelist: {}
 }
 
-export default function editWishList(state = initialState, action) {
+export default function editGameList(state = initialState, action) {
     switch (action.type) {
         case 'ADD_WISHLIST_SUCCESS':
             //console.log('add wishlist success');

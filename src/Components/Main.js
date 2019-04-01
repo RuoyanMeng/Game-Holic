@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 import * as actions from '../Actions/index'
 import GameGrid from './GameGrid';
+import { signOut } from '../Actions/authActions'
 
 
 
@@ -14,6 +15,7 @@ class Main extends Component {
   static propTypes = {
     isFetching: PropTypes.string.isRequired,
     games: PropTypes.array.isRequired,
+    auth: PropTypes.object.isRequired
     // Injected by React Router
     //children: PropTypes.node
   }
@@ -27,7 +29,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.keyWord)
+    //console.log(this.state.keyWord)
     this.props.actions.getAllGames(`${this.state.keyWord}`)
     //console.log(this.props.allGames)
   }
@@ -54,6 +56,8 @@ class Main extends Component {
         gameGrid = <b>Failed to load data, please try again</b>;
         break;
     }
+    //console.log(this.props.auth.uid)
+    const links = this.props.auth.uid ? <button onClick={this.props.signOut}>Sign Out</button> : <Link to='/SignIn'><button>Sign In</button></Link>;
 
 
     return (
@@ -71,7 +75,7 @@ class Main extends Component {
             }
           >GO!</button>
 
-          <Link to = '/LogIn'><button>LogIn</button></Link>
+          {links}
 
         </div>
 
@@ -84,10 +88,8 @@ class Main extends Component {
         </div>
 
         <div>
-          <Link to= '/UserIndex'> UserIndex </Link>
+          <Link to='/UserIndex'>UserIndex</Link>
         </div>
-
-
       </div>
     )
   }
@@ -95,17 +97,19 @@ class Main extends Component {
 
 
 const mapStateToProps = (state) => {
-  console.log(state.allGames.games)
+  //console.log(state.firebase.auth)
   //console.log(state.allGames.isFetching)
   return {
     isFetching: state.allGames.isFetching,
-    games: state.allGames.games
+    games: state.allGames.games,
+    auth: state.firebase.auth
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    signOut: () => dispatch(signOut())
   }
 }
 

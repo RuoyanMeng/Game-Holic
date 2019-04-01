@@ -22,7 +22,7 @@ export function getAllGames(inputValue) {
         }).catch(error => {
             dispatch(errorMessage)
             throw (error);
-            
+
         });
     }
 }
@@ -44,29 +44,38 @@ export function getSingleGame(id) {
     }
 }
 
-export const addItemToWishList = (briefGameInfo) =>{
-    return (dispatch,getState, {getFirestore}) => {
+export const addItemToList = (briefGameInfo) => {
+    let uid = briefGameInfo.uid;
+    let listType = briefGameInfo.playStatus;
+    let gameId = briefGameInfo.gameID;
+    return (dispatch, getState, { getFirestore }) => {
         const firestore = getFirestore();
-        firestore.collection('wishlist').add({
+        firestore.collection('users').doc(uid).collection('games').doc(gameId).set({
+            listType: listType,
+            gameId : briefGameInfo.gameID
+        }).then(() => {
+            console.log("game listType added!");
+        });
+        firestore.collection('users').doc(uid).collection(listType).doc(gameId).set({
             ...briefGameInfo
-          }).then(() => {
-            console.log("Document successfully added!");
-            dispatch({ type: types.ADD_WISHLIST_SUCCESS });
-          }).catch(err => {
-            dispatch({ type: types.ADD_WISHLIST_ERROR }, err);
-          });
+        }).then(() => {
+            console.log("Game successfully added!");
+            dispatch({ type: types.ADD_LIST_SUCCESS, uid });
+        }).catch(err => {
+            dispatch({ type: types.ADD_LIST_ERROR }, err);
+        });
     }
 }
 
-export function removeItemFromWishList(id){
-    return (dispatch,getState, {getFirestore}) => {
+export function removeItemFromWishList(id) {
+    return (dispatch, getState, { getFirestore }) => {
         const firestore = getFirestore();
         firestore.collection('wishlist').doc(id).delete().then(() => {
             console.log("Document successfully deleted!");
-            dispatch({ type:types.REMOVE_WISHLIST_SUCCESS });
-          }).catch(err => {
-            dispatch({ type: types.REMOVE_WISHLIST_ERROR }, err);
-          });
+            dispatch({ type: types.REMOVE_LIST_SUCCESS });
+        }).catch(err => {
+            dispatch({ type: types.REMOVE_LIST_ERROR }, err);
+        });
     }
 }
 

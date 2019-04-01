@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 import Main from './Components/Main';
 import SingleGame from './Components/SingleGame';
 import UserIndex from './Components/UserIndex';
-import LogIn from './Components/auth/LogIn';
+import SignIn from './Components/auth/SignIn';
 import SignUp from './Components/auth/SignUp';
 import Search from './Components/Search';
 
@@ -23,7 +23,7 @@ class App extends Component {
         <Route path="/GameDetails/:id" component={SingleGame}/>
         <Route path="/Search" component={Search}/>
         <Route path="/UserIndex" component={UserIndex}/>
-        <Route path="/LogIn" component={LogIn}/>
+        <Route path="/SignIn" component={SignIn}/>
         <Route path="/SignUp" component={SignUp}/>
       </div>
 
