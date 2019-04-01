@@ -34,7 +34,7 @@ class Header extends Component {
               <Search
                 type="text"
                 placeholder="Find your fancy game here..."
-                style={{ width: 650 }}
+                style={{ width: 600 }}
                 onSearch={value => this.searchGame(value)}
               />
             </div>
