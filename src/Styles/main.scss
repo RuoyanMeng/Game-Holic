@@ -1,0 +1,44 @@
+.main-wrap {
+    position: relative;
+    width: 100%;
+    background: #222;
+    overflow: hidden;
+    .main-center {
+        width: 1120px;
+        margin: 0 auto;
+        .main-background {
+            width: 1920px;
+            height: 1080px;
+            margin-left: -400px;
+            background-image: url(../img/background.png);
+            background-size: cover;
+            text-align: left;
+            overflow: hidden;
+            .banner-info {
+                width: 756px;
+                margin: 274px 0 0 350px;
+            }
+            h1, h2 {
+                color: #fff;
+                font-weight: bold;
+            }
+            h1 {
+                font-size: 72px;
+               
+            }
+            h2 {
+                font-size: 34px;
+                line-height: 60px;
+                font-style: italic;
+            }            
+        }
+
+        .list-title{
+            h2 {
+                float: center;
+                color: #fff;
+                font-size: 40px;
+            }
+        }
+    }
+}

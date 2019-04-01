@@ -1,0 +1,24 @@
+.Game-wrap {
+  position: relative;
+  width: 100%;
+  background: #222;
+  overflow: hidden;
+  .list-title {
+    h2 {
+      float: center;
+      color: #fff;
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .GameCard{
+      .game-item {
+        width: 17%;
+        float: left;
+        position: relative;
+        padding-left: 100px;
+        margin-bottom: 15px;
+      }
+  }
+}
