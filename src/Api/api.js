@@ -11,7 +11,7 @@ class GamesApi {
     let search = null;
     let _url = null;
     if (query === "") {
-      _url = "/covers";
+      _url = "/games";
       search = "sort popularity desc;";
     } else {
       _url = "/search";
@@ -26,7 +26,7 @@ class GamesApi {
         'Accept': 'application/json',
         'user-key': API_KEY
       },
-      data: 'fields *;' + search + ' limit 20;'
+      data: 'fields *, cover.*;' + search + ' limit 20;'
     })
       .then(response => {
         console.log(response.data);
@@ -57,8 +57,6 @@ class GamesApi {
       .catch(err => {
         console.error(err);
       })
-
-
   }
 
 

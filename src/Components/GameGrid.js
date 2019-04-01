@@ -31,15 +31,24 @@ class GameGrid extends Component {
         break;
       case "LOADED":
         gameList = this.props.games.map(game => {
-          return (
-            // set card styles here, add any thing you need in this div
-            //{pathname:"/GameDetails",search:`${game.id}`}
-            <div key={game.id} className="game-item">
-              <Link to={`/GameDetails/${game.id}`}>
-                <img src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${game.image_id}.jpg`} width="160" className="game-img"/>
-              </Link>
-            </div>
-          )
+          if (game.cover && game.cover.image_id) {
+            return (
+              // set card styles here, add any thing you need in this div
+              //{pathname:"/GameDetails",search:`${game.id}`}
+              <div key={game.id} className="game-item">
+                <Link to={`/GameDetails/${game.id}`}>
+                  <img
+                    src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
+                      game.cover.image_id
+                    }.jpg`}
+                    width="160"
+                    height="210"
+                    className="game-img"
+                  />
+                </Link>
+              </div>
+            );
+          }
         });
         break;
       default:

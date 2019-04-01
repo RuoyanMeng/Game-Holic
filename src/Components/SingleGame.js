@@ -54,10 +54,20 @@ class GameGrid extends Component {
                 <div className="game-summary">
                   <h2>Summary:</h2>
                   {this.props.game.summary && <p>{this.props.game.summary}</p>}
+                  {this.props.game.name && (
+                    <Button
+                      type="primary"
+                      shape="round"
+                      onClick={() => this.addWishListClick()}
+                    >
+                      Add to Wishlist
+                    </Button>
+                  )}
                 </div>
+               
               </Col>
               <Col span={8}>
-                <h2>Rate:</h2>
+                <h2>Popularity:</h2>
                 {this.props.game.popularity && (
                   <p className="game-popularity">
                     {this.props.game.popularity.toFixed(2)}
@@ -99,7 +109,7 @@ class GameGrid extends Component {
                         <img
                           className="game-cover"
                         //   src={"https:" + this.props.game.cover.url}
-                          src={`https://images.igdb.com/igdb/image/upload/t_screenshot_big_2x/${this.props.game.cover.image_id}.jpg`}
+                          src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${this.props.game.cover.image_id}.jpg`}
                           alt={this.props.game.name}
                         />
                       )}
@@ -107,15 +117,7 @@ class GameGrid extends Component {
 
                     <Col span={14}>{gameDetails}</Col>
                   </Row>
-                  {this.props.game.name && (
-                    <Button
-                      type="primary"
-                      shape="round"
-                      onClick={() => this.addWishListClick()}
-                    >
-                      Add to Wishlist
-                    </Button>
-                  )}
+                 
                 </div>
               </Col>
             </Row>
