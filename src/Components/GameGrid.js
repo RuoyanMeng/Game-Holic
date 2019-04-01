@@ -31,7 +31,8 @@ class GameGrid extends Component {
         break;
       case "LOADED":
         gameList = this.props.games.map(game => {
-          if (game.cover && game.cover.image_id) {
+          let filterList = [22422,16309,22472,26163];
+          if (game.cover && game.cover.image_id && filterList.indexOf(game.id) == -1 ) {
             return (
               // set card styles here, add any thing you need in this div
               //{pathname:"/GameDetails",search:`${game.id}`}
