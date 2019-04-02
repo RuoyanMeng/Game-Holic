@@ -27,10 +27,12 @@ class WishList extends Component {
 
 
     render() {
+        const { wishList } = this.props
         let wish_list = null;
         //why if statement not working?
-        if (this.props.wishlist) {
-            wish_list = this.props.wishlist[0].wishList.map(item => {
+
+        if (!wishList) {
+            wish_list = wishList.users[0].games.map(item => {
                 let id = item.id
                 //console.log(id);
                 //console.log(this.props.ww[id]);
@@ -61,10 +63,11 @@ class WishList extends Component {
     }
 };
 
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state) => {
+    console.log(state.firestore)
     return {
         auth: state.firebase.auth,
-        wishList:state.firestore.ordered.users
+        wishList: state.firestore.ordered
     }
 }
 
@@ -80,7 +83,8 @@ export default compose(
                 doc: ownProps.auth.uid,
                 subcollections: [
                     {
-                        collection: 'wishList',
+                        collection: 'games',
+                        where: ['playStatus', '==', 'wishList']
                     }
                 ],
             }

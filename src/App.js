@@ -21,7 +21,7 @@ class App extends Component {
       <div className="App">
         <Route exact path="/" component={Main} />
         <Route path="/GameDetails/:id" component={SingleGame}/>
-        <Route path="/Search" component={Search}/>
+        <Route path="/Search/:query" component={Search}/>
         <Route path="/UserIndex" component={UserIndex}/>
         <Route path="/SignIn" component={SignIn}/>
         <Route path="/SignUp" component={SignUp}/>

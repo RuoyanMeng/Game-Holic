@@ -26,10 +26,12 @@ class PlayingList extends Component {
 
 
     render() {
+        const { playingList } = this.props
+
         let playing_List = null;
         //why if statement not working?
-        if (this.props.playingList) {
-            playing_List = this.props.playingList[0].playingList.map(item => {
+        if (!playingList) {
+            playing_List = playingList.users[0].games.map(item => {
                 let id = item.id
                 //console.log(id);
                 //console.log(this.props.ww[id]);
@@ -64,7 +66,7 @@ const mapStateToProps = (state) => {
     console.log(state.firestore.ordered.users)
     return {
         auth: state.firebase.auth,
-        playingList: state.firestore.ordered.users
+        playingList: state.firestore.ordered
     }
 }
 
@@ -81,9 +83,7 @@ export default compose(
                 subcollections: [
                     {
                         collection: 'games',
-                        where: [
-                            ['listType', '==', 'playingList']
-                        ]
+                        where: ['playStatus', '==', 'playingList']
                     }
                 ],
             }

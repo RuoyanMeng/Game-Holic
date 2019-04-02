@@ -13,9 +13,6 @@ class GamesApi {
     if (query === "") {
       _url = "/games";
       search = "sort popularity desc;";
-    } else {
-      _url = "/search";
-      search = "search " + `"${query}"` + ";";
     }
 
     return axios({
@@ -29,13 +26,37 @@ class GamesApi {
       data: 'fields *, cover.*;' + search + ' limit 20;'
     })
       .then(response => {
-        //console.log(response.data);
+        console.log(response.data);
         return response.data;
       })
       .catch(err => {
         console.error(err);
       });
   }
+
+  static getSearchResults = (query) => {
+    //console.log(query)
+    let _url = "/search";
+    let search = "search " + `"${query}"` + ";";
+    return axios({
+      url: _url,
+      baseURL: BASE_URL,
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'user-key': API_KEY
+      },
+      data: 'fields *;' + search + ' limit 20;'
+    })
+      .then(response => {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
 
   static getGame = (id) => {
     let idQuery = "where id = " + `${id}` + ";";

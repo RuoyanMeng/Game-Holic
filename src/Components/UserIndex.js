@@ -15,7 +15,7 @@ import CompletedList from './gameList/CompletedList'
 class UserIndex extends Component {
 
     static propTypes = {
-        wishlist: PropTypes.array.isRequired,
+        auth: PropTypes.object.isRequired,
     }
 
     constructor(props) {
@@ -43,10 +43,10 @@ class UserIndex extends Component {
                 <Header />
                 <h1>this is WishList component</h1>
                 <WishList/>
-                {/* <h1>this is PlayingList component</h1>
-                <PlayingList/> */}
-                {/* <h1>this is CompletedList component</h1>
-                <CompletedList/> */}
+                <h1>this is PlayingList component</h1>
+                <PlayingList/> 
+                <h1>this is CompletedList component</h1>
+                <CompletedList/>
             </div>
         )
     }

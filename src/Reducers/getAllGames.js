@@ -2,6 +2,7 @@
 
 const initialState = {
   games: [],
+  searchResults: [],
   isFetching: "LOADING"
 }
 
@@ -17,6 +18,12 @@ export default function getAllGamesReducer(state = initialState, action) {
       return {
         ...state,
         idFeching: "ERROR"
+      }
+    case 'LOAD_SEARCH_RESULTS_SUCCESS':
+      return {
+        ...state,
+        isFetching: "LOADED",
+        searchResults: action.searchResults
       }
     default:
       return state

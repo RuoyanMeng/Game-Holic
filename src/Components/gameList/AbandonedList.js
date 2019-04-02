@@ -28,10 +28,11 @@ class AbandonedList extends Component {
 
 
     render() {
+        const { abandonedList } = this.props
         let Abandoned_List = null;
         //why if statement not working?
-        if (this.props.wishlist) {
-            Abandoned_List = this.props.abandonedList[0].abandonedList.map(item => {
+        if (!abandonedList) {
+            Abandoned_List = abandonedList.users[0].abandonedList.map(item => {
                 let id = item.id
                 //console.log(id);
                 //console.log(this.props.ww[id]);
@@ -62,10 +63,10 @@ class AbandonedList extends Component {
     }
 };
 
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state) => {
     return {
         //auth: state.firebase.auth,
-        abandonedList:state.firestore.ordered.users
+        abandonedList: state.firestore.ordered
     }
 }
 

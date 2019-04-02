@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
 
 import * as actions from "../Actions/index";
 
@@ -26,12 +24,12 @@ class SingleGame extends Component {
     super(props);
     this.state = {
       currentId: this.props.match.params.id,
-      playStatus: 'None'
+      playStatus: this.props.playStatus
     }
 
   }
   componentDidMount() {
-    console.log(this.state.currentId)
+    console.log(this.state.playStatus)
     this.props.actions.getSingleGame(`${this.state.currentId}`)
     let id = {
       uid: this.props.auth.uid,
@@ -42,26 +40,12 @@ class SingleGame extends Component {
     //console.log(this.props.game.playStatus)
   }
 
-  static getDerivedStateFromProps(props, state) {
-    // Re-run the filter whenever the list array or filter text change.
-    // Note we need to store prevPropsList and prevFilterText to detect changes.
-    if (
-      props.playStatus !== state.playStatus
-    ) {
-      return {
-        playStatus:props.playStatus
-      };
-    }
-    return null;
-  }
 
 
 
-
-  addListClick(playStatusB, uid, playStatusA) {
+  addListClick( uid, playStatus) {
     let briefGameInfo = {
-      playStatusBeforeChange: playStatusB,
-      playStatusAfterChange: playStatusA,
+      playStatus: playStatus,
       uid: uid,
       gameID: this.state.currentId,
       gameName: this.props.game.name
@@ -72,12 +56,13 @@ class SingleGame extends Component {
     this.componentDidMount();
   }
 
-  handleChange(value){
-    this.setState({ playStatus: value })
+  handleChange=(e)=>{
+    this.setState({ playStatus: e.target.value })
     console.log(this.state.playStatus)
   }
 
   render() {
+    console.log(this.state.playStatus)
     const { game, auth, isFetching, playStatus, isGetingPlayStatus } = this.props;
     let playStatusSelector = null;
 
@@ -98,7 +83,8 @@ class SingleGame extends Component {
             playStatusSelector =
               <div>
                 <select 
-                  onChange={(e)=>this.setState({ playStatus: e.target.value })}
+                  onChange={(e)=>this.handleChange(e)}
+                  value={this.state.playStatus}
                 >
                   <option value="None">None</option>
                   <option value="wishList">Wanna Play</option>
@@ -106,7 +92,7 @@ class SingleGame extends Component {
                   <option value="completedList">Completed</option>
                   <option value="abandonedList">Abandoned</option>
                 </select>
-                <button onClick={() => this.addListClick(playStatus, auth.uid, this.state.playStatus)}>SAVE</button>
+                <button onClick={() => this.addListClick(auth.uid, this.state.playStatus)}>SAVE</button>
               </div>
 
             gameDetails = (
