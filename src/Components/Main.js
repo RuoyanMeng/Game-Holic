@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom';
+
 import * as actions from '../Actions/index'
 import GameGrid from './GameGrid';
 import { signOut } from '../Actions/authActions'
@@ -86,7 +87,7 @@ class Main extends Component {
 }
 
 const mapStateToProps = (state) => {
-  //console.log(state.firebase.auth)
+  console.log(state)
   //console.log(state.allGames.isFetching)
   return {
     isFetching: state.allGames.isFetching,

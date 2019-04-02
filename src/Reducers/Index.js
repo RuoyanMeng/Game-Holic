@@ -10,6 +10,7 @@ import gameList from './editGameList'
 
 
 
+
 const rootReducer = combineReducers({
     auth:authReducers,
     allGames,

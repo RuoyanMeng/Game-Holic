@@ -13,41 +13,55 @@ import { Button, Row, Col } from "antd";
 import "../Styles/singlegame.scss";
 
 class SingleGame extends Component {
-    static propTypes = {
-        game: PropTypes.object.isRequired,
-        isFetching: PropTypes.string.isRequired,
-        auth: PropTypes.object.isRequired,
-        gameStatus: PropTypes.array.isRequired
-        // Injected by React Router
-        //children: PropTypes.node
+  static propTypes = {
+    game: PropTypes.object.isRequired,
+    isFetching: PropTypes.string.isRequired,
+    auth: PropTypes.object.isRequired,
+    gameStatus: PropTypes.array.isRequired
+    // Injected by React Router
+    //children: PropTypes.node
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentId: this.props.match.params.id,
+      playStatus: 'None'
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentId: this.props.match.params.id,
-            //playStatus: 'None'
-        }
-
+  }
+  componentDidMount() {
+    console.log(this.state.currentId)
+    this.props.actions.getSingleGame(`${this.state.currentId}`)
+    let id = {
+      uid: this.props.auth.uid,
+      gameID: this.state.currentId
     }
-    componentDidMount() {
-        console.log(this.state.currentId)
-        this.props.actions.getSingleGame(`${this.state.currentId}`)
-        let id = {
-            uid: this.props.auth.uid,
-            gameID: this.state.currentId
-        }
-        //console.log(id.uid)
-        this.props.actions.getPlayStatus(id)
-        console.log(this.props.game.playStatus)
+    //console.log(id.uid)
+    this.props.actions.getPlayStatus(id)
+    //console.log(this.props.game.playStatus)
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    // Re-run the filter whenever the list array or filter text change.
+    // Note we need to store prevPropsList and prevFilterText to detect changes.
+    if (
+      props.playStatus !== state.playStatus
+    ) {
+      return {
+        playStatus:props.playStatus
+      };
     }
+    return null;
+  }
 
-  
 
 
-  addListClick(uid, playStatus) {
+
+  addListClick(playStatusB, uid, playStatusA) {
     let briefGameInfo = {
-      playStatus: playStatus,
+      playStatusBeforeChange: playStatusB,
+      playStatusAfterChange: playStatusA,
       uid: uid,
       gameID: this.state.currentId,
       gameName: this.props.game.name
@@ -55,32 +69,19 @@ class SingleGame extends Component {
       // platforms:this.props.game.platforms
     };
     this.props.actions.addItemToList(briefGameInfo);
+    this.componentDidMount();
+  }
+
+  handleChange(value){
+    this.setState({ playStatus: value })
+    console.log(this.state.playStatus)
   }
 
   render() {
-    const { game, auth, isFetching,playStatus } = this.props;
+    const { game, auth, isFetching, playStatus, isGetingPlayStatus } = this.props;
     let playStatusSelector = null;
 
-    if(playStatus!=''){
-        {/* change play ststus here, the style below only for function test */ }
-        console.log("ooo"+playStatus)
-        playStatusSelector =
-        <div>
-            <select value={playStatus} className="avenir"
-                onChange={
-                    (e) => this.setState({ playStatus: e.target.value })
-                }
-            >
-                <option value="None">None</option>
-                <option value="wishList">Wanna Play</option>
-                <option value="playingList">Playing</option>
-                <option value="completedList">Completed</option>
-                <option value="abandonedList">Abandoned</option>
-            </select>
-            <button onClick={() => this.addListClick(auth.uid, this.state.playStatus)}>SAVE</button>
-        </div>
-    
-    }
+
     let gameDetails = null;
     switch (isFetching) {
       case "LOADING":
@@ -88,42 +89,65 @@ class SingleGame extends Component {
         break;
       case "LOADED":
         //edit all the elements and layout of gamedetails card here
-        gameDetails = (
-          <div className="game-detail-card">
-            <Row>
-              <Col span={16}>
-                <div className="game-summary">
-                  <h2>Summary:</h2>
-                  {this.props.game.summary && <p>{this.props.game.summary}</p>}
-                  {this.props.game.name && (playStatusSelector
-                    // <Button
-                    //   type="primary"
-                    //   shape="round"
-                    //   onClick={() => this.addWishListClick()}
-                    // >
-                    //   Add to Wishlist
-                    // </Button>
+        switch (isGetingPlayStatus) {
+          case "LOADING":
+            gameDetails = <em>Loading...</em>;
+            break;
+          case "GET_PLAYSTATUS_SUCCESS":
+            {/* change play ststus here, the style below only for function test */ }
+            playStatusSelector =
+              <div>
+                <select 
+                  onChange={(e)=>this.setState({ playStatus: e.target.value })}
+                >
+                  <option value="None">None</option>
+                  <option value="wishList">Wanna Play</option>
+                  <option value="playingList">Playing</option>
+                  <option value="completedList">Completed</option>
+                  <option value="abandonedList">Abandoned</option>
+                </select>
+                <button onClick={() => this.addListClick(playStatus, auth.uid, this.state.playStatus)}>SAVE</button>
+              </div>
 
-                  )}
-                </div>
-              </Col>
-              <Col span={8}>
-                <h2>Popularity:</h2>
-                {this.props.game.popularity && (
-                  <p className="game-popularity">
-                    {this.props.game.popularity.toFixed(2)}
-                  </p>
-                )}
-              </Col>
-            </Row>
-          </div>
-        );
+            gameDetails = (
+              <div className="game-detail-card">
+                <Row>
+                  <Col span={16}>
+                    <div className="game-summary">
+                      <h2>Summary:</h2>
+                      {this.props.game.summary && <p>{this.props.game.summary}</p>}
+                      {this.props.game.name && (playStatusSelector
+                        // <Button
+                        //   type="primary"
+                        //   shape="round"
+                        //   onClick={() => this.addWishListClick()}
+                        // >
+                        //   Add to Wishlist
+                        // </Button>
+
+                      )}
+                    </div>
+                  </Col>
+                  <Col span={8}>
+                    <h2>Popularity:</h2>
+                    {this.props.game.popularity && (
+                      <p className="game-popularity">
+                        {this.props.game.popularity.toFixed(2)}
+                      </p>
+                    )}
+                  </Col>
+                </Row>
+              </div>
+            );
+        }
+
+
         break;
       default:
         gameDetails = <b>Failed to load data, please try again</b>;
         break;
     }
-  
+
     return (
       <div className="game-wrap">
         <Row>
@@ -148,7 +172,7 @@ class SingleGame extends Component {
                           //   src={"https:" + game.cover.url}
                           src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
                             game.cover.image_id
-                          }.jpg`}
+                            }.jpg`}
                           alt={game.name}
                         />
                       )}
@@ -169,10 +193,11 @@ class SingleGame extends Component {
 
 const mapStateToProps = state => {
   //console.log(state.singleGame)
-  console.log(state.firestore.ordered.users);
+  //console.log(state.firestore.ordered.users);
   return {
     playStatus: state.singleGame.playStatus,
     isFetching: state.singleGame.isFetching,
+    isGetingPlayStatus: state.singleGame.isGetingPlayStatus,
     game: state.singleGame.game,
     auth: state.firebase.auth
   };

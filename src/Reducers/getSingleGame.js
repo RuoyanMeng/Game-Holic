@@ -1,7 +1,8 @@
 const initialState = {
   game: {},
   isFetching: "LOADING",
-  playStatus: ''
+  isGetingPlayStatus: "LOADING",
+  playStatus: "None"
 }
 
 export default function getSingleGameReducer(state = initialState, action) {
@@ -21,7 +22,8 @@ export default function getSingleGameReducer(state = initialState, action) {
       console.log(action.playStatus)
       return {
         ...state,
-        playStatus: action.playStatus
+        playStatus: action.playStatus,
+        isGetingPlayStatus: "GET_PLAYSTATUS_SUCCESS"
       }
     default:
       return state

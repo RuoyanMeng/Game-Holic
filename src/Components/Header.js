@@ -13,16 +13,19 @@ const Search = Input.Search;
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      keyWord: ""
-    };
   }
   searchGame(value) {
     console.log(value);
   }
 
   render() {
-    const links = this.props.auth.uid ? <button onClick={this.props.signOut}>Sign Out</button> : <Link to='/SignIn'><button>Sign In</button></Link>;
+    let signOutBlock = 
+  <div>
+    <Link to='/UserIndex' className="btn btn-floating pink lighten-1">{this.props.profile.userName}</Link>
+    <button onClick={this.props.signOut}>Sign Out</button>
+    
+    </div>
+    const links = this.props.auth.uid ? signOutBlock : <Link to='/SignIn'><button>Sign In</button></Link>;
     return (
       <div className="header">
         <Affix>
@@ -51,7 +54,8 @@ const mapStateToProps = (state) => {
   //console.log(state.firebase.auth)
   //console.log(state.allGames.isFetching)
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile:state.firebase.profile
   }
 }
 

@@ -46,17 +46,22 @@ export function getSingleGame(id) {
 
 export const addItemToList = (briefGameInfo) => {
     let uid = briefGameInfo.uid;
-    let listType = briefGameInfo.playStatus;
+    let listTypeB = briefGameInfo.playStatusBeforeChange;
+    let listTypeA = briefGameInfo.playStatusAfterChange;
     let gameId = briefGameInfo.gameID;
+    console.log(briefGameInfo.gameName)
     return (dispatch, getState, { getFirestore }) => {
         const firestore = getFirestore();
+
+        //add new item to correspend list
         firestore.collection('users').doc(uid).collection('games').doc(gameId).set({
-            listType: listType,
+            listType: listTypeA,
             gameId: briefGameInfo.gameID
         }).then(() => {
             console.log("game listType added!");
         });
-        firestore.collection('users').doc(uid).collection(listType).doc(gameId).set({
+        //
+        firestore.collection('users').doc(uid).collection(listTypeA).doc(gameId).set({
             ...briefGameInfo
         }).then(() => {
             console.log("Game successfully added!");
@@ -64,6 +69,16 @@ export const addItemToList = (briefGameInfo) => {
         }).catch(err => {
             dispatch({ type: types.ADD_LIST_ERROR }, err);
         });
+
+        if (listTypeB !== "None") {
+            firestore.collection('users').doc(uid).collection(listTypeB).doc(gameId).delete().then(() => {
+                console.log("Document successfully deleted from " + listTypeB);
+                dispatch({ type: types.REMOVE_LIST_SUCCESS });
+            }).catch(err => {
+                dispatch({ type: types.REMOVE_LIST_ERROR }, err);
+            }
+            );
+        }
     }
 }
 
@@ -84,12 +99,12 @@ export function getPlayStatus(id) {
         const firestore = getFirestore();
         var playStatus = null;
         firestore.collection('users').doc(id.uid).collection('games').where('gameId', '==', id.gameID).get().then(games => {
-            console.log(games.size);
-            if(games.size==0){
+            //console.log(games.size);
+            if (games.size === 0) {
                 console.log("GET PLAYSTATUS SUCCESS: None!");
                 playStatus = 'None'
                 dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
-            }else{
+            } else {
                 games.forEach(game => {
                     console.log("GET_PLAYSTATUS_SUCCESS!");
                     playStatus = game.data().listType
@@ -97,7 +112,6 @@ export function getPlayStatus(id) {
                     dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
                 })
             }
-            
         }).catch(err => {
             //dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
         });

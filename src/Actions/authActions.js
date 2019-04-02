@@ -43,18 +43,7 @@ export const signUp = (newUser) => {
                     userName: newUser.userName,
                     initials: newUser.userName[0] + newUser.userName[1]
                 })
-                // user.collection('wishList').add({
-                //     gameID:null
-                // }),
-                // user.collection('playingList').add({
-                //     gameID:null
-                // }),
-                // user.collection('completedList').add({
-                //     gameID:null
-                // }),
-                // user.collection('abandonedList').add({
-                //     gameID:null
-                // })
+
             )
         }).then(() => {
             dispatch({ type: 'SIGNUP_SUCCESS' });
