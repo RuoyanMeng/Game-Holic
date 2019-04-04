@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 
-import Header from "../Header";
+// import Header from "../Header";
 
 class PlayingList extends Component {
 
@@ -54,7 +54,7 @@ class PlayingList extends Component {
 
         return (
             <div>
-                <Header />
+                {/* <Header /> */}
                 <h1>this is playing List component</h1>
                 {playing_List}
             </div>

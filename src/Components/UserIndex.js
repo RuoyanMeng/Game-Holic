@@ -39,9 +39,10 @@ class UserIndex extends Component {
 
 
         return (
-            <div>
+            <div id='Userindex'>
                 <Header />
-                <h1 id='wishlist'>this is WishList component</h1>
+                <h1 id='Greeting'>Good day!</h1>
+                <h1>this is WishList component</h1>
                 <WishList/>
                 <h1>this is PlayingList component</h1>
                 <PlayingList/> 
