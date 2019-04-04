@@ -19,7 +19,7 @@ export default function getSingleGameReducer(state = initialState, action) {
         idFeching: "ERROR"
       }
     case 'GET_PLAYSTATUS_SUCCESS':
-      console.log(action.playStatus)
+      console.log('GET_PLAYSTATUS_SUCCESS: '+action.playStatus)
       return {
         ...state,
         playStatus: action.playStatus,

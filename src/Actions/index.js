@@ -69,6 +69,7 @@ export function getSingleGame(id) {
 export const addItemToList = (briefGameInfo) => {
     let uid = briefGameInfo.uid;
     let gameId = briefGameInfo.gameID;
+    let playStatus = briefGameInfo.playStatus;
     console.log(briefGameInfo.gameName)
     return (dispatch, getState, { getFirestore }) => {
         const firestore = getFirestore();
@@ -79,6 +80,7 @@ export const addItemToList = (briefGameInfo) => {
         }).then(() => {
             console.log("game listType added!");
             dispatch({ type: types.ADD_LIST_SUCCESS, uid });
+            dispatch({type:types.GET_PLAYSTATUS_SUCCESS, playStatus})
         }).catch(err => {
             dispatch({ type: types.ADD_LIST_ERROR }, err);
         });
@@ -118,7 +120,6 @@ export function getPlayStatus(id) {
         }).catch(err => {
             //dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
         });
-
     }
 }
 
