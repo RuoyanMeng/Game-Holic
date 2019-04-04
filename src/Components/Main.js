@@ -77,9 +77,9 @@ class Main extends Component {
 
           <div className="game-card">{gameGrid}</div>
 
-          <div>
+          {/* <div>
             <Link to="/UserIndex"> UserIndex </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     );
