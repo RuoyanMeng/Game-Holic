@@ -22,6 +22,11 @@ class Header extends Component {
     };
   }
 
+  handleSignOut=()=>{
+    this.props.signOut();
+    this.props.actions.resetState();
+  }
+
   render() {
     let signOutBlock = (
       <div className="username">
@@ -38,7 +43,7 @@ class Header extends Component {
           size="small"
           shape="round"
           ghost
-          onClick={this.props.signOut}
+          onClick={()=>{this.handleSignOut()}}
         >
          Sign Out
          

@@ -8,6 +8,7 @@ const initialState = {
 export default function getSingleGameReducer(state = initialState, action) {
   switch (action.type) {
     case 'LOAD_SINGLEGAME_SUCCESS':
+      console.log(action.game[0])
       return {
         ...state,
         isFetching: "LOADED",
@@ -19,11 +20,21 @@ export default function getSingleGameReducer(state = initialState, action) {
         idFeching: "ERROR"
       }
     case 'GET_PLAYSTATUS_SUCCESS':
-      console.log('GET_PLAYSTATUS_SUCCESS: '+action.playStatus)
+      console.log('GET_PLAYSTATUS_SUCCESS: ' + action.playStatus)
       return {
         ...state,
         playStatus: action.playStatus,
         isGetingPlayStatus: "GET_PLAYSTATUS_SUCCESS"
+      }
+    case 'RESET_STATE':
+      console.log('reset state')
+      console.log(state)
+      return {
+        ...state,
+        game: {},
+        isFetching: "LOADING",
+        isGetingPlayStatus: "LOADING",
+        playStatus: "None"
       }
     default:
       return state

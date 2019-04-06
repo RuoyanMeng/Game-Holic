@@ -5,10 +5,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as actions from "../Actions/index";
+import { signIn } from '../Actions/authActions'
 
 import Header from "./Header";
-import { Button, Row, Col } from "antd";
+import { Button, Row, Col, Modal, Radio } from "antd";
 import "../Styles/singlegame.scss";
+
+const RadioGroup = Radio.Group;
 
 class SingleGame extends Component {
   static propTypes = {
@@ -24,26 +27,35 @@ class SingleGame extends Component {
     super(props);
     this.state = {
       currentId: this.props.match.params.id,
-      playStatus: this.props.playStatus
+      playStatus: this.props.playStatus,
+      loading: false,
+      visible: false,
+      email: '',
+      password: ''
     }
 
   }
   componentDidMount() {
-    console.log(this.state.playStatus)
-    this.props.actions.getSingleGame(`${this.state.currentId}`)
-    let id = {
-      uid: this.props.auth.uid,
-      gameID: this.state.currentId
+    console.log(this.props.playStatus)
+    //this.props.actions.resetState();
+    this.props.actions.getSingleGame(`${this.state.currentId}`);
+    if (!this.props.auth.isEmpty) {
+      let id = {
+        uid: this.props.auth.uid,
+        gameID: this.state.currentId
+      }
+      //console.log(id.uid)
+      this.props.actions.getPlayStatus(id)
+      //console.log(this.props.game.playStatus)
     }
-    //console.log(id.uid)
-    this.props.actions.getPlayStatus(id)
-    //console.log(this.props.game.playStatus)
+
   }
 
-
-
-
-  addListClick( uid, playStatus) {
+  addListClick(uid, playStatus) {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false, visible: false });
+    }, 3000);
     let briefGameInfo = {
       playStatus: playStatus,
       uid: uid,
@@ -56,67 +68,193 @@ class SingleGame extends Component {
     //this.componentDidMount();
   }
 
-  handleChange=(e)=>{
-    this.setState({ playStatus: e.target.value })
-    //console.log(this.state.playStatus)
+  // handleChange = (e) => {
+  //   this.setState({ playStatus: e.target.value })
+  //   //console.log(this.state.playStatus)
+  // }
+
+  handleSignInChange = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value
+    })
+  }
+
+  onChange = (e) => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      playStatus: e.target.value,
+    });
+  }
+
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleOk = () => {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false, visible: false });
+    }, 3000);
+
+  }
+
+  handleCancel = () => {
+    this.setState({ visible: false });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let credentials = {
+      email: this.state.email,
+      password: this.state.password
+    }
+    //console.log(credentials);
+    this.props.signIn(credentials);
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false, visible: false });
+    }, 3000);
+
   }
 
   render() {
     //console.log(this.state.playStatus)
-    const { game, auth, isFetching, playStatus, isGetingPlayStatus } = this.props;
+    const { visible, loading, value } = this.state;
+    const { game, auth, isFetching, playStatus, isGetingPlayStatus, authError } = this.props;
+    const radioStyle = {
+      display: 'block',
+      height: '30px',
+      lineHeight: '30px',
+    };
+
     let playStatusSelector = null;
-
-
     let gameDetails = null;
+
     switch (isFetching) {
       case "LOADING":
         gameDetails = <em>Loading...</em>;
         break;
       case "LOADED":
         //edit all the elements and layout of gamedetails card here
-        switch (isGetingPlayStatus) {
-          case "LOADING":
-            gameDetails = <em>Loading...</em>;
-            break;
-          case "GET_PLAYSTATUS_SUCCESS":
-            {/* change play ststus here, the style below only for function test */ }
-            playStatusSelector =
-              <div>
-                <select 
-                  onChange={(e)=>this.handleChange(e)}
-                  value={playStatus}
-                >
-                  <option value="None">None</option>
-                  <option value="wishList">Wanna Play</option>
-                  <option value="playingList">Playing</option>
-                  <option value="completedList">Completed</option>
-                  <option value="abandonedList">Abandoned</option>
-                </select>
-                <button onClick={() => this.addListClick(auth.uid, this.state.playStatus)}>SAVE</button>
-              </div>
-
-            gameDetails = (
-              <div className="game-detail-card">
-                <Row>
-                  <Col span={16}>
-                    <div className="game-summary">
-                      <h2>Summary:</h2>
-                      {this.props.game.summary && <p>{this.props.game.summary}</p>}
-                      {this.props.game.name && (playStatusSelector
-                      )}
+        if (auth.isEmpty) {
+          {/* change play ststus here, the style below only for function test */ }
+          let signUp = <Link to='/SignUp'>Sign Up</Link>
+          playStatusSelector =
+            <div>
+              <Button type="primary" onClick={this.showModal}>
+                {playStatus}
+              </Button>
+              <Modal
+                visible={visible}
+                title="Game Holic"
+                onCancel={this.handleCancel}
+                footer={null}
+              >
+                <form onSubmit={this.handleSubmit} className="white">
+                  <div className="input-field">
+                    <label htmlFor="email">Email<br /></label>
+                    <input type="email" id='email' onChange={this.handleSignInChange} />
+                  </div>
+                  <div className="input-field">
+                    <label htmlFor="password">Password<br /></label>
+                    <input type="password" id='password' onChange={this.handleSignInChange} />
+                  </div><br /><br />
+                  <div className="input-field">
+                    <button className="btn pink lighten-1 z-depth-0" >Sign In</button>
+                    <div className="center red-text">
+                      {authError ? <p>{authError}</p> : null}
                     </div>
-                  </Col>
-                  <Col span={8}>
-                    <h2>Popularity:</h2>
-                    {this.props.game.popularity && (
-                      <p className="game-popularity">
-                        {this.props.game.popularity.toFixed(2)}
-                      </p>
+                  </div>
+                  <h5 className="grey-text text-darken-3">Don't have an account? {signUp}</h5>
+                </form>
+              </Modal>
+            </div>
+          gameDetails = (
+            <div className="game-detail-card">
+              <Row>
+                <Col span={16}>
+                  <div className="game-summary">
+                    <h2>Summary:</h2>
+                    {this.props.game.summary && <p>{this.props.game.summary}</p>}
+                    {this.props.game.name && (playStatusSelector
                     )}
-                  </Col>
-                </Row>
-              </div>
-            );
+                  </div>
+                </Col>
+                <Col span={8}>
+                  <h2>Popularity:</h2>
+                  {this.props.game.popularity && (
+                    <p className="game-popularity">
+                      {this.props.game.popularity.toFixed(2)}
+                    </p>
+                  )}
+                </Col>
+              </Row>
+            </div>
+          );
+
+        } else {
+          switch (isGetingPlayStatus) {
+            case "LOADING":
+              gameDetails = <em>Loading...</em>;
+              break;
+            case "GET_PLAYSTATUS_SUCCESS":
+              {/* change play ststus here, the style below only for function test */ }
+              playStatusSelector =
+                <div>
+                  <div>
+                    <Button type="primary" onClick={this.showModal}>
+                      {playStatus}
+                    </Button>
+                    <Modal
+                      visible={visible}
+                      title="Title"
+                      onOk={this.handleOk}
+                      onCancel={this.handleCancel}
+                      footer={[
+                        <Button key="back" onClick={this.handleCancel}>Return</Button>,
+                        <Button key="submit" type="primary" loading={loading}
+                          onClick={() => this.addListClick(auth.uid, this.state.playStatus)}>
+                          Submit
+                        </Button>
+                      ]}
+                    >
+                      <RadioGroup onChange={this.onChange} value={this.state.value}>
+                        <Radio style={radioStyle} value="wishList">Wanna Play</Radio>
+                        <Radio style={radioStyle} value="playingList">Playing</Radio>
+                        <Radio style={radioStyle} value="completedList">Completed</Radio>
+                        <Radio style={radioStyle} value="abandonedList">Abandoned</Radio>
+                      </RadioGroup>
+                    </Modal>
+                  </div>
+                </div>
+
+
+              gameDetails = (
+                <div className="game-detail-card">
+                  <Row>
+                    <Col span={16}>
+                      <div className="game-summary">
+                        <h2>Summary:</h2>
+                        {this.props.game.summary && <p>{this.props.game.summary}</p>}
+                        {this.props.game.name && (playStatusSelector
+                        )}
+                      </div>
+                    </Col>
+                    <Col span={8}>
+                      <h2>Popularity:</h2>
+                      {this.props.game.popularity && (
+                        <p className="game-popularity">
+                          {this.props.game.popularity.toFixed(2)}
+                        </p>
+                      )}
+                    </Col>
+                  </Row>
+                </div>
+              );
+          }
         }
 
 
@@ -162,7 +300,7 @@ class SingleGame extends Component {
               </Col>
             </Row>
             <Row>
-              <div className="more-info"> 
+              <div className="more-info">
                 <h2>Tags</h2>
                 {this.props.game.summary && <p>{this.props.game.summary}</p>}
 
@@ -176,20 +314,22 @@ class SingleGame extends Component {
 }
 
 const mapStateToProps = state => {
-  //console.log(state)
+  console.log(state)
   //console.log(state.firestore.ordered.users);
   return {
     playStatus: state.singleGame.playStatus,
     isFetching: state.singleGame.isFetching,
     isGetingPlayStatus: state.singleGame.isGetingPlayStatus,
     game: state.singleGame.game,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    authError: state.auth.authError
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    signIn: (creds) => dispatch(signIn(creds))
   };
 };
 

@@ -56,8 +56,9 @@ export function loadSingleGameSuccess(game) {
 }
 
 export function getSingleGame(id) {
-    return function (dispatch) {
+    return (dispatch) => {
         gamesApi.getGame(id).then(game => {
+            //console.log(game)
             dispatch(loadSingleGameSuccess(game));
         }).catch(error => {
             dispatch(errorMessage);
@@ -80,7 +81,7 @@ export const addItemToList = (briefGameInfo) => {
         }).then(() => {
             console.log("game listType added!");
             dispatch({ type: types.ADD_LIST_SUCCESS, uid });
-            dispatch({type:types.GET_PLAYSTATUS_SUCCESS, playStatus})
+            dispatch({ type: types.GET_PLAYSTATUS_SUCCESS, playStatus })
         }).catch(err => {
             dispatch({ type: types.ADD_LIST_ERROR }, err);
         });
@@ -103,23 +104,30 @@ export function getPlayStatus(id) {
     return (dispatch, getState, { getFirestore }) => {
         const firestore = getFirestore();
         var playStatus = null;
-        firestore.collection('users').doc(id.uid).collection('games').where('gameID', '==', id.gameID).get().then(games => {
-            console.log(games.size);
-            if (games.size === 0) {
-                console.log("GET PLAYSTATUS SUCCESS: None!");
-                playStatus = 'None'
-                dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
-            } else {
-                games.forEach(game => {
-                    console.log("GET_PLAYSTATUS_SUCCESS!");
-                    playStatus = game.data().playStatus
-                    console.log(playStatus)
+        if (id.uid === null) {
+            console.log("GET PLAYSTATUS SUCCESS: None!");
+            playStatus = 'None'
+            dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
+        } else {
+            firestore.collection('users').doc(id.uid).collection('games').where('gameID', '==', id.gameID).get().then(games => {
+                console.log(games.size);
+                if (games.size === 0) {
+                    console.log("GET PLAYSTATUS SUCCESS: None!");
+                    playStatus = 'None'
                     dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
-                })
-            }
-        }).catch(err => {
-            //dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
-        });
+                } else {
+                    games.forEach(game => {
+                        console.log("GET_PLAYSTATUS_SUCCESS!");
+                        playStatus = game.data().playStatus
+                        console.log(playStatus)
+                        dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
+                    })
+                }
+            }).catch(err => {
+                //dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
+            });
+        }
+
     }
 }
 
@@ -133,19 +141,26 @@ export function getGameList(listType) {
             if (games.size === 0) {
                 console.log("GET LIST SUCCESS: None!");
                 gameList = {}
-                dispatch({ type: "GET_"+listType.listType+"_SUCCESS", gameList });
+                dispatch({ type: "GET_" + listType.listType + "_SUCCESS", gameList });
             } else {
                 games.forEach(game => {
                     console.log("GET_GAME_LIST_SUCCESS!");
                     gameList.push(game.data());
                 })
                 console.log(gameList)
-                console.log("GET_"+listType.listType+"_SUCCESS");
-                dispatch({ type: "GET_"+listType.listType+"_SUCCESS", gameList });
+                console.log("GET_" + listType.listType + "_SUCCESS");
+                dispatch({ type: "GET_" + listType.listType + "_SUCCESS", gameList });
             }
         }).catch(err => {
             //dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
         });
+    }
+}
+
+export function resetState(){
+    return (dispatch) => {
+    
+        dispatch({ type: types.RESET_STATE });
     }
 }
 
