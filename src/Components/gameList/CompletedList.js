@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 
-// import Header from "../Header";
+import Header from "../Header";
 
 class CompletedList extends Component {
 
@@ -55,7 +55,7 @@ class CompletedList extends Component {
 
         return (
             <div>
-                {/* <Header /> */}
+                <Header />
                 <h1>this is CompletedList component</h1>
                 {completed_List}
             </div>
