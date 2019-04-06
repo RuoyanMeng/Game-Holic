@@ -25,6 +25,7 @@ class GameGrid extends Component {
 
   render() {
     let gameList = null;
+    let listNumber = 0;
     switch (this.state.status) {
       case "LOADING":
         gameList = <em>Loading...</em>;
@@ -32,7 +33,8 @@ class GameGrid extends Component {
       case "LOADED":
         gameList = this.props.games.map(game => {
           let filterList = [22422,16309,22472,26163,68049,114455,37419];
-          if (game.cover && game.cover.image_id && filterList.indexOf(game.id) == -1 ) {
+          if (game.cover && game.cover.image_id && filterList.indexOf(game.id) == -1 && listNumber < 20 ) {
+            listNumber++;
             return (
               // set card styles here, add any thing you need in this div
               //{pathname:"/GameDetails",search:`${game.id}`}
