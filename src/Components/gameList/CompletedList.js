@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../../Actions/index'
-import Header from "../Header";
+
 
 class CompletedList extends Component {
 
@@ -61,7 +61,7 @@ class CompletedList extends Component {
 
         return (
             <div>
-                <Header />
+                {/* <Header /> */}
                 <h1>this is CompletedList component</h1>
                 {completed_List}
             </div>

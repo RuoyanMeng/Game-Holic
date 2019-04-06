@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../../Actions/index'
 
 
-import Header from "../Header";
+// import Header from "../Header";
 
 class PlayingList extends Component {
 

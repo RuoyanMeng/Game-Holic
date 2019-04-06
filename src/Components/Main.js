@@ -64,7 +64,7 @@ class Main extends Component {
         <div className="main-center">
           <div className="main-background">
             <div className="banner-info">
-              <h1>Here, plenty of trendy games for you!   </h1>
+              <h1>Here, plenty of trendy games for you!</h1>
               <h2>
                 Start discovering fancy games and getting your own collections now! You could find everything you need!
               </h2>

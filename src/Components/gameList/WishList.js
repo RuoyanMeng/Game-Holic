@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 
 import * as actions from '../../Actions/index'
 
-import Header from "../Header";
+// import Header from "../Header";
 
 class WishList extends Component {
 
@@ -61,7 +61,7 @@ class WishList extends Component {
 
         return (
             <div>
-                <Header />
+                {/* <Header /> */}
                 <h1>this is wishList component</h1>
                 {wish_list}
             </div>

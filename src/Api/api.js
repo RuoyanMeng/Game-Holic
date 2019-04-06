@@ -23,7 +23,7 @@ class GamesApi {
         'Accept': 'application/json',
         'user-key': API_KEY
       },
-      data: 'fields *, cover.*, screenshots.*;' + search + ' limit 30;'
+      data: 'fields *, cover.*, screenshots.*;' + search + ' limit 33;'
     })
       .then(response => {
         console.log(response.data);

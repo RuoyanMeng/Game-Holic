@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 
-import Header from "../Header";
+// import Header from "../Header";
 
 class AbandonedList extends Component {
 
@@ -55,7 +55,7 @@ class AbandonedList extends Component {
 
         return (
             <div>
-                <Header />
+                {/* <Header /> */}
                 <h1>this is AbandonedList component</h1>
                 {Abandoned_List}
             </div>
