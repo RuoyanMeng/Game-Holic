@@ -31,7 +31,7 @@ class GameGrid extends Component {
         break;
       case "LOADED":
         gameList = this.props.games.map(game => {
-          let filterList = [22422,16309,22472,26163];
+          let filterList = [22422,16309,22472,26163,68049,114455,37419];
           if (game.cover && game.cover.image_id && filterList.indexOf(game.id) == -1 ) {
             return (
               // set card styles here, add any thing you need in this div
@@ -61,7 +61,7 @@ class GameGrid extends Component {
     return (
       <div className="Game-wrap">
         <div className="list-title">
-          <h2>Trendy Games</h2>
+          <h2>Trending Games</h2>
         </div>
 
         <div className="GameCard">

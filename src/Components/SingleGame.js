@@ -161,7 +161,13 @@ class SingleGame extends Component {
                 </div>
               </Col>
             </Row>
-            {playStatus}
+            <Row>
+              <div className="more-info"> 
+                <h2>Tags</h2>
+                {this.props.game.summary && <p>{this.props.game.summary}</p>}
+
+              </div>
+            </Row>
           </div>
         </div>
       </div>
