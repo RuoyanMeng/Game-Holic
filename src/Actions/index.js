@@ -159,7 +159,6 @@ export function getGameList(listType) {
 
 export function resetState(){
     return (dispatch) => {
-    
         dispatch({ type: types.RESET_STATE });
     }
 }

@@ -72,7 +72,7 @@ class GamesApi {
       data: "fields *, cover.*, screenshots.*, keywords.*;" + idQuery
     })
       .then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         return response.data;
       })
       .catch(err => {

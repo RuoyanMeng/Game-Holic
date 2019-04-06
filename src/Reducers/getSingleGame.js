@@ -8,7 +8,7 @@ const initialState = {
 export default function getSingleGameReducer(state = initialState, action) {
   switch (action.type) {
     case 'LOAD_SINGLEGAME_SUCCESS':
-      console.log(action.game[0])
+      //console.log(action.game[0])
       return {
         ...state,
         isFetching: "LOADED",
@@ -28,10 +28,10 @@ export default function getSingleGameReducer(state = initialState, action) {
       }
     case 'RESET_STATE':
       console.log('reset state')
-      console.log(state)
+      //console.log(state)
       return {
         ...state,
-        game: {},
+        //game: {},
         isFetching: "LOADING",
         isGetingPlayStatus: "LOADING",
         playStatus: "None"

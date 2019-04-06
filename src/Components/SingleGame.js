@@ -8,8 +8,10 @@ import * as actions from "../Actions/index";
 import { signIn } from '../Actions/authActions'
 
 import Header from "./Header";
-import { Row, Col, Rate, Tag, Modal, Button, Radio, RadioGroup } from "antd";
+import { Row, Col, Rate, Tag, Modal, Button, Radio } from "antd";
 import "../Styles/singlegame.scss";
+
+const RadioGroup = Radio.Group;
 
 class SingleGame extends Component {
   static propTypes = {
@@ -37,16 +39,6 @@ class SingleGame extends Component {
     console.log(this.props.playStatus)
     //this.props.actions.resetState();
     this.props.actions.getSingleGame(`${this.state.currentId}`);
-    if (!this.props.auth.isEmpty) {
-      let id = {
-        uid: this.props.auth.uid,
-        gameID: this.state.currentId
-      }
-      //console.log(id.uid)
-      this.props.actions.getPlayStatus(id)
-      //console.log(this.props.game.playStatus)
-    }
-
   }
 
   addListClick(uid, playStatus) {
@@ -63,13 +55,10 @@ class SingleGame extends Component {
       // platforms:this.props.game.platforms
     };
     this.props.actions.addItemToList(briefGameInfo);
-    //this.componentDidMount();
+   
   }
 
-  // handleChange = (e) => {
-  //   this.setState({ playStatus: e.target.value })
-  //   //console.log(this.state.playStatus)
-  // }
+
 
   handleSignInChange = (e) => {
     this.setState({
@@ -105,24 +94,19 @@ class SingleGame extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    //this.props.actions.resetState();
     let credentials = {
       email: this.state.email,
       password: this.state.password
     }
-    //console.log(credentials);
     this.props.signIn(credentials);
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 3000);
-
   }
 
   render() {
     //console.log(this.state.playStatus)
     const { visible, loading } = this.state;
     const { game, auth, isFetching, playStatus, isGetingPlayStatus, authError } = this.props;
-    const RadioGroup = Radio.Group;
+    
     const radioStyle = {
       display: 'block',
       height: '30px',
@@ -139,7 +123,7 @@ class SingleGame extends Component {
     let getKeywords = null;
     let playStatusModal = null;
     let gameDetails = null;
-    
+    console.log(this.props.isFetching)
 
     switch (isFetching) {
       case "LOADING":
@@ -147,10 +131,14 @@ class SingleGame extends Component {
         break;
       case "LOADED":
         //edit all the elements and layout of gamedetails card here
+        console.log(this.props.isFetching)
         if (auth.isEmpty) {
           {/* change play ststus here, the style below only for function test */ }
           let signUp = <Link to='/SignUp'>Sign Up</Link>
-          let playStatusModalSignUp =
+          //let path =<Link to={"/GameDetails/"+game.id}>Sign In</Link>
+          console.log('aaaaa'+this.props.isFetching)
+
+          playStatusModal =
             <div>
               <Button type="primary" onClick={this.showModal}>
                 {playStatus}
@@ -171,7 +159,7 @@ class SingleGame extends Component {
                     <input type="password" id='password' onChange={this.handleSignInChange} />
                   </div><br /><br />
                   <div className="input-field">
-                    <button className="btn pink lighten-1 z-depth-0" >Sign In</button>
+                  <button className="btn pink lighten-1 z-depth-0" >Sign In</button>
                     <div className="center red-text">
                       {authError ? <p>{authError}</p> : null}
                     </div>
@@ -183,21 +171,30 @@ class SingleGame extends Component {
           
 
         } else {
+          if (!this.props.auth.isEmpty) {
+            let id = {
+              uid: this.props.auth.uid,
+              gameID: this.state.currentId
+            }
+            //console.log(id.uid)
+            this.props.actions.getPlayStatus(id)
+            //console.log(this.props.game.playStatus)
+          }
           switch (isGetingPlayStatus) {
             case "LOADING":
               gameDetails = <em>Loading...</em>;
               break;
             case "GET_PLAYSTATUS_SUCCESS":
               {/* change play ststus here, the style below only for function test */ }
+              console.log(visible)
               playStatusModal =
-                <div>
                   <div>
                     <Button type="primary" onClick={this.showModal}>
                       {playStatus}
                     </Button>
                     <Modal
                       visible={visible}
-                      title="Title"
+                      title="Add this game to..."
                       onOk={this.handleOk}
                       onCancel={this.handleCancel}
                       footer={[
@@ -216,7 +213,7 @@ class SingleGame extends Component {
                       </RadioGroup>
                     </Modal>
                   </div>
-                </div>
+                
           }
         }
         gameDetails = 
