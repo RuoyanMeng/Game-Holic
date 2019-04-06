@@ -8,10 +8,8 @@ import * as actions from "../Actions/index";
 import { signIn } from '../Actions/authActions'
 
 import Header from "./Header";
-import { Button, Row, Col, Modal, Radio } from "antd";
+import { Row, Col, Rate, Tag, Modal, Button, Radio, RadioGroup } from "antd";
 import "../Styles/singlegame.scss";
-
-const RadioGroup = Radio.Group;
 
 class SingleGame extends Component {
   static propTypes = {
@@ -21,7 +19,7 @@ class SingleGame extends Component {
     gameStatus: PropTypes.array.isRequired
     // Injected by React Router
     //children: PropTypes.node
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -122,16 +120,26 @@ class SingleGame extends Component {
 
   render() {
     //console.log(this.state.playStatus)
-    const { visible, loading, value } = this.state;
+    const { visible, loading } = this.state;
     const { game, auth, isFetching, playStatus, isGetingPlayStatus, authError } = this.props;
+    const RadioGroup = Radio.Group;
     const radioStyle = {
       display: 'block',
       height: '30px',
       lineHeight: '30px',
     };
 
-    let playStatusSelector = null;
+  
+    
+    let rating = this.props.game.total_rating
+      ? this.props.game.total_rating.toFixed(0) / 20
+      : 2.5;
+
+    let getScreenshots = null;
+    let getKeywords = null;
+    let playStatusModal = null;
     let gameDetails = null;
+    
 
     switch (isFetching) {
       case "LOADING":
@@ -142,7 +150,7 @@ class SingleGame extends Component {
         if (auth.isEmpty) {
           {/* change play ststus here, the style below only for function test */ }
           let signUp = <Link to='/SignUp'>Sign Up</Link>
-          playStatusSelector =
+          let playStatusModalSignUp =
             <div>
               <Button type="primary" onClick={this.showModal}>
                 {playStatus}
@@ -172,28 +180,7 @@ class SingleGame extends Component {
                 </form>
               </Modal>
             </div>
-          gameDetails = (
-            <div className="game-detail-card">
-              <Row>
-                <Col span={16}>
-                  <div className="game-summary">
-                    <h2>Summary:</h2>
-                    {this.props.game.summary && <p>{this.props.game.summary}</p>}
-                    {this.props.game.name && (playStatusSelector
-                    )}
-                  </div>
-                </Col>
-                <Col span={8}>
-                  <h2>Popularity:</h2>
-                  {this.props.game.popularity && (
-                    <p className="game-popularity">
-                      {this.props.game.popularity.toFixed(2)}
-                    </p>
-                  )}
-                </Col>
-              </Row>
-            </div>
-          );
+          
 
         } else {
           switch (isGetingPlayStatus) {
@@ -202,7 +189,7 @@ class SingleGame extends Component {
               break;
             case "GET_PLAYSTATUS_SUCCESS":
               {/* change play ststus here, the style below only for function test */ }
-              playStatusSelector =
+              playStatusModal =
                 <div>
                   <div>
                     <Button type="primary" onClick={this.showModal}>
@@ -230,35 +217,61 @@ class SingleGame extends Component {
                     </Modal>
                   </div>
                 </div>
-
-
-              gameDetails = (
-                <div className="game-detail-card">
-                  <Row>
-                    <Col span={16}>
-                      <div className="game-summary">
-                        <h2>Summary:</h2>
-                        {this.props.game.summary && <p>{this.props.game.summary}</p>}
-                        {this.props.game.name && (playStatusSelector
-                        )}
-                      </div>
-                    </Col>
-                    <Col span={8}>
-                      <h2>Popularity:</h2>
-                      {this.props.game.popularity && (
-                        <p className="game-popularity">
-                          {this.props.game.popularity.toFixed(2)}
-                        </p>
-                      )}
-                    </Col>
-                  </Row>
-                </div>
-              );
           }
         }
+        gameDetails = 
+            <div className="game-detail-card">
+              <Row>
+                <Col span={16}>
+                  <div className="game-summary">
+                    <h2>Summary</h2>
+                    {this.props.game.summary && (
+                      <p>{this.props.game.summary}</p>
+                    )}
+                    {playStatusModal}
+                  </div>
+                </Col>
+                <Col span={8}>
+                  <h2>Rating</h2>
+                  <Rate disabled allowHalf value={rating} />
+                </Col>
+              </Row>
+            </div>
+          
 
+            if (game.screenshots) {
+              getScreenshots = Object.values(game.screenshots).map(s => {
+                // console.log(s)
+                return (
+                  <div key={s.id} className="screen-shots">
+                    <img
+                      src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
+                        s.image_id
+                      }.jpg`}
+                      className="game-img"
+                    />
+                  </div>
+                );
+              });
+            } else {
+              getScreenshots = <p>No relevant screenshots</p>;
+            }
 
+            if (game.keywords) {
+              getKeywords = Object.values(game.keywords).map(k => {
+                // console.log(s)
+                return (
+                  <div key={k.id} className="key-words">
+                    <Tag color="cyan">{k.name}</Tag>
+                  </div>
+                );
+              });
+            } else {
+              getKeywords = <p>No relevant keywords</p>;
+            }
+        
         break;
+
       default:
         gameDetails = <b>Failed to load data, please try again</b>;
         break;
@@ -288,7 +301,7 @@ class SingleGame extends Component {
                           //   src={"https:" + game.cover.url}
                           src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
                             game.cover.image_id
-                            }.jpg`}
+                          }.jpg`}
                           alt={game.name}
                         />
                       )}
@@ -299,11 +312,18 @@ class SingleGame extends Component {
                 </div>
               </Col>
             </Row>
-            <Row>
-              <div className="more-info">
-                <h2>Tags</h2>
-                {this.props.game.summary && <p>{this.props.game.summary}</p>}
 
+            <Row>
+              <div className="more-keywords">
+                <h2>Keywords</h2>
+                {getKeywords}
+              </div>
+            </Row>
+
+            <Row>
+              <div className="more-screenshots">
+                <h2>Screenshots</h2>
+                {getScreenshots}
               </div>
             </Row>
           </div>
@@ -333,10 +353,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleGame);
-
-
-
-
-
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleGame);

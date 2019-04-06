@@ -1,61 +1,97 @@
-.game-wrap{
-    position: relative;
-    width: 100%;
-    background: #222;
-    overflow: hidden;
+.game-wrap {
+  position: relative;
+  width: 100%;
+  background: #222;
+  overflow: hidden;
 
-    .game-center {
-        width: 1350px;
-        height: 1080px;
-        margin: 0 auto;
-        // .game-background {
-        //     width: 1920px;
-        //     height: 1080px;
-        //     margin-left: -400px;
-        // }
-        .back-to {
-            float: right;
-            height: 40px;
-            line-height: 40px;
-            margin-right: 163px;
-            margin-top: 25px;
-            font-size: 15px;
-        }
-        .game-content {
-            margin-top: 110px;
-            text-align: left;
-            .single-game-title {
-                color: #fff;
-                font-size:50px;
-                font-weight: bold;
-            }
-            .game-cover {
-                margin: 25px 0;
-                width: 100%;
-            }
-            .game-detail-card {
-                margin-top: 20px;
-                font-size: 20px;
-                h2, p{
-                    color: #fff;
-                }
-            }
-            .game-summary {
-                padding: 0 20px;
-                
-            }
-            .game-popularity {
-                color: orange;
-                font-weight: bold;
-            }
-        }
-       
-        
+  .game-center {
+    width: 1350px;
+    margin: 0 auto;
+    // .game-background {
+    //     width: 1920px;
+    //     height: 1080px;
+    //     margin-left: -400px;
+    // }
+    .back-to {
+      float: right;
+      height: 40px;
+      line-height: 40px;
+      margin-right: 146px;
+      margin-top: 25px;
+      font-size: 18px;
     }
-    
-    
 
+    .game-content {
+      margin-top: 110px;
+      text-align: left;
+      .single-game-title {
+        color: #fff;
+        font-size: 50px;
+        font-weight: bold;
+        padding-left: 0%;
+      }
+      .game-cover {
+        margin: 25px 0;
+        width: 100%;
+      }
+      .game-detail-card {
+        margin-top: 20px;
+        font-size: 20px;
+        h2,
+        p {
+          color: #fff;
+        }
+      }
+      .game-summary {
+        padding: 0 20px;
+      }
+      .game-popularity {
+        color: orange;
+        font-weight: bold;
+      }
+    }
 
+    .more-screenshots {
+      margin-top: 10px;
+      text-align: left;
+      font-size: 20px;
+      h2 {
+        color: #fff;
+      }
+      .screen-shots {
+        width: 30%;
+        float: left;
+        position: relative;
+        margin-bottom: 15px;
+        margin-right: 15px;
+        .game-img {
+          width: 410px;
+          height: 230px;
+        } 
+      }
+      p {
+        font-style: italic;
+        font-size: 15px;
+        color: rgb(112, 107, 107);
+    }
+    }
 
+    .more-keywords {
+      margin-top: 10px;
+      text-align: left;
+      font-size: 20px;
+      h2 {
+        color: #fff;
+      }
+      .key-words {
+        float: left;
+      }
+      p {
+        font-style: italic;
+        font-size: 15px;
+        color: rgb(112, 107, 107);
+    }
+
+    }
+  }
 }
-
