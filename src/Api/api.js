@@ -23,7 +23,7 @@ class GamesApi {
         'Accept': 'application/json',
         'user-key': API_KEY
       },
-      data: 'fields *, cover.*, screenshots.*;' + search + ' limit 33;'
+      data: 'fields *, cover.*;' + search + ' limit 33;'
     })
       .then(response => {
         console.log(response.data);
@@ -69,10 +69,10 @@ class GamesApi {
         'user-key': API_KEY
       },
       //if need more info about game attribute, go to https://api-docs.igdb.com/, you can add elements follow the API doc
-      data: "fields *, cover.*;" + idQuery
+      data: "fields *, cover.*, screenshots.*, keywords.*;" + idQuery
     })
       .then(response => {
-        //console.log(response.data);
+        console.log(response.data);
         return response.data;
       })
       .catch(err => {

@@ -73,7 +73,7 @@ class Header extends Component {
           <div className="header-wrap">
             <Link to="/">
               {/* <h2>GameHolic</h2> */}
-              <img class="logo" src={logo}></img>
+              <img className="logo" src={logo}></img>
             </Link>
             <div className="search-wrap">
               <Search
