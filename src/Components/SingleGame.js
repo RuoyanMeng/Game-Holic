@@ -176,7 +176,7 @@ class SingleGame extends Component {
 }
 
 const mapStateToProps = state => {
-  //console.log(state.singleGame)
+  //console.log(state)
   //console.log(state.firestore.ordered.users);
   return {
     playStatus: state.singleGame.playStatus,
@@ -199,22 +199,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(SingleGame);
 
 
 
-// export default compose(
-//     connect(mapStateToProps, mapDispatchToProps),
-//     firestoreConnect(ownProps => {
-//         return [
-//             {
-//                 collection: 'users',
-//                 doc: ownProps.auth.uid,
-//                 subcollections: [
-//                     {
-//                         collection: 'games',
-//                         where: [
-//                             ['gameId', '==', ownProps.match.params.id]
-//                         ]
-//                     }
-//                 ],
-//             }
-//         ]
-//     })
-// )(GameGrid);
+

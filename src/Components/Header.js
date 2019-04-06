@@ -29,6 +29,7 @@ class Header extends Component {
           </Avatar>
         </Link>
 
+        <Link to='/'>
         <Button
           button
           type="dashed"
@@ -37,8 +38,10 @@ class Header extends Component {
           ghost
           onClick={this.props.signOut}
         >
-          Sign Out
+         Sign Out
+         
         </Button>
+        </Link>
       </div>
     );
 
