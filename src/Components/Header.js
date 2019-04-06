@@ -10,6 +10,8 @@ import * as actions from "../Actions/index";
 import { Affix, Input, Button, Avatar } from "antd";
 import "../Styles/header.scss";
 
+import logo from '../img/logo.png'
+
 const Search = Input.Search;
 
 class Header extends Component {
@@ -67,8 +69,8 @@ class Header extends Component {
         <Affix>
           <div className="header-wrap">
             <Link to="/">
-              <h2>GameHolic</h2>
-              
+              {/* <h2>GameHolic</h2> */}
+              <img class="logo" src={logo}></img>
             </Link>
             <div className="search-wrap">
               <Search
