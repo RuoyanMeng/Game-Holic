@@ -29,10 +29,10 @@ class UserIndex extends Component {
 
     }
 
-    removeWishListClick(id) {
+    // removeWishListClick(id) {
 
-        this.props.actions.removeItemFromWishList(id)
-    }
+    //     this.props.actions.removeItemFromWishList(id)
+    // }
 
 
     render() {

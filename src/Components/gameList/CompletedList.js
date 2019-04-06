@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { compose } from 'redux'
-import { firestoreConnect } from 'react-redux-firebase'
 
+import * as actions from '../../Actions/index'
 import Header from "../Header";
 
 class CompletedList extends Component {
@@ -17,12 +16,16 @@ class CompletedList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            uid: this.props.auth.uid
         }
 
     }
     componentDidMount() {
-
+        let listType = {
+            uid: this.state.uid,
+            listType: 'completedList'
+        }
+        this.props.actions.getGameList(listType)
     }
 
 
@@ -31,24 +34,27 @@ class CompletedList extends Component {
 
         let completed_List = null;
         //why if statement not working?
-        if (!completedList) {
-            completed_List = completedList.users[0].games.map(item => {
-                let id = item.id
-                //console.log(id);
-                //console.log(this.props.ww[id]);
-                return (
-                    //Need a table here to list all games
-                    <div key={item.gameID}>
-                        {/* a example of remove item from list, you can move this function to the place you want */}
-                        <h1>{item.gameName}</h1>
-                    </div>
-                )
-            })
-        } else {
-            completed_List =
-                <div>
-                    <h1>it's empty</h1>
-                </div>
+        switch (this.props.isFetching) {
+            case "LOADING":
+            completed_List = <em>Loading...</em>;
+                break;
+            case "LOADED":
+                if (completedList) {
+                    completed_List = Object.values(completedList).map(v => {
+                        console.log(v)
+                        return (
+                            <div key={v.gameID}>
+                                <h1>{v.gameName}</h1>
+                            </div>
+                        )
+                    })
+                }
+                break;
+            default:
+            completed_List = <b>Failed to load data, please try again</b>;
+                break;
+
+
 
         }
 
@@ -64,29 +70,21 @@ class CompletedList extends Component {
 };
 
 const mapStateToProps = (state) => {
+
     return {
         auth: state.firebase.auth,
-        completedList: state.firestore.ordered
+        completedList: state.gameList.completedlist,
+        isFetching: state.gameList.isFetchingP
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        actions: bindActionCreators(actions, dispatch),
     }
 }
 
 
-
-
-export default compose(
-    connect(mapStateToProps),
-    firestoreConnect(ownProps => {
-        return [
-            {
-                collection: 'users',
-                doc: ownProps.auth.uid,
-                subcollections: [
-                    {
-                        collection: 'games',
-                        where: ['playStatus', '==', 'completedList']
-                    }
-                ],
-            }
-        ]
-    })
-)(CompletedList);
+export default 
+    connect(mapStateToProps,mapDispatchToProps)
+    (CompletedList);

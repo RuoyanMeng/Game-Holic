@@ -53,16 +53,16 @@ class SingleGame extends Component {
       // platforms:this.props.game.platforms
     };
     this.props.actions.addItemToList(briefGameInfo);
-    this.componentDidMount();
+    //this.componentDidMount();
   }
 
   handleChange=(e)=>{
     this.setState({ playStatus: e.target.value })
-    console.log(this.state.playStatus)
+    //console.log(this.state.playStatus)
   }
 
   render() {
-    console.log(this.state.playStatus)
+    //console.log(this.state.playStatus)
     const { game, auth, isFetching, playStatus, isGetingPlayStatus } = this.props;
     let playStatusSelector = null;
 
@@ -84,7 +84,7 @@ class SingleGame extends Component {
               <div>
                 <select 
                   onChange={(e)=>this.handleChange(e)}
-                  value={this.state.playStatus}
+                  value={playStatus}
                 >
                   <option value="None">None</option>
                   <option value="wishList">Wanna Play</option>
@@ -103,14 +103,6 @@ class SingleGame extends Component {
                       <h2>Summary:</h2>
                       {this.props.game.summary && <p>{this.props.game.summary}</p>}
                       {this.props.game.name && (playStatusSelector
-                        // <Button
-                        //   type="primary"
-                        //   shape="round"
-                        //   onClick={() => this.addWishListClick()}
-                        // >
-                        //   Add to Wishlist
-                        // </Button>
-
                       )}
                     </div>
                   </Col>

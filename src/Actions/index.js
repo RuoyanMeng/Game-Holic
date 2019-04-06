@@ -69,6 +69,7 @@ export function getSingleGame(id) {
 export const addItemToList = (briefGameInfo) => {
     let uid = briefGameInfo.uid;
     let gameId = briefGameInfo.gameID;
+    let playStatus = briefGameInfo.playStatus;
     console.log(briefGameInfo.gameName)
     return (dispatch, getState, { getFirestore }) => {
         const firestore = getFirestore();
@@ -79,6 +80,7 @@ export const addItemToList = (briefGameInfo) => {
         }).then(() => {
             console.log("game listType added!");
             dispatch({ type: types.ADD_LIST_SUCCESS, uid });
+            dispatch({type:types.GET_PLAYSTATUS_SUCCESS, playStatus})
         }).catch(err => {
             dispatch({ type: types.ADD_LIST_ERROR }, err);
         });
@@ -118,9 +120,36 @@ export function getPlayStatus(id) {
         }).catch(err => {
             //dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
         });
-
     }
 }
+
+export function getGameList(listType) {
+
+    return (dispatch, getState, { getFirestore }) => {
+        const firestore = getFirestore();
+        var gameList = [];
+        firestore.collection('users').doc(listType.uid).collection('games').where('playStatus', '==', listType.listType).get().then(games => {
+            console.log(games.size);
+            if (games.size === 0) {
+                console.log("GET LIST SUCCESS: None!");
+                gameList = {}
+                dispatch({ type: "GET_"+listType.listType+"_SUCCESS", gameList });
+            } else {
+                games.forEach(game => {
+                    console.log("GET_GAME_LIST_SUCCESS!");
+                    gameList.push(game.data());
+                })
+                console.log(gameList)
+                console.log("GET_"+listType.listType+"_SUCCESS");
+                dispatch({ type: "GET_"+listType.listType+"_SUCCESS", gameList });
+            }
+        }).catch(err => {
+            //dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
+        });
+    }
+}
+
+
 
 
 

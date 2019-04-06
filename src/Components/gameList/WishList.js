@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { compose } from 'redux'
-import { firestoreConnect } from 'react-redux-firebase'
+
+import * as actions from '../../Actions/index'
 
 import Header from "../Header";
 
@@ -17,38 +17,44 @@ class WishList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            uid: this.props.auth.uid
         }
 
     }
     componentDidMount() {
-
+        let listType = {
+            uid: this.state.uid,
+            listType: 'wishList'
+        }
+        this.props.actions.getGameList(listType)
     }
 
 
     render() {
-        const { wishList } = this.props
+        const { wishList} = this.props
+        
         let wish_list = null;
-        //why if statement not working?
+        switch (this.props.isFetching) {
+            case "LOADING":
+            wish_list = <em>Loading...</em>;
+                break;
+            case "LOADED":
+                if (wishList) {
+                    wish_list = Object.values(wishList).map(v => {
+                        console.log(v)
+                        return (
+                            <div key={v.gameID}>
+                                <h1>{v.gameName}</h1>
+                            </div>
+                        )
+                    })
+                }
+                break;
+            default:
+            wish_list = <b>Failed to load data, please try again</b>;
+                break;
 
-        if (!wishList) {
-            wish_list = wishList.users[0].games.map(item => {
-                let id = item.id
-                //console.log(id);
-                //console.log(this.props.ww[id]);
-                return (
-                    //Need a table here to list all games
-                    <div key={item.gameID}>
-                        {/* a example of remove item from list, you can move this function to the place you want */}
-                        <h1>{item.gameName}</h1>
-                    </div>
-                )
-            })
-        } else {
-            wish_list =
-                <div>
-                    <h1>it's empty</h1>
-                </div>
+
 
         }
 
@@ -64,30 +70,18 @@ class WishList extends Component {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state.firestore)
+    console.log(state.gameList)
     return {
         auth: state.firebase.auth,
-        wishList: state.firestore.ordered
+        wishList: state.gameList.wishlist,
+        isFetching: state.gameList.isFetchingW
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    }
+}
 
-
-
-export default compose(
-    connect(mapStateToProps),
-    firestoreConnect(ownProps => {
-        return [
-            {
-                collection: 'users',
-                doc: ownProps.auth.uid,
-                subcollections: [
-                    {
-                        collection: 'games',
-                        where: ['playStatus', '==', 'wishList']
-                    }
-                ],
-            }
-        ]
-    })
-)(WishList);
+export default connect(mapStateToProps, mapDispatchToProps)(WishList);
