@@ -47,7 +47,7 @@ class PlayingList extends Component {
                         console.log(v)
                         return (
                             <div key={v.gameID}>
-                                <h1>{v.gameName}</h1>
+                                <Link to={`/GameDetails/${v.gameID}`}><h2>{v.gameName}</h2></Link>
                             </div>
                         )
                     })
@@ -66,7 +66,7 @@ class PlayingList extends Component {
         return (
             <div>
                 {/* <Header /> */}
-                < h1 > this is playing List component</h1 >
+                {/* < h1 > this is playing List component</h1 > */}
                 {playing_List}
             </div >
         )

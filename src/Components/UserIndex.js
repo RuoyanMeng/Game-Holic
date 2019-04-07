@@ -10,7 +10,7 @@ import Header from "./Header";
 import WishList from "./gameList/WishList"
 import PlayingList from './gameList/PlayingList'
 import CompletedList from './gameList/CompletedList'
-import '../Styles/Userindex.css'
+import '../Styles/Userindex.scss'
 
 class UserIndex extends Component {
 
@@ -42,11 +42,11 @@ class UserIndex extends Component {
             <div id='Userindex'>
                 <Header />
                 <h1 id='Greeting'>Good day!</h1>
-                <h1>this is WishList component</h1>
+                <h1>Wish List</h1>
                 <WishList/>
-                <h1>this is PlayingList component</h1>
+                <h1>Playing</h1>
                 <PlayingList/> 
-                <h1>this is CompletedList component</h1>
+                <h1>Completed</h1>
                 <CompletedList/>
             </div>
         )

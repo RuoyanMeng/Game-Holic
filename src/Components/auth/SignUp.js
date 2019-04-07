@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signUp } from '../../Actions/authActions'
 
+import '../../Styles/Sign.css'
+
 class SignUp extends Component {
     state = {
         email: '',
@@ -27,17 +29,17 @@ class SignUp extends Component {
                 <form className="white" onSubmit={this.handleSubmit}>
                     <h5 className="grey-text text-darken-3">Sign Up</h5>
                     <div className="input-field">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">Email</label><br/>
                         <input type="email" id='email' onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Password</label><br/>
                         <input type="password" id='password' onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="userName">User Name</label>
+                        <label htmlFor="userName">User Name</label><br/>
                         <input type="text" id='userName' onChange={this.handleChange} />
-                    </div>
+                    </div><br/><br/>
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
                         { authError ? <p>{authError}</p> : null }
