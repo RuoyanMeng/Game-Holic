@@ -60,6 +60,11 @@ class Header extends Component {
           Sign In
         </Button>
       </Link>
+      <Link to="/SignUp" className="btn-login">
+        <Button type="dashed" size="small" shape="round" ghost>
+          Sign Up
+        </Button>
+      </Link>
       </div>
     );
 
