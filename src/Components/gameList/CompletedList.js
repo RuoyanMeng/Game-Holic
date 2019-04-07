@@ -44,7 +44,7 @@ class CompletedList extends Component {
                         console.log(v)
                         return (
                             <div key={v.gameID}>
-                                <h1>{v.gameName}</h1>
+                                <Link to={`/GameDetails/${v.gameID}`}><h2>{v.gameName}</h2></Link>
                             </div>
                         )
                     })
@@ -62,7 +62,7 @@ class CompletedList extends Component {
         return (
             <div>
                 {/* <Header /> */}
-                <h1>this is CompletedList component</h1>
+                {/* <h1>this is CompletedList component</h1> */}
                 {completed_List}
             </div>
         )
