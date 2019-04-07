@@ -37,9 +37,8 @@ class Search extends Component {
       case "LOADED":
       //cannot use GameGrid directly
         gameGrid = (
-          <div>
-            
-            search results
+          <div>     
+            Search Results
           </div>
         );
         break;

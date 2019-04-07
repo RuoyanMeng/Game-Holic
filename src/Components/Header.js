@@ -90,7 +90,7 @@ class Header extends Component {
                 <Search
                   type="text"
                   placeholder="Find your fancy game here..."
-                  style={{width:'90%'}}
+                  style={{width:'90%', background:"#333333" }}
                   onSearch={value => this.setState({ query: value })}
                 />
               </Col>
