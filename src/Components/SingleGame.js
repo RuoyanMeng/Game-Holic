@@ -8,19 +8,18 @@ import * as actions from "../Actions/index";
 import { signIn } from "../Actions/authActions";
 
 import Header from "./Header";
-import { Row, Col, Rate, Tag, Modal, Button, Radio, Icon} from "antd";
+import { Row, Col, Rate, Tag, Modal, Icon } from "antd";
 import "../Styles/singlegame.scss";
 
-const RadioGroup = Radio.Group;
 
 class SingleGame extends Component {
   static propTypes = {
     game: PropTypes.object.isRequired,
     isFetching: PropTypes.string.isRequired,
+    isGetingPlayStatus: PropTypes.string.isRequired,
+    authError: PropTypes.string.isRequired,
     auth: PropTypes.object.isRequired,
     gameStatus: PropTypes.array.isRequired
-    // Injected by React Router
-    //children: PropTypes.node
   };
 
   constructor(props) {
@@ -36,22 +35,19 @@ class SingleGame extends Component {
   }
   componentDidMount() {
     console.log(this.props.playStatus);
-    //this.props.actions.resetState();
+    this.props.actions.resetState();
     window.scrollTo(0, 0);
     this.props.actions.getSingleGame(`${this.state.currentId}`);
   }
 
   addListClick(uid, playStatus) {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 3000);
+    this.setState({ visible: false });
     let briefGameInfo = {
       playStatus: playStatus,
       uid: uid,
       gameID: this.state.currentId,
       gameName: this.props.game.name,
-      // gameCover: this.props.game.cover,
+      gameCover: this.props.game.cover,
       // rating:this.props.game.rating,
       // platforms:this.props.game.platforms
     };
@@ -113,7 +109,8 @@ class SingleGame extends Component {
     const radioStyle = {
       display: "block",
       height: "30px",
-      lineHeight: "30px"
+      lineHeight: "30px",
+      color: 'white'
     };
 
     let rating = this.props.game.total_rating
@@ -124,7 +121,7 @@ class SingleGame extends Component {
     let getKeywords = null;
     let playStatusModal = null;
     let gameDetails = null;
-    console.log(this.props.isFetching);
+    //console.log(this.props.isFetching);
 
     switch (isFetching) {
       case "LOADING":
@@ -132,20 +129,20 @@ class SingleGame extends Component {
         break;
       case "LOADED":
         //edit all the elements and layout of gamedetails card here
-        console.log(this.props.isFetching);
+        //console.log(this.props.isFetching);
         if (auth.isEmpty) {
           {
             /* change play ststus here, the style below only for function test */
           }
           let signUp = <Link to="/SignUp">Sign Up</Link>;
           //let path =<Link to={"/GameDetails/"+game.id}>Sign In</Link>
-          console.log("aaaaa" + this.props.isFetching);
+          //console.log("aaaaa" + this.props.isFetching);
 
           playStatusModal = (
             <div>
-              <Button type="primary" onClick={this.showModal}>
+              <button id='button' className='f6 br3 dark-green no-underline ba grow pv2 ph3 dib' onClick={this.showModal}>
                 {playStatus}
-              </Button>
+              </button>
               <Modal
                 visible={visible}
                 title="Game Holic"
@@ -153,23 +150,19 @@ class SingleGame extends Component {
                 footer={null}
               >
                 <form onSubmit={this.handleSubmit} className="white">
-                  <div className="input-field">
-                    <label htmlFor="email">
-                      Email
-                      <br />
-                    </label>
+                  <div className="input-field mt3">
+                    <label htmlFor="email" className="db fw6 lh-copy f6">Email<br /></label>
                     <input
+                      className='pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100'
                       type="email"
                       id="email"
                       onChange={this.handleSignInChange}
                     />
                   </div>
-                  <div className="input-field">
-                    <label htmlFor="password">
-                      Password
-                      <br />
-                    </label>
+                  <div className="input-field mt3">
+                    <label htmlFor="password" className="db fw6 lh-copy f6">Password<br /></label>
                     <input
+                      className='pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100'
                       type="password"
                       id="password"
                       onChange={this.handleSignInChange}
@@ -177,17 +170,18 @@ class SingleGame extends Component {
                   </div>
                   <br />
                   <br />
-                  <div className="input-field">
-                    <button className="btn pink lighten-1 z-depth-0">
+                  <div className="mt0">
+                    <button className="b ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib">
                       Sign In
                     </button>
+                    <h5 className="white mt1">
+                      Don't have an account? {signUp}
+                    </h5>
                     <div className="center red-text">
                       {authError ? <p>{authError}</p> : null}
                     </div>
                   </div>
-                  <h5 className="grey-text text-darken-3">
-                    Don't have an account? {signUp}
-                  </h5>
+
                 </form>
               </Modal>
             </div>
@@ -210,51 +204,59 @@ class SingleGame extends Component {
               {
                 /* change play ststus here, the style below only for function test */
               }
-              console.log(visible);
+              //console.log(visible);
               playStatusModal = (
                 <div>
-                  <Button type="primary" onClick={this.showModal}>
+                  <button id='button' className='f6 br3 dark-green no-underline ba grow pv2 ph3 dib' onClick={this.showModal}>
                     {playStatus}
-                  </Button>
+                  </button>
                   <Modal
                     visible={visible}
                     title="Add this game to..."
-                    style={{ color: '#1890ff' }}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     footer={[
-                      <Button key="back" onClick={this.handleCancel}>
+                      <button className='white b ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib' onClick={this.handleCancel}>
                         Return
-                      </Button>,
-                      <Button
-                        key="submit"
-                        type="primary"
+                      </button>,
+                      <button
+                        className='b ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib white'
                         loading={loading}
                         onClick={() =>
                           this.addListClick(auth.uid, this.state.playStatus)
                         }
                       >
                         Submit
-                      </Button>
+                      </button>
                     ]}
                   >
-                    <RadioGroup
-                      onChange={this.onChange}
-                      value={this.state.value}
-                    >
-                      <Radio style={radioStyle} value="wishList">
-                        Wanna Play
-                      </Radio>
-                      <Radio style={radioStyle} value="playingList">
-                        Playing
-                      </Radio>
-                      <Radio style={radioStyle} value="completedList">
-                        Completed
-                      </Radio>
-                      <Radio style={radioStyle} value="abandonedList">
-                        Abandoned
-                      </Radio>
-                    </RadioGroup>
+
+                    <form className='white'>
+                      <div className="radio flex items-center mb1">
+                        <label>
+                          <input className='mr2' type="radio" value="wishList" checked={this.state.playStatus === 'wishList'} onChange={this.onChange} />
+                          Wanna Play
+                        </label>
+                      </div>
+                      <div className="radio flex items-center mb1">
+                        <label>
+                          <input className='mr2' type="radio" value="playingList" checked={this.state.playStatus === 'playingList'} onChange={this.onChange} />
+                          Playing
+                        </label>
+                      </div>
+                      <div className="radio flex items-center mb1">
+                        <label>
+                          <input className='mr2' type="radio" value="completedList" checked={this.state.playStatus === 'completedList'} onChange={this.onChange} />
+                          Completed
+                        </label>
+                      </div>
+                      <div className="radio flex items-center mb1">
+                        <label>
+                          <input className='mr2' type="radio" value="abandonedList" checked={this.state.playStatus === 'abandonedList'} onChange={this.onChange} />
+                          Abandoned
+                        </label>
+                      </div>
+                    </form>
                   </Modal>
                 </div>
               );
@@ -274,7 +276,7 @@ class SingleGame extends Component {
               </Col>
               <Col xs={24} sm={8}>
                 <h2 className="rating-star">Rating</h2>
-                <Rate disabled allowHalf value={rating} className="rating-star"/>
+                <Rate disabled allowHalf value={rating} className="rating-star" />
                 {/* {this.props.game.popularity && (
                   // <p className="game-popularity">
                   //   {this.props.game.popularity.toFixed(2)}
@@ -292,7 +294,7 @@ class SingleGame extends Component {
                 <img
                   src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
                     s.image_id
-                  }.jpg`}
+                    }.jpg`}
                   className="game-img"
                 />
               </Col>
@@ -325,21 +327,21 @@ class SingleGame extends Component {
     return (
       <div className="game-wrap">
         <Header />
-        <div className="game-center clearfix">        
-        <Link to="/" className="back-to">
-            <Icon type="double-left" style={{ fontSize: '13px', color: '#1890ff' }}/>
+        <div className="game-center clearfix">
+          <Link to="/" className="back-to">
+            <Icon type="double-left" style={{ fontSize: '13px', color: '#1890ff' }} />
             &nbsp;Back to Search
           </Link>
           {game.name && <h1 className="single-game-title">{game.name} </h1>}
           <Row>
             <Col xs={24} sm={24} lg={8}>
-            
+
               {game.cover && (
                 <img
                   className="game-cover"
                   src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
                     game.cover.image_id
-                  }.jpg`}
+                    }.jpg`}
                   alt={game.name}
                 />
               )}
@@ -360,7 +362,7 @@ class SingleGame extends Component {
               <Row type="flex">{getScreenshots}</Row>
             </div>
           )}
-          
+
         </div>
       </div>
     );

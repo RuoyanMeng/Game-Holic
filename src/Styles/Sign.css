@@ -10,23 +10,16 @@
     font-weight: bold;
     text-shadow: 5px 2px 6px #000;
 }
-.container input{
+/* .container input{
     margin:0.5vh;
     color:black;
-}
-.container button{
-    background-color:rgb(139, 139, 139);
-    border:0px;
-    font-weight: bold;
-    text-shadow: 5px 2px 6px #000;
-    border-radius: 5px;
 }
 .container button:hover{
     background-color:rgb(56, 56, 56);
 }
 .container button:active{
     background-color:rgb(139, 139, 139);
-}
+} */
 .Sign{
     background-image: url(../img/background.png);
     background-size: cover;
@@ -54,4 +47,8 @@
     left: 50%; 
     top: 50%;  
     transform: translate(-50%, -50%); 
+}
+
+#email,#password{
+    color:white;
 }
