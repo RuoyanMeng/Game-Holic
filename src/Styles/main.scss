@@ -3,36 +3,41 @@
     width: 100%;
     background: #222;
     overflow: hidden;
+
     .main-center {
-        width: 1120px;
-        margin: 0 auto;
-        .main-background {
-            width: 1920px;
-            height: 1080px;
-            margin-left: -400px;
-            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(34, 34, 34)), url(../img/background.png);
-            background-size: cover;
-            text-align: left;
-            overflow: hidden;
-            .banner-info {
-                width: 756px;
-                margin: 274px 0 0 400px;
-            }
-            h1, h2 {
-                color: #fff;
-                font-weight: bold;
-            }
-            h1 {
-                font-size: 72px;
-                text-shadow: 5px 2px 6px #000;
-                padding-left: 0%;
-            }
-            h2 {
-                font-size: 34px;
-                line-height: 60px;
-                font-style: italic;
-            }            
+        width: 100%;
+        height: 1080px;
+        padding: 0 10%;
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(34, 34, 34)), url(../img/background.png);
+        background-size: cover;
+        text-align: left;
+        overflow: hidden;
+        .banner-info {
+            margin-top: 150px;
         }
 
+        h1,
+        h2 {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 70px;
+            line-height: 80px;
+            text-shadow: 5px 2px 6px #000;
+            padding-left: 0%;
+        }
+
+        h2 {
+            font-size: 32px;
+            line-height: 50px;
+            font-style: italic;
+        }
+
+    }
+
+    .game-card {
+        padding: 5% 10%;
     }
 }

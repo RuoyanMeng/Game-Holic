@@ -42,9 +42,9 @@ body::before{
     text-shadow: 5px 2px 6px #000;
     border-radius: 5px;
 }
-button:hover{
+.container button:hover{
     background-color:rgb(56, 56, 56);
 }
-button:active{
+.container button:active{
     background-color:rgb(139, 139, 139);
 }

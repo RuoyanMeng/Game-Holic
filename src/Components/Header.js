@@ -7,7 +7,7 @@ import { Redirect } from "react-router-dom";
 import { signOut } from "../Actions/authActions";
 import * as actions from "../Actions/index";
 
-import { Affix, Input, Button, Avatar } from "antd";
+import { Row, Col, Affix, Input, Button, Avatar } from "antd";
 import "../Styles/header.scss";
 
 import logo from '../img/logo.png'
@@ -38,7 +38,6 @@ class Header extends Component {
 
         <Link to='/'>
         <Button
-          button
           type="dashed"
           size="small"
           shape="round"
@@ -75,21 +74,26 @@ class Header extends Component {
     return (
       <div className="header">
         <Affix>
-          <div className="header-wrap">
-            <Link to="/">
-              {/* <h2>GameHolic</h2> */}
-              <img className="logo" src={logo}></img>
-            </Link>
-            <div className="search-wrap">
-              <Search
-                type="text"
-                placeholder="Find your fancy game here..."
-                style={{ width: 600 }}
-                onSearch={value => this.setState({ query: value })}
-              />
-            </div>
-            {search}
-            {links}
+          <div className="header-wrap clearfix">
+            <Row>
+              <Col xs={24} sm={8}>
+                <Link to="/">
+                  <img className="logo" src={logo} />
+                </Link>
+              </Col>
+              <Col xs={12} sm={8}>
+                <Search
+                  type="text"
+                  placeholder="Find your fancy game here..."
+                  style={{width:'90%'}}
+                  onSearch={value => this.setState({ query: value })}
+                />
+              </Col>
+              <Col xs={12} sm={8}>
+                {search}
+                {links}
+              </Col>
+            </Row>
           </div>
         </Affix>
       </div>

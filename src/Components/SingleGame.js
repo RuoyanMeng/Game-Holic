@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as actions from "../Actions/index";
-import { signIn } from '../Actions/authActions'
+import { signIn } from "../Actions/authActions";
 
 import Header from "./Header";
 import { Row, Col, Rate, Tag, Modal, Button, Radio } from "antd";
@@ -30,14 +30,14 @@ class SingleGame extends Component {
       playStatus: this.props.playStatus,
       loading: false,
       visible: false,
-      email: '',
-      password: ''
-    }
-
+      email: "",
+      password: ""
+    };
   }
   componentDidMount() {
-    console.log(this.props.playStatus)
+    console.log(this.props.playStatus);
     //this.props.actions.resetState();
+    window.scrollTo(0, 0);
     this.props.actions.getSingleGame(`${this.state.currentId}`);
   }
 
@@ -55,66 +55,66 @@ class SingleGame extends Component {
       // platforms:this.props.game.platforms
     };
     this.props.actions.addItemToList(briefGameInfo);
-   
   }
 
-
-
-  handleSignInChange = (e) => {
+  handleSignInChange = e => {
     this.setState({
       [e.target.id]: e.target.value
-    })
-  }
-
-  onChange = (e) => {
-    console.log('radio checked', e.target.value);
-    this.setState({
-      playStatus: e.target.value,
     });
-  }
+  };
 
+  onChange = e => {
+    console.log("radio checked", e.target.value);
+    this.setState({
+      playStatus: e.target.value
+    });
+  };
 
   showModal = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
-  }
+  };
 
   handleOk = () => {
     this.setState({ loading: true });
     setTimeout(() => {
       this.setState({ loading: false, visible: false });
     }, 3000);
-
-  }
+  };
 
   handleCancel = () => {
     this.setState({ visible: false });
-  }
+  };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     //this.props.actions.resetState();
     let credentials = {
       email: this.state.email,
       password: this.state.password
-    }
+    };
     this.props.signIn(credentials);
-  }
+  };
 
   render() {
     //console.log(this.state.playStatus)
     const { visible, loading } = this.state;
-    const { game, auth, isFetching, playStatus, isGetingPlayStatus, authError } = this.props;
-    
+    const {
+      game,
+      auth,
+      isFetching,
+      playStatus,
+      isGetingPlayStatus,
+      authError
+    } = this.props;
+
     const radioStyle = {
-      display: 'block',
-      height: '30px',
-      lineHeight: '30px',
+      display: "block",
+      height: "30px",
+      lineHeight: "30px"
     };
 
-  
-    
     let rating = this.props.game.total_rating
       ? this.props.game.total_rating.toFixed(0) / 20
       : 2.5;
@@ -123,7 +123,7 @@ class SingleGame extends Component {
     let getKeywords = null;
     let playStatusModal = null;
     let gameDetails = null;
-    console.log(this.props.isFetching)
+    console.log(this.props.isFetching);
 
     switch (isFetching) {
       case "LOADING":
@@ -131,14 +131,16 @@ class SingleGame extends Component {
         break;
       case "LOADED":
         //edit all the elements and layout of gamedetails card here
-        console.log(this.props.isFetching)
+        console.log(this.props.isFetching);
         if (auth.isEmpty) {
-          {/* change play ststus here, the style below only for function test */ }
-          let signUp = <Link to='/SignUp'>Sign Up</Link>
+          {
+            /* change play ststus here, the style below only for function test */
+          }
+          let signUp = <Link to="/SignUp">Sign Up</Link>;
           //let path =<Link to={"/GameDetails/"+game.id}>Sign In</Link>
-          console.log('aaaaa'+this.props.isFetching)
+          console.log("aaaaa" + this.props.isFetching);
 
-          playStatusModal =
+          playStatusModal = (
             <div>
               <Button type="primary" onClick={this.showModal}>
                 {playStatus}
@@ -151,33 +153,52 @@ class SingleGame extends Component {
               >
                 <form onSubmit={this.handleSubmit} className="white">
                   <div className="input-field">
-                    <label htmlFor="email">Email<br /></label>
-                    <input type="email" id='email' onChange={this.handleSignInChange} />
+                    <label htmlFor="email">
+                      Email
+                      <br />
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      onChange={this.handleSignInChange}
+                    />
                   </div>
                   <div className="input-field">
-                    <label htmlFor="password">Password<br /></label>
-                    <input type="password" id='password' onChange={this.handleSignInChange} />
-                  </div><br /><br />
+                    <label htmlFor="password">
+                      Password
+                      <br />
+                    </label>
+                    <input
+                      type="password"
+                      id="password"
+                      onChange={this.handleSignInChange}
+                    />
+                  </div>
+                  <br />
+                  <br />
                   <div className="input-field">
-                  <button className="btn pink lighten-1 z-depth-0" >Sign In</button>
+                    <button className="btn pink lighten-1 z-depth-0">
+                      Sign In
+                    </button>
                     <div className="center red-text">
                       {authError ? <p>{authError}</p> : null}
                     </div>
                   </div>
-                  <h5 className="grey-text text-darken-3">Don't have an account? {signUp}</h5>
+                  <h5 className="grey-text text-darken-3">
+                    Don't have an account? {signUp}
+                  </h5>
                 </form>
               </Modal>
             </div>
-          
-
+          );
         } else {
           if (!this.props.auth.isEmpty) {
             let id = {
               uid: this.props.auth.uid,
               gameID: this.state.currentId
-            }
+            };
             //console.log(id.uid)
-            this.props.actions.getPlayStatus(id)
+            this.props.actions.getPlayStatus(id);
             //console.log(this.props.game.playStatus)
           }
           switch (isGetingPlayStatus) {
@@ -185,88 +206,113 @@ class SingleGame extends Component {
               gameDetails = <em>Loading...</em>;
               break;
             case "GET_PLAYSTATUS_SUCCESS":
-              {/* change play ststus here, the style below only for function test */ }
-              console.log(visible)
-              playStatusModal =
-                  <div>
-                    <Button type="primary" onClick={this.showModal}>
-                      {playStatus}
-                    </Button>
-                    <Modal
-                      visible={visible}
-                      title="Add this game to..."
-                      onOk={this.handleOk}
-                      onCancel={this.handleCancel}
-                      footer={[
-                        <Button key="back" onClick={this.handleCancel}>Return</Button>,
-                        <Button key="submit" type="primary" loading={loading}
-                          onClick={() => this.addListClick(auth.uid, this.state.playStatus)}>
-                          Submit
-                        </Button>
-                      ]}
+              {
+                /* change play ststus here, the style below only for function test */
+              }
+              console.log(visible);
+              playStatusModal = (
+                <div>
+                  <Button type="primary" onClick={this.showModal}>
+                    {playStatus}
+                  </Button>
+                  <Modal
+                    visible={visible}
+                    title="Add this game to..."
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    footer={[
+                      <Button key="back" onClick={this.handleCancel}>
+                        Return
+                      </Button>,
+                      <Button
+                        key="submit"
+                        type="primary"
+                        loading={loading}
+                        onClick={() =>
+                          this.addListClick(auth.uid, this.state.playStatus)
+                        }
+                      >
+                        Submit
+                      </Button>
+                    ]}
+                  >
+                    <RadioGroup
+                      onChange={this.onChange}
+                      value={this.state.value}
                     >
-                      <RadioGroup onChange={this.onChange} value={this.state.value}>
-                        <Radio style={radioStyle} value="wishList">Wanna Play</Radio>
-                        <Radio style={radioStyle} value="playingList">Playing</Radio>
-                        <Radio style={radioStyle} value="completedList">Completed</Radio>
-                        <Radio style={radioStyle} value="abandonedList">Abandoned</Radio>
-                      </RadioGroup>
-                    </Modal>
-                  </div>
-                
+                      <Radio style={radioStyle} value="wishList">
+                        Wanna Play
+                      </Radio>
+                      <Radio style={radioStyle} value="playingList">
+                        Playing
+                      </Radio>
+                      <Radio style={radioStyle} value="completedList">
+                        Completed
+                      </Radio>
+                      <Radio style={radioStyle} value="abandonedList">
+                        Abandoned
+                      </Radio>
+                    </RadioGroup>
+                  </Modal>
+                </div>
+              );
           }
         }
-        gameDetails = 
-            <div className="game-detail-card">
-              <Row>
-                <Col span={16}>
+        gameDetails = (
+          <div className="game-detail-card">
+            <Row>
+              <Col xs={24} sm={16}>
+                {this.props.game.summary && (
                   <div className="game-summary">
                     <h2>Summary</h2>
-                    {this.props.game.summary && (
-                      <p>{this.props.game.summary}</p>
-                    )}
-                    {playStatusModal}
+                    <p>{this.props.game.summary}</p>
                   </div>
-                </Col>
-                <Col span={8}>
-                  <h2>Rating</h2>
-                  <Rate disabled allowHalf value={rating} />
-                </Col>
-              </Row>
-            </div>
-          
+                )}
+                {playStatusModal}
+              </Col>
+              <Col xs={24} sm={8}>
+                <h2>Rating</h2>
+                <Rate disabled allowHalf value={rating} />
+                {/* {this.props.game.popularity && (
+                  // <p className="game-popularity">
+                  //   {this.props.game.popularity.toFixed(2)}
+                  // </p>
+                )} */}
+              </Col>
+            </Row>
+          </div>
+        );
 
-            if (game.screenshots) {
-              getScreenshots = Object.values(game.screenshots).map(s => {
-                // console.log(s)
-                return (
-                  <div key={s.id} className="screen-shots">
-                    <img
-                      src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
-                        s.image_id
-                      }.jpg`}
-                      className="game-img"
-                    />
-                  </div>
-                );
-              });
-            } else {
-              getScreenshots = <p>No relevant screenshots</p>;
-            }
+        if (game.screenshots) {
+          getScreenshots = Object.values(game.screenshots).map(s => {
+            return (
+              <Col xs={24} sm={12} lg={8} key={s.id} className="screen-shots">
+                <img
+                  src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
+                    s.image_id
+                  }.jpg`}
+                  className="game-img"
+                />
+              </Col>
+            );
+          });
+        } else {
+          getScreenshots = <p>No relevant screenshots</p>;
+        }
 
-            if (game.keywords) {
-              getKeywords = Object.values(game.keywords).map(k => {
-                // console.log(s)
-                return (
-                  <div key={k.id} className="key-words">
-                    <Tag color="cyan">{k.name}</Tag>
-                  </div>
-                );
-              });
-            } else {
-              getKeywords = <p>No relevant keywords</p>;
-            }
-        
+        if (game.keywords) {
+          getKeywords = Object.values(game.keywords).map(k => {
+            // console.log(s)
+            return (
+              <div key={k.id} className="key-words">
+                <Tag color="cyan">{k.name}</Tag>
+              </div>
+            );
+          });
+        } else {
+          getKeywords = <p>No relevant keywords</p>;
+        }
+
         break;
 
       default:
@@ -276,54 +322,40 @@ class SingleGame extends Component {
 
     return (
       <div className="game-wrap">
-        <Row>
-          <Header />
-        </Row>
-        <div className="game-center">
-          <div className="game-background">
-            <Row>
-              <Col>
-                <Link to="/" className="back-to">
-                  Back to Search
-                </Link>
-                <div className="game-content">
-                  {game.name && (
-                    <h1 className="single-game-title">{game.name} </h1>
-                  )}
-                  <Row>
-                    <Col span={10}>
-                      {game.cover && (
-                        <img
-                          className="game-cover"
-                          //   src={"https:" + game.cover.url}
-                          src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
-                            game.cover.image_id
-                          }.jpg`}
-                          alt={game.name}
-                        />
-                      )}
-                    </Col>
-
-                    <Col span={14}>{gameDetails}</Col>
-                  </Row>
-                </div>
-              </Col>
-            </Row>
-
-            <Row>
-              <div className="more-keywords">
-                <h2>Keywords</h2>
-                {getKeywords}
-              </div>
-            </Row>
-
-            <Row>
-              <div className="more-screenshots">
-                <h2>Screenshots</h2>
-                {getScreenshots}
-              </div>
-            </Row>
-          </div>
+        <Header />
+        <div className="game-center clearfix">
+          {game.name && <h1 className="single-game-title">{game.name} </h1>}
+          <Row>
+            <Col xs={24} sm={24} lg={8}>
+              {game.cover && (
+                <img
+                  className="game-cover"
+                  src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
+                    game.cover.image_id
+                  }.jpg`}
+                  alt={game.name}
+                />
+              )}
+            </Col>
+            <Col xs={24} sm={24} lg={16}>
+              {gameDetails}
+            </Col>
+          </Row>
+          {getKeywords && (
+            <div className="more-keywords clearfix">
+              <h2>Keywords</h2>
+              {getKeywords}
+            </div>
+          )}
+          {getScreenshots && (
+            <div className="more-screenshots clearfix">
+              <h2>Screenshots</h2>
+              <Row type="flex">{getScreenshots}</Row>
+            </div>
+          )}
+          <Link to="/" className="back-to">
+            Back to Search
+          </Link>
         </div>
       </div>
     );
@@ -331,7 +363,7 @@ class SingleGame extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
+  console.log(state);
   //console.log(state.firestore.ordered.users);
   return {
     playStatus: state.singleGame.playStatus,
@@ -346,7 +378,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     actions: bindActionCreators(actions, dispatch),
-    signIn: (creds) => dispatch(signIn(creds))
+    signIn: creds => dispatch(signIn(creds))
   };
 };
 
