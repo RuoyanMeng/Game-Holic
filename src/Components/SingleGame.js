@@ -8,7 +8,7 @@ import * as actions from "../Actions/index";
 import { signIn } from "../Actions/authActions";
 
 import Header from "./Header";
-import { Row, Col, Rate, Tag, Modal, Button, Radio } from "antd";
+import { Row, Col, Rate, Tag, Modal, Button, Radio, Icon} from "antd";
 import "../Styles/singlegame.scss";
 
 const RadioGroup = Radio.Group;
@@ -218,6 +218,7 @@ class SingleGame extends Component {
                   <Modal
                     visible={visible}
                     title="Add this game to..."
+                    style={{ color: '#1890ff' }}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     footer={[
@@ -272,7 +273,7 @@ class SingleGame extends Component {
               </Col>
               <Col xs={24} sm={8}>
                 <h2>Rating</h2>
-                <Rate disabled allowHalf value={rating} />
+                <Rate disabled allowHalf value={rating} className="rating-star"/>
                 {/* {this.props.game.popularity && (
                   // <p className="game-popularity">
                   //   {this.props.game.popularity.toFixed(2)}
@@ -323,10 +324,15 @@ class SingleGame extends Component {
     return (
       <div className="game-wrap">
         <Header />
-        <div className="game-center clearfix">
+        <div className="game-center clearfix">        
+        <Link to="/" className="back-to">
+            <Icon type="double-left" style={{ fontSize: '13px', color: '#1890ff' }}/>
+            &nbsp;Back to Search
+          </Link>
           {game.name && <h1 className="single-game-title">{game.name} </h1>}
           <Row>
             <Col xs={24} sm={24} lg={8}>
+            
               {game.cover && (
                 <img
                   className="game-cover"
@@ -353,9 +359,7 @@ class SingleGame extends Component {
               <Row type="flex">{getScreenshots}</Row>
             </div>
           )}
-          <Link to="/" className="back-to">
-            Back to Search
-          </Link>
+          
         </div>
       </div>
     );

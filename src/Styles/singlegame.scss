@@ -16,13 +16,10 @@
     //     margin-left: -400px;
     // }
     .back-to {
-      float: right;
+      // float: right;
       height: 40px;
       line-height: 40px;
-      margin-top: 25px;
-      margin-bottom: 50px;
-      margin-right: 5%;
-      font-size: 18px;
+      font-size: 15px;
     }
     .single-game-title {
       color: #fff;
@@ -40,6 +37,9 @@
       h2,
       p {
         color: #fff;
+      }
+      .rating-star {
+        padding-left: 10%;
       }
     }
     .game-popularity {

@@ -10,7 +10,7 @@ import * as actions from "../Actions/index";
 import { Row, Col, Affix, Input, Button, Avatar } from "antd";
 import "../Styles/header.scss";
 
-import logo from '../img/logo.png'
+import logo1 from '../img/logo1.png'
 
 const Search = Input.Search;
 
@@ -78,7 +78,7 @@ class Header extends Component {
             <Row>
               <Col xs={24} sm={8}>
                 <Link to="/">
-                  <img className="logo" src={logo} />
+                  <img className="logo1" src={logo1} />
                 </Link>
               </Col>
               <Col xs={12} sm={8}>
