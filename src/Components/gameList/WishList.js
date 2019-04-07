@@ -44,7 +44,10 @@ class WishList extends Component {
                         console.log(v)
                         return (
                             <div key={v.gameID}>
-                                <Link to={`/GameDetails/${v.gameID}`}><h2>{v.gameName}</h2> </Link>                            
+                                <Link to={`/GameDetails/${v.gameID}`}><h2>{v.gameName}</h2> </Link>    
+                                {/* <img
+                                    className="game-cover"
+                                    src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${v.gameCover.image_id}.jpg`} />                         */}
                             </div>
                         )
                     })

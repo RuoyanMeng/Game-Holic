@@ -6,10 +6,10 @@
     content:"";
     position: fixed;
     top:0;right:0;bottom:0;left:0;
-    background-image: url('../img/bg1.jpg');
+    background-image: url('../img/bg3.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 75%;
+    background-position: 75% top;
     z-index:-1;
     filter:blur(3px);
 }
@@ -31,5 +31,5 @@
 
 }
 #Greeting{
-    padding-top:8%;
+    margin-top:25vh;
 }

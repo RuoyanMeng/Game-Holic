@@ -50,7 +50,8 @@ class SingleGame extends Component {
       playStatus: playStatus,
       uid: uid,
       gameID: this.state.currentId,
-      gameName: this.props.game.name
+      gameName: this.props.game.name,
+      // gameCover: this.props.game.cover,
       // rating:this.props.game.rating,
       // platforms:this.props.game.platforms
     };
