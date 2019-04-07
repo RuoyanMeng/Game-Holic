@@ -50,7 +50,8 @@ class SingleGame extends Component {
       playStatus: playStatus,
       uid: uid,
       gameID: this.state.currentId,
-      gameName: this.props.game.name
+      gameName: this.props.game.name,
+      // gameCover: this.props.game.cover,
       // rating:this.props.game.rating,
       // platforms:this.props.game.platforms
     };
@@ -272,7 +273,7 @@ class SingleGame extends Component {
                 {playStatusModal}
               </Col>
               <Col xs={24} sm={8}>
-                <h2>Rating</h2>
+                <h2 className="rating-star">Rating</h2>
                 <Rate disabled allowHalf value={rating} className="rating-star"/>
                 {/* {this.props.game.popularity && (
                   // <p className="game-popularity">
