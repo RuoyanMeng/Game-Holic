@@ -4,13 +4,17 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../Actions/index'
+import { signOut } from "../Actions/authActions";
 import Header from "./Header";
 import GameGrid from './GameGrid';
+import "../Styles/search.scss";
+import { Row, Col } from "antd";
 
 class Search extends Component {
   static propTypes = {
     isFetching: PropTypes.string.isRequired,
-    searchResults: PropTypes.array.isRequired
+    searchResults: PropTypes.array.isRequired,
+    //auth: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -21,7 +25,6 @@ class Search extends Component {
   }
   
   componentDidMount() {
-
     console.log(this.state.query);
     this.props.actions.getSearchResults(`${this.state.query}`);
   }
@@ -38,7 +41,10 @@ class Search extends Component {
       //cannot use GameGrid directly
         gameGrid = (
           <div>     
-            Search Results
+             <GameGrid
+              games={this.props.searchResults}
+              isFetching={this.props.isFetching}
+            />
           </div>
         );
         break;
@@ -48,15 +54,15 @@ class Search extends Component {
     }
 
     return (
-      <div>
+      <div className="search-wrap">
         <Header />
-        <h1>
-          this is Search
-        </h1>
-        {gameGrid}
-        
+        <div className="search-center">
+          Search Results For:&nbsp;&nbsp;
+          <p>{this.state.query}</p>
+          <div className="game-card">{gameGrid}</div>
+        </div>
       </div>
-    )
+    );
   }
 };
 

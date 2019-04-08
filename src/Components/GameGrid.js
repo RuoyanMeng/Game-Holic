@@ -59,9 +59,7 @@ class GameGrid extends Component {
 
     return (
       <div className="Game-wrap">
-        <div className="list-title">
-          <h2>Trending Games</h2>
-        </div>
+       
         <Row type="flex">{gameList}</Row>
       </div>
     );

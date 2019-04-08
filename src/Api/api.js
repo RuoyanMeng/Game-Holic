@@ -36,7 +36,7 @@ class GamesApi {
 
   static getSearchResults = (query) => {
     //console.log(query)
-    let _url = "/search";
+    let _url = "/games/";
     let search = "search " + `"${query}"` + ";";
     return axios({
       url: _url,
@@ -46,7 +46,7 @@ class GamesApi {
         'Accept': 'application/json',
         'user-key': API_KEY
       },
-      data: 'fields *, cover.*;' + search + ' limit 20;'
+      data: 'fields *, cover.*;' + search + ' limit 33;'
     })
       .then(response => {
         console.log(response.data);

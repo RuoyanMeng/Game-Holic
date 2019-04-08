@@ -1,0 +1,25 @@
+.search-wrap {
+    position: relative;
+    width: 100%;
+    background:#222;;
+    overflow: hidden;
+    .search-center {
+      margin-top: 150px;
+      padding: 0 10%;
+      text-align: left;
+      font-size: 30px;
+      color: white;
+      p {
+          display: inline;
+          font-size: 40px;
+          font-style: italic;
+          font-weight: bold;
+      }
+    }
+
+    .game-card {
+        padding: 5% 10%;
+        padding-top: 100px;
+        
+    }
+}

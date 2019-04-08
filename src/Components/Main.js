@@ -67,8 +67,8 @@ class Main extends Component {
               <div className="banner-info">
                 <h1>Here, plenty of trendy games for you!</h1>
                 <h2>
-                  Start discovering fancy games and getting your own collections
-                  now! You could find everything you need!
+                  Start discovering fancy games and getting your own
+                  collections now! You could find everything you need!
                 </h2>
               </div>
             </Col>
@@ -77,10 +77,12 @@ class Main extends Component {
           {/* <div className="list-title">
             <h2>Trendy Games</h2>
           </div> */}
-          {/* <div>
-            <Link to="/UserIndex"> UserIndex </Link>
-          </div> */}
         </div>
+        <Row>
+        <div className="list-title">
+          <h2>Trending Games</h2>
+        </div>
+        </Row>
         <div className="game-card">{gameGrid}</div>
       </div>
     );
