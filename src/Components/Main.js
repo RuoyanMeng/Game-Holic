@@ -45,7 +45,7 @@ class Main extends Component {
     let gameGrid = null;
     switch (this.props.isFetching) {
       case "LOADING":
-        gameGrid = <em>Loading...</em>;
+        gameGrid = <h1 className='white'>Loading...</h1>;
         break;
       case "LOADED":
         gameGrid = (

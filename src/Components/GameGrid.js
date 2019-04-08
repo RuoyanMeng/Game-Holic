@@ -23,7 +23,7 @@ class GameGrid extends Component {
     let listNumber = 0;
     switch (this.state.status) {
       case "LOADING":
-        gameList = <em>Loading...</em>;
+        gameList = <h1 className='white'>Loading...</h1>;
         break;
       case "LOADED":
         gameList = this.props.games.map(game => {

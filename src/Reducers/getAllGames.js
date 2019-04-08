@@ -29,7 +29,10 @@ export default function getAllGamesReducer(state = initialState, action) {
     case 'RESET_STATE':
       console.log('reset state')
       //console.log(state)
-      return initialState
+      return {
+        ...state,
+        searchResults: []
+      }
     default:
       return state
 
