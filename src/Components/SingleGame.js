@@ -35,9 +35,12 @@ class SingleGame extends Component {
   }
   componentDidMount() {
     console.log(this.props.playStatus);
-    this.props.actions.resetState();
     window.scrollTo(0, 0);
     this.props.actions.getSingleGame(`${this.state.currentId}`);
+  }
+
+  componentWillUnmount=()=>{
+    this.props.actions.resetState();
   }
 
   addListClick(uid, playStatus) {
@@ -125,7 +128,7 @@ class SingleGame extends Component {
 
     switch (isFetching) {
       case "LOADING":
-        gameDetails = <em>Loading...</em>;
+        gameDetails = <h1 className='white'>Loading...</h1>;
         break;
       case "LOADED":
         //edit all the elements and layout of gamedetails card here

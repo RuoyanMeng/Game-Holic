@@ -29,6 +29,10 @@ class Search extends Component {
     //this.props.actions.getSearchResults(`${this.state.query}`);
   }
 
+  componentWillUnmount(){
+    this.props.actions.resetState();
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.match.params.query !== prevState.query) {
       return { query: nextProps.match.params.query };
@@ -40,7 +44,7 @@ class Search extends Component {
     let gameGrid = null;
     switch (this.props.isFetching) {
       case "LOADING":
-        gameGrid = <em>Loading...</em>;
+        gameGrid = <h1 className='white'>Loading...</h1>;
         break;
       case "LOADED":
         //cannot use GameGrid directly

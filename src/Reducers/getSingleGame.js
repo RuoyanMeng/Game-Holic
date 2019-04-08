@@ -29,13 +29,7 @@ export default function getSingleGameReducer(state = initialState, action) {
     case 'RESET_STATE':
       console.log('reset state')
       //console.log(state)
-      return {
-        ...state,
-        //game: {},
-        isFetching: "LOADING",
-        isGetingPlayStatus: "LOADING",
-        playStatus: "None"
-      }
+      return initialState
     default:
       return state
 

@@ -36,6 +36,11 @@ class Main extends Component {
     //console.log(this.props.allGames)
   }
 
+  componentWillUnmount=()=>{
+    this.props.actions.resetState();
+  }
+
+
   render() {
     let gameGrid = null;
     switch (this.props.isFetching) {

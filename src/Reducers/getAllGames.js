@@ -26,6 +26,10 @@ export default function getAllGamesReducer(state = initialState, action) {
         isFetching: "LOADED",
         searchResults: action.searchResults
       }
+    case 'RESET_STATE':
+      console.log('reset state')
+      //console.log(state)
+      return initialState
     default:
       return state
 
