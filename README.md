@@ -12,9 +12,8 @@ Our project is using React and Redux dealing with data and interaction, and we s
 [GameHolic](https://game-holic-590ee.firebaseapp.com/)
 
 ## To start a local version
-The project is now deployed on https://game-holic-bfb01.firebaseapp.com/
 To start a local version, download and run ## npm install, ## npm start
-
+  
 ### Frameworks used
 * ReactJS
 * Redux
