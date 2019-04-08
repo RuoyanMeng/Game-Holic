@@ -96,7 +96,7 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  //console.log(state);
   //console.log(state.allGames.isFetching)
   return {
     isFetching: state.allGames.isFetching,

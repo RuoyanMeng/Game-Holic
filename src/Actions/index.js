@@ -15,7 +15,7 @@ export function loadGameSuccess(games) {
 }
 
 export function getAllGames(inputValue) {
-    console.log(inputValue)
+    //console.log(inputValue)
     return function (dispatch) {
         gamesApi.getAllGames(inputValue).then(games => {
             console.log("get success")
@@ -36,7 +36,7 @@ export function loadSearchResultsSuccess(searchResults) {
 }
 
 export function getSearchResults(inputValue) {
-    console.log(inputValue)
+    //console.log(inputValue)
     return function (dispatch) {
         gamesApi.getSearchResults(inputValue).then(searchResults => {
             console.log("get search success")
@@ -71,7 +71,7 @@ export const addItemToList = (briefGameInfo) => {
     let uid = briefGameInfo.uid;
     let gameId = briefGameInfo.gameID;
     let playStatus = briefGameInfo.playStatus;
-    console.log(briefGameInfo.gameName)
+    //console.log(briefGameInfo.gameName)
     return (dispatch, getState, { getFirestore }) => {
         const firestore = getFirestore();
 
@@ -88,17 +88,6 @@ export const addItemToList = (briefGameInfo) => {
     }
 }
 
-// export function removeItemFromWishList(id) {
-//     return (dispatch, getState, { getFirestore }) => {
-//         const firestore = getFirestore();
-//         firestore.collection('wishlist').doc(id).delete().then(() => {
-//             console.log("Document successfully deleted!");
-//             dispatch({ type: types.REMOVE_LIST_SUCCESS });
-//         }).catch(err => {
-//             dispatch({ type: types.REMOVE_LIST_ERROR }, err);
-//         });
-//     }
-// }
 
 export function getPlayStatus(id) {
     return (dispatch, getState, { getFirestore }) => {
@@ -106,14 +95,14 @@ export function getPlayStatus(id) {
         var playStatus = null;
         if (id.uid === null) {
             console.log("GET PLAYSTATUS SUCCESS: None!");
-            playStatus = 'None'
+            playStatus = 'Set Status'
             dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
         } else {
             firestore.collection('users').doc(id.uid).collection('games').where('gameID', '==', id.gameID).get().then(games => {
                 console.log(games.size);
                 if (games.size === 0) {
                     console.log("GET PLAYSTATUS SUCCESS: None!");
-                    playStatus = 'None'
+                    playStatus = 'Set Status'
                     dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
                 } else {
                     games.forEach(game => {
@@ -137,7 +126,7 @@ export function getGameList(listType) {
         const firestore = getFirestore();
         var gameList = [];
         firestore.collection('users').doc(listType.uid).collection('games').where('playStatus', '==', listType.listType).get().then(games => {
-            console.log(games.size);
+            //console.log(games.size);
             if (games.size === 0) {
                 console.log("GET LIST SUCCESS: None!");
                 gameList = {}
@@ -147,7 +136,7 @@ export function getGameList(listType) {
                     console.log("GET_GAME_LIST_SUCCESS!");
                     gameList.push(game.data());
                 })
-                console.log(gameList)
+                //console.log(gameList)
                 console.log("GET_" + listType.listType + "_SUCCESS");
                 dispatch({ type: "GET_" + listType.listType + "_SUCCESS", gameList });
             }

@@ -26,7 +26,7 @@ class GamesApi {
       data: 'fields *, cover.*;' + search + ' limit 33;'
     })
       .then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         return response.data;
       })
       .catch(err => {
@@ -49,7 +49,7 @@ class GamesApi {
       data: 'fields *, cover.*;' + search + ' limit 33;'
     })
       .then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         return response.data;
       })
       .catch(err => {

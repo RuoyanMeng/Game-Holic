@@ -24,7 +24,7 @@ class WishList extends Component {
     componentDidMount() {
         let listType = {
             uid: this.state.uid,
-            listType: 'wishList'
+            listType: 'Wanna Play'
         }
         this.props.actions.getGameList(listType)
     }

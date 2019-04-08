@@ -23,7 +23,7 @@ class CompletedList extends Component {
     componentDidMount() {
         let listType = {
             uid: this.state.uid,
-            listType: 'completedList'
+            listType: 'Completed'
         }
         this.props.actions.getGameList(listType)
     }
