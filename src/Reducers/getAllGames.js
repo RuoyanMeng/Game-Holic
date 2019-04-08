@@ -20,6 +20,7 @@ export default function getAllGamesReducer(state = initialState, action) {
         idFeching: "ERROR"
       }
     case 'LOAD_SEARCH_RESULTS_SUCCESS':
+      console.log(action.searchResults)
       return {
         ...state,
         isFetching: "LOADED",
