@@ -53,9 +53,9 @@ class SignIn extends Component {
                             <button className="f6 bg-transparent no-underline grow dib v-mid white ba b--white ph3 pv2 mb3">
                                 Sign In
                             </button>
-                            <h4 className="white mt1">
+                            <h5 className="white mt1">
                                 Don't have an account? {signUp}
-                            </h4>
+                            </h5>
                             <div className="center red">
                                 {authError ? <p>{authError}</p> : null}
                             </div>
