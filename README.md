@@ -21,6 +21,7 @@ To start a local version, download and run ## npm install, ## npm start
 
 ### Libraries used
 * Ant Design of React
+* Tachyons
 
 ### API used
 * IGDB API
