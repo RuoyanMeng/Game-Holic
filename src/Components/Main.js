@@ -48,6 +48,7 @@ class Main extends Component {
             <GameGrid
               games={this.props.games}
               isFetching={this.props.isFetching}
+              isIndex={true}
             />
           </div>
         );

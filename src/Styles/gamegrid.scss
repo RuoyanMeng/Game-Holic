@@ -10,4 +10,29 @@
     width: 90%;
     margin-bottom: 10%;
   }
+
+  .search-game-item {
+    display: block;
+    width: 100%;
+    margin-bottom: 5%;
+    padding: 2%;
+    background:#313035;
+    border-radius: 10px;
+    text-align: left;
+    .game-cover {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .game-name {
+      color: #fff;
+      padding-left: 5%;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .game-summary {
+      color: #ddd;
+      padding-left: 5%;
+      font-size: 18px;
+    }
+  }
 }

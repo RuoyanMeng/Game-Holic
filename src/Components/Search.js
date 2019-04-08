@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import * as actions from '../Actions/index'
+import * as actions from "../Actions/index";
 import { signOut } from "../Actions/authActions";
 import Header from "./Header";
-import GameGrid from './GameGrid';
+import GameGrid from "./GameGrid";
 import "../Styles/search.scss";
 import { Row, Col } from "antd";
 
@@ -14,21 +14,26 @@ class Search extends Component {
   static propTypes = {
     isFetching: PropTypes.string.isRequired,
     searchResults: PropTypes.array.isRequired,
-    //auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
       query: this.props.match.params.query
-    }
+    };
   }
-  
+
   componentDidMount() {
     console.log(this.state.query);
     //this.props.actions.getSearchResults(`${this.state.query}`);
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.match.params.query !== prevState.query) {
+      return { query: nextProps.match.params.query };
+    } else return null;
+  }
 
   render() {
     console.log(this.state.query);
@@ -38,12 +43,13 @@ class Search extends Component {
         gameGrid = <em>Loading...</em>;
         break;
       case "LOADED":
-      //cannot use GameGrid directly
+        //cannot use GameGrid directly
         gameGrid = (
-          <div>     
-             <GameGrid
+          <div>
+            <GameGrid
               games={this.props.searchResults}
               isFetching={this.props.isFetching}
+              isIndex={false}
             />
           </div>
         );
@@ -64,24 +70,23 @@ class Search extends Component {
       </div>
     );
   }
-};
+}
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   //console.log(state.firebase.auth)
-  console.log(state.allGames)
+  console.log(state.allGames);
   return {
     isFetching: state.allGames.isFetching,
     searchResults: state.allGames.searchResults,
-    //auth: state.firebase.auth
-  }
-}
+    auth: state.firebase.auth
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     actions: bindActionCreators(actions, dispatch)
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,
