@@ -1,9 +1,9 @@
 .game-wrap {
   position: relative;
   width: 100%;
+  min-height: 100%;
   background: #222;
   overflow: hidden;
-
   .game-center {
     margin-top: 150px;
     padding: 0 10%;
