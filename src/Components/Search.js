@@ -26,7 +26,7 @@ class Search extends Component {
   
   componentDidMount() {
     console.log(this.state.query);
-    this.props.actions.getSearchResults(`${this.state.query}`);
+    //this.props.actions.getSearchResults(`${this.state.query}`);
   }
 
 

@@ -27,6 +27,14 @@ class Header extends Component {
     this.props.actions.resetState();
   }
 
+  handleSearch=(value)=>{
+    this.setState({ query: value })
+    setTimeout(
+      () => {this.props.actions.getSearchResults(`${this.state.query}`); },
+      1000
+    );
+  }
+
   render() {
     let signOutBlock = (
       <div className="username">
@@ -91,7 +99,7 @@ class Header extends Component {
                   type="text"
                   placeholder="Find your fancy game here..."
                   style={{width:'90%', background:"#333333" }}
-                  onSearch={value => this.setState({ query: value })}
+                  onSearch={value => this.handleSearch(value)}
                 />
               </Col>
               <Col xs={12} sm={8}>

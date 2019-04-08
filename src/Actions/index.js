@@ -39,10 +39,10 @@ export function getSearchResults(inputValue) {
     console.log(inputValue)
     return function (dispatch) {
         gamesApi.getSearchResults(inputValue).then(searchResults => {
-            console.log("get success")
+            console.log("get search success")
             dispatch(loadSearchResultsSuccess(searchResults));
         }).catch(error => {
-            console.log("get error")
+            console.log("get search error")
             dispatch(errorMessage)
             throw (error);
         });
