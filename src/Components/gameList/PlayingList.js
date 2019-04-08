@@ -26,7 +26,7 @@ class PlayingList extends Component {
     componentDidMount() {
         let listType = {
             uid: this.state.uid,
-            listType: 'playingList'
+            listType: 'Playing'
         }
         this.props.actions.getGameList(listType)
     }

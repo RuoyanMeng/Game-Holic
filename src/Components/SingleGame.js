@@ -237,25 +237,25 @@ class SingleGame extends Component {
                     <form className='white'>
                       <div className="radio flex items-center mb1">
                         <label>
-                          <input className='mr2' type="radio" value="wishList" checked={this.state.playStatus === 'wishList'} onChange={this.onChange} />
+                          <input className='mr2' type="radio" value="Wanna Play" checked={this.state.playStatus === 'Wanna Play'} onChange={this.onChange} />
                           Wanna Play
                         </label>
                       </div>
                       <div className="radio flex items-center mb1">
                         <label>
-                          <input className='mr2' type="radio" value="playingList" checked={this.state.playStatus === 'playingList'} onChange={this.onChange} />
+                          <input className='mr2' type="radio" value="Playing" checked={this.state.playStatus === 'Playing'} onChange={this.onChange} />
                           Playing
                         </label>
                       </div>
                       <div className="radio flex items-center mb1">
                         <label>
-                          <input className='mr2' type="radio" value="completedList" checked={this.state.playStatus === 'completedList'} onChange={this.onChange} />
+                          <input className='mr2' type="radio" value="Completed" checked={this.state.playStatus === 'Completed'} onChange={this.onChange} />
                           Completed
                         </label>
                       </div>
                       <div className="radio flex items-center mb1">
                         <label>
-                          <input className='mr2' type="radio" value="abandonedList" checked={this.state.playStatus === 'abandonedList'} onChange={this.onChange} />
+                          <input className='mr2' type="radio" value="Abandoned" checked={this.state.playStatus === 'Abandoned'} onChange={this.onChange} />
                           Abandoned
                         </label>
                       </div>
