@@ -333,7 +333,7 @@ class SingleGame extends Component {
         <div className="game-center clearfix">
           <Link to="/" className="back-to">
             <Icon type="double-left" style={{ fontSize: '13px', color: '#1890ff' }} />
-            &nbsp;Back to Search
+            &nbsp;Back
           </Link>
           {game.name && <h1 className="single-game-title">{game.name} </h1>}
           <Row>
