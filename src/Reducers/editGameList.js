@@ -23,19 +23,19 @@ export default function editGameList(state = initialState, action) {
         //     ...state,
         //     wishlist: state.wishlist.filter(item => action.briefGameInfo !== item.id)
         // }
-        case 'GET_playingList_SUCCESS':
+        case 'GET_Playing_SUCCESS':
             return {
                 ...state,
                 playlist: action.gameList,
                 isFetchingP: "LOADED"
             }
-        case 'GET_wishList_SUCCESS':
+        case 'GET_Wanna Play_SUCCESS':
             return {
                 ...state,
                 wishlist: action.gameList,
                 isFetchingW: "LOADED"
             }
-        case 'GET_completedList_SUCCESS':
+        case 'GET_Completed_SUCCESS':
             return {
                 ...state,
                 completedlist: action.gameList,

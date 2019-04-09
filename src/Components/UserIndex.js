@@ -29,15 +29,8 @@ class UserIndex extends Component {
 
     }
 
-    // removeWishListClick(id) {
-
-    //     this.props.actions.removeItemFromWishList(id)
-    // }
-
 
     render() {
-
-
         return (
             <div id='Userindex'>
                 <Header />
