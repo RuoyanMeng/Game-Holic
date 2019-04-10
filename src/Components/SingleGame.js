@@ -8,7 +8,7 @@ import * as actions from "../Actions/index";
 import { signIn } from "../Actions/authActions";
 
 import Header from "./Header";
-import { Row, Col, Rate, Tag, Modal, Icon } from "antd";
+import { Row, Col, Rate, Tag, Modal, Icon, Progress } from "antd";
 import "../Styles/singlegame.scss";
 
 
@@ -116,9 +116,12 @@ class SingleGame extends Component {
       color: 'white'
     };
 
+    // let rating = this.props.game.total_rating
+    //   ? this.props.game.total_rating.toFixed(0) / 20
+    //   : 2.5;
+
     let rating = this.props.game.total_rating
-      ? this.props.game.total_rating.toFixed(0) / 20
-      : 2.5;
+      ? this.props.game.total_rating.toFixed(2) : 50 ;
 
     let getScreenshots = null;
     let getKeywords = null;
@@ -278,8 +281,9 @@ class SingleGame extends Component {
                 {playStatusModal}
               </Col>
               <Col xs={24} sm={8}>
-                <h2 className="rating-star">Rating</h2>
-                <Rate disabled allowHalf value={rating} className="rating-star" />
+                <h2 className="rating-star">Recommend Level</h2>
+                <Progress type="circle" percent={rating} strokeColor="green" trailColor="white" className="rating-progress" />
+                {/* <Rate disabled allowHalf value={rating} className="rating-star" /> */}
                 {/* {this.props.game.popularity && (
                   // <p className="game-popularity">
                   //   {this.props.game.popularity.toFixed(2)}
