@@ -19,35 +19,31 @@ class Search extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      query: this.props.match.params.query
-    };
   }
 
   componentDidMount() {
-    console.log(this.state.query);
+    //console.log(this.state.query);
     //this.props.actions.getSearchResults(`${this.state.query}`);
   }
 
-  componentWillUnmount(){
-    this.props.actions.resetState();
+  componentWillUnmount() {
+    //this.props.actions.resetState();
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.match.params.query !== prevState.query) {
-      return { query: nextProps.match.params.query };
-    } else return null;
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.match.params.query !== prevState.query) {
+  //     return { query: nextProps.match.params.query };
+  //   } else return null;
+  // }
 
   render() {
-    console.log(this.state.query);
+    //console.log(this.state.query);
     let gameGrid = null;
     switch (this.props.isFetching) {
       case "LOADING":
         gameGrid = <h1 className='white'>Loading...</h1>;
         break;
       case "LOADED":
-        //cannot use GameGrid directly
         gameGrid = (
           <div>
             <GameGrid
@@ -68,7 +64,7 @@ class Search extends Component {
         <Header />
         <div className="search-center">
           Search Results For:&nbsp;&nbsp;
-          <p>{this.state.query}</p>
+          <p>{this.props.match.params.query}</p>
           <div className="game-card">{gameGrid}</div>
         </div>
       </div>
@@ -78,7 +74,7 @@ class Search extends Component {
 
 const mapStateToProps = state => {
   //console.log(state.firebase.auth)
-  console.log(state.allGames);
+  console.log(state.allGames.searchResults);
   return {
     isFetching: state.allGames.isFetching,
     searchResults: state.allGames.searchResults,

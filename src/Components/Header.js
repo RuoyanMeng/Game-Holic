@@ -29,6 +29,8 @@ class Header extends Component {
 
   handleSearch=(value)=>{
     this.setState({ query: value })
+    this.props.actions.resetState('SEARCHRESULTS');
+    console.log("reset")
     setTimeout(
       () => {this.props.actions.getSearchResults(`${this.state.query}`); },
       1000

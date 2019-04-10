@@ -39,8 +39,8 @@ class SingleGame extends Component {
     this.props.actions.getSingleGame(`${this.state.currentId}`);
   }
 
-  componentWillUnmount=()=>{
-    this.props.actions.resetState();
+  componentWillUnmount = () => {
+    this.props.actions.resetState('SINGLEGAME');
   }
 
   addListClick(uid, playStatus) {
@@ -97,6 +97,11 @@ class SingleGame extends Component {
     this.props.signIn(credentials);
   };
 
+  goBack(e) {
+    e.preventDefault();
+    this.props.history.goBack();
+  }
+
   render() {
     //console.log(this.state.playStatus)
     const { visible, loading } = this.state;
@@ -121,7 +126,7 @@ class SingleGame extends Component {
     //   : 2.5;
 
     let rating = this.props.game.total_rating
-      ? this.props.game.total_rating.toFixed(2) : 50 ;
+      ? this.props.game.total_rating.toFixed(2) : 50;
 
     let getScreenshots = null;
     let getKeywords = null;
@@ -335,10 +340,12 @@ class SingleGame extends Component {
       <div className="game-wrap">
         <Header />
         <div className="game-center clearfix">
-          <Link to="/" className="back-to">
+          {/* <Link to="/" className="back-to"> */}
+          <button onClick={e=>{this.goBack(e)}} className='bg-transparent blue b--blue'>
             <Icon type="double-left" style={{ fontSize: '13px', color: '#1890ff' }} />
             &nbsp;Back
-          </Link>
+            </button>
+          {/* </Link> */}
           {game.name && <h1 className="single-game-title">{game.name} </h1>}
           <Row>
             <Col xs={24} sm={24} lg={8}>

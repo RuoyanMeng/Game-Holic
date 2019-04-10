@@ -146,9 +146,9 @@ export function getGameList(listType) {
     }
 }
 
-export function resetState(){
+export function resetState(section){
     return (dispatch) => {
-        dispatch({ type: types.RESET_STATE });
+        dispatch({ type: types.RESET_STATE+'_'+section });
     }
 }
 

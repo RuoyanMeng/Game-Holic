@@ -26,7 +26,7 @@ export default function getSingleGameReducer(state = initialState, action) {
         playStatus: action.playStatus,
         isGetingPlayStatus: "GET_PLAYSTATUS_SUCCESS"
       }
-    case 'RESET_STATE':
+    case 'RESET_STATE_SINGLEGAME':
       console.log('reset state')
       //console.log(state)
       return initialState
