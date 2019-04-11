@@ -46,10 +46,10 @@ class GamesApi {
         'Accept': 'application/json',
         'user-key': API_KEY
       },
-      data: 'fields *, cover.*;' + search + ' limit 33;'
+      data: 'fields summary, name, cover.*;' + search + ' limit 33;'
     })
       .then(response => {
-        //console.log(response.data);
+        console.log(response.data);
         return response.data;
       })
       .catch(err => {
@@ -69,7 +69,7 @@ class GamesApi {
         'user-key': API_KEY
       },
       //if need more info about game attribute, go to https://api-docs.igdb.com/, you can add elements follow the API doc
-      data: "fields *, cover.*, screenshots.*, keywords.*;" + idQuery
+      data: "fields  total_rating, summary, cover.*, screenshots.*, keywords.*, genres.*, themes.*;" + idQuery
     })
       .then(response => {
         //console.log(response.data);
@@ -79,6 +79,30 @@ class GamesApi {
         console.error(err);
       })
   }
+
+  // static getKeywordGames = (keyword) => {
+  //   let idQuery = "search " + `"${keyword}"` + ";";
+  //   console.log(idQuery)
+  //   console.log(keyword)
+  //   return axios({
+  //     url: "/games",
+  //     baseURL: BASE_URL,
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'user-key': API_KEY
+  //     },
+  //     //if need more info about game attribute, go to https://api-docs.igdb.com/, you can add elements follow the API doc
+  //     data: "fields summary, name, cover.*;"+ idQuery 
+  //   })
+  //     .then(response => {
+  //       console.log(response.data);
+  //       return response.data;
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     })
+  // }
 
 
 }

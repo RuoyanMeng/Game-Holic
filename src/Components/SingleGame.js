@@ -8,7 +8,7 @@ import * as actions from "../Actions/index";
 import { signIn } from "../Actions/authActions";
 
 import Header from "./Header";
-import { Row, Col, Rate, Tag, Modal, Icon, Progress } from "antd";
+import { Row, Col, Tag, Modal, Icon, Progress } from "antd";
 import "../Styles/singlegame.scss";
 
 
@@ -30,7 +30,8 @@ class SingleGame extends Component {
       loading: false,
       visible: false,
       email: "",
-      password: ""
+      password: "",
+      keyword:''
     };
   }
   componentDidMount() {
@@ -97,6 +98,15 @@ class SingleGame extends Component {
     this.props.signIn(credentials);
   };
 
+  hancdleKeyword = (keyword) => {
+    this.props.actions.resetState('SEARCHRESULTS');
+    //console.log("reset")
+    setTimeout(
+      () => {this.props.actions.getSearchResults(`${keyword}`); },
+      1000
+    );
+  }
+
   goBack(e) {
     e.preventDefault();
     this.props.history.goBack();
@@ -114,22 +124,16 @@ class SingleGame extends Component {
       authError
     } = this.props;
 
-    const radioStyle = {
-      display: "block",
-      height: "30px",
-      lineHeight: "30px",
-      color: 'white'
-    };
 
     // let rating = this.props.game.total_rating
     //   ? this.props.game.total_rating.toFixed(0) / 20
     //   : 2.5;
 
     let rating = this.props.game.total_rating
-      ? this.props.game.total_rating.toFixed(2) : 50;
+      ? game.total_rating.toFixed(2) : 50;
 
     let getScreenshots = null;
-    let getKeywords = null;
+    let getGenres = null;
     let playStatusModal = null;
     let gameDetails = null;
     //console.log(this.props.isFetching);
@@ -212,9 +216,6 @@ class SingleGame extends Component {
               gameDetails = <em>Loading...</em>;
               break;
             case "GET_PLAYSTATUS_SUCCESS":
-              {
-                /* change play ststus here, the style below only for function test */
-              }
               //console.log(visible);
               playStatusModal = (
                 <div>
@@ -271,16 +272,19 @@ class SingleGame extends Component {
                   </Modal>
                 </div>
               );
+              break;
+            default:
+              break;
           }
         }
         gameDetails = (
           <div className="game-detail-card">
             <Row>
               <Col xs={24} sm={16}>
-                {this.props.game.summary && (
+                {game.summary && (
                   <div className="game-summary">
                     <h2>Summary</h2>
-                    <p>{this.props.game.summary}</p>
+                    <p>{game.summary}</p>
                   </div>
                 )}
                 {playStatusModal}
@@ -288,12 +292,6 @@ class SingleGame extends Component {
               <Col xs={24} sm={8}>
                 <h2 className="rating-star">Recommend Level</h2>
                 <Progress type="circle" percent={rating} strokeColor="green" trailColor="white" className="rating-progress" />
-                {/* <Rate disabled allowHalf value={rating} className="rating-star" /> */}
-                {/* {this.props.game.popularity && (
-                  // <p className="game-popularity">
-                  //   {this.props.game.popularity.toFixed(2)}
-                  // </p>
-                )} */}
               </Col>
             </Row>
           </div>
@@ -316,17 +314,18 @@ class SingleGame extends Component {
           getScreenshots = <p>No relevant screenshots</p>;
         }
 
-        if (game.keywords) {
-          getKeywords = Object.values(game.keywords).map(k => {
+        if (game.themes) {
+          getGenres = Object.values(game.themes).map(k => {
             // console.log(s)
+            let path = "/Search/"+k.name
             return (
-              <div key={k.id} className="key-words">
-                <Tag color="cyan">{k.name}</Tag>
-              </div>
+              <Link to={path} key={k.id} className="key-words" >
+                <Tag color="cyan" onClick={()=>{this.hancdleKeyword(k.name)}}>{k.name}</Tag>
+              </Link>
             );
           });
         } else {
-          getKeywords = <p>No relevant keywords</p>;
+          getGenres = <p>No relevant keywords</p>;
         }
 
         break;
@@ -341,7 +340,7 @@ class SingleGame extends Component {
         <Header />
         <div className="game-center clearfix">
           {/* <Link to="/" className="back-to"> */}
-          <button onClick={e=>{this.goBack(e)}} className='bg-transparent blue b--blue'>
+          <button onClick={e => { this.goBack(e) }} className='bg-transparent blue b--blue'>
             <Icon type="double-left" style={{ fontSize: '13px', color: '#1890ff' }} />
             &nbsp;Back
             </button>
@@ -364,10 +363,10 @@ class SingleGame extends Component {
               {gameDetails}
             </Col>
           </Row>
-          {getKeywords && (
+          {getGenres && (
             <div className="more-keywords clearfix">
               <h2>Keywords</h2>
-              {getKeywords}
+              {getGenres}
             </div>
           )}
           {getScreenshots && (
@@ -384,7 +383,7 @@ class SingleGame extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  console.log(state.singleGame.game);
   //console.log(state.firestore.ordered.users);
   return {
     playStatus: state.singleGame.playStatus,

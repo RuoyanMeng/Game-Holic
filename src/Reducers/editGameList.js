@@ -12,17 +12,9 @@ export default function editGameList(state = initialState, action) {
         case 'ADD_LIST_SUCCESS':
             //console.log('add wishlist success');
             return state;
-        // return {
-        //     ...state,
-        //     wishlist: [...state.wishlist, action.briefGameInfo]
-        // }
         case 'ADD_LIST_SUCCESS':
             //console.log('REMOVE FROM wishlist success');
             return state;
-        // return {
-        //     ...state,
-        //     wishlist: state.wishlist.filter(item => action.briefGameInfo !== item.id)
-        // }
         case 'GET_Playing_SUCCESS':
             return {
                 ...state,

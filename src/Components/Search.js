@@ -4,11 +4,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as actions from "../Actions/index";
-import { signOut } from "../Actions/authActions";
 import Header from "./Header";
 import GameGrid from "./GameGrid";
 import "../Styles/search.scss";
-import { Row, Col } from "antd";
 
 class Search extends Component {
   static propTypes = {
@@ -38,21 +36,31 @@ class Search extends Component {
 
   render() {
     //console.log(this.state.query);
+    const {isFetching,searchResults } = this.props
     let gameGrid = null;
-    switch (this.props.isFetching) {
+    switch (isFetching) {
       case "LOADING":
         gameGrid = <h1 className='white'>Loading...</h1>;
         break;
       case "LOADED":
-        gameGrid = (
-          <div>
-            <GameGrid
-              games={this.props.searchResults}
-              isFetching={this.props.isFetching}
-              isIndex={false}
-            />
-          </div>
-        );
+        if(searchResults.length !== 0){
+          gameGrid = (
+            <div>
+              <GameGrid
+                games={searchResults}
+                isFetching={isFetching}
+                isIndex={false}
+              />
+            </div>
+          );
+        }else{
+          gameGrid = (
+            <div>
+              <h2 className='white'>Opps, we got nothing here</h2>
+            </div>
+          );
+        }
+        
         break;
       default:
         gameGrid = <b>Failed to load data, please try again</b>;

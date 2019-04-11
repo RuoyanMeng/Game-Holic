@@ -3,6 +3,7 @@
 const initialState = {
   games: [],
   searchResults: [],
+  // keywordGames:[],
   isFetching: "LOADING"
 }
 
@@ -26,6 +27,12 @@ export default function getAllGamesReducer(state = initialState, action) {
         isFetching: "LOADED",
         searchResults: action.searchResults
       }
+    // case 'LOAD_KEYWORD_GAMES_SUCCESS':
+    //   return{
+    //     ...state,
+    //     isFetching:"LOADED",
+    //     keywordGames:action.keywordGames
+    //   }
     case 'RESET_STATE_SEARCHRESULTS':
       console.log('reset state')
       //console.log(state)

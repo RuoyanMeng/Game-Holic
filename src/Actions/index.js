@@ -49,6 +49,8 @@ export function getSearchResults(inputValue) {
     }
 }
 
+
+
 export function loadSingleGameSuccess(game) {
     return {
         type: types.LOAD_SINGLEGAME_SUCCESS, game
