@@ -20,6 +20,12 @@ class SignUp extends Component {
     e.preventDefault();
     this.props.signUp(this.state);
   }
+
+  goBack(e) {
+    e.preventDefault();
+    this.props.history.goBack();
+  }
+
   render() {
     const { auth, authError } = this.props;
     if (auth.uid) return <Redirect to='/' />
@@ -27,6 +33,12 @@ class SignUp extends Component {
     return (
       <div className="container">
         <div class='Sign'>
+          <button
+            className='mt3 ml3 f6 bg-transparent no-underline grow dib v-mid white ba b--white ph3 pv2 mb3'
+            onClick={e => { this.goBack(e) }}
+          >
+            Back
+          </button>
           <form onSubmit={this.handleSubmit} className="white">
             <div className="input-field mt3 white">
               <label htmlFor="email" className="db fw6 lh-copy f6">Email<br /></label>
@@ -48,11 +60,11 @@ class SignUp extends Component {
             </div>
             <div className="input-field mt3">
               <label htmlFor="userName" className="db fw6 lh-copy f6">User Name<br /></label>
-              <input 
+              <input
                 className='pa2 b--white input-reset ba bg-transparent white w-100'
-                type="text" 
-                id='userName' 
-                onChange={this.handleChange} 
+                type="text"
+                id='userName'
+                onChange={this.handleChange}
               />
             </div><br /><br />
             <div className="mt0">

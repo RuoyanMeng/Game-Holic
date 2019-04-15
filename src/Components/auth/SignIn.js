@@ -22,6 +22,12 @@ class SignIn extends Component {
         //console.log(this.state);
         this.props.signIn(this.state);
     }
+
+    goBack(e) {
+        e.preventDefault();
+        this.props.history.goBack();
+    }
+
     render() {
         const { authError, auth } = this.props;
         if (auth.uid) return <Redirect to='/' />
@@ -29,7 +35,14 @@ class SignIn extends Component {
 
         return (
             <div className="container">
+
                 <div class="Sign">
+                    <button
+                        className='mt3 ml3 f6 bg-transparent no-underline grow dib v-mid white ba b--white ph3 pv2 mb3'
+                        onClick={e => { this.goBack(e) }}
+                    >
+                        Back
+                    </button>
                     <form onSubmit={this.handleSubmit} className="white">
                         <div className="input-field mt3 white">
                             <label htmlFor="email" className="db fw6 lh-copy f6">Email<br /></label>
@@ -61,7 +74,7 @@ class SignIn extends Component {
                             </div>
                         </div>
                     </form>
-              </div>
+                </div>
             </div>
         )
     }
