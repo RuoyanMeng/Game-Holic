@@ -18,13 +18,17 @@ class PlayStatusModal extends Component {
   addListClick=(uid, playStatus)=> {
     
     this.setState({ visible: false });
+    
     let briefGameInfo = {
       playStatus: playStatus,
       uid: uid,
       gameID: JSON.stringify(this.props.game.id),
       gameName: (this.props.game.name).toString() ,
-      gameCover: this.props.game.cover,
+      
     };
+    if(this.props.game.cover){
+      briefGameInfo.gameCover= this.props.game.cover
+    }
     this.props.actions.addItemToList(briefGameInfo);
   }
 
