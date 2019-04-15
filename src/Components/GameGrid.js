@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { Row, Col } from "antd";
 import "../Styles/gamegrid.scss";
 
+import poster from "../img/poster.jpg"
+
 class GameGrid extends Component {
   static propTypes = {
     games: PropTypes.array.isRequired,
@@ -57,26 +59,43 @@ class GameGrid extends Component {
               );
             }
           } else {
-            return (
-              <Link to={`/GameDetails/${game.id}`} className="search-game-item" key={game.id}>
-                <Row>
-                  <Col span={6}>
-                    {game.cover && game.cover.image_id && (
-                      <img
-                        src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
-                          game.cover.image_id
-                        }.jpg`}
-                        className="game-cover"
-                      />
-                    )}
-                  </Col>
-                  <Col span={18}>
-                    <h2 className="game-name">{game.name}</h2>
-                    <div className="game-summary">{game.summary}</div>
-                  </Col>
-                </Row>
-              </Link>
-            );
+            if (game.cover){
+              return (
+                <Link to={`/GameDetails/${game.id}`} className="search-game-item" key={game.id}>
+                  <Row>
+                    <Col span={6}>
+                      {game.cover && game.cover.image_id && (
+                        <img
+                          src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
+                            game.cover.image_id
+                          }.jpg`}
+                          className="game-cover"
+                        />
+                      )}                  
+                    </Col>
+                    <Col span={18}>
+                      <h2 className="game-name">{game.name}</h2>
+                      <div className="game-summary">{game.summary}</div>
+                    </Col>
+                  </Row>
+                </Link>
+               ); 
+              }else{
+                return (
+                  <Link to={`/GameDetails/${game.id}`} className="search-game-item" key={game.id}>
+                    <Row>
+                      <Col span={6}>
+                      {<img className="game-cover" src={poster} 
+                      alt={game.name}/>}                   
+                      </Col>
+                      <Col span={18}>
+                        <h2 className="game-name">{game.name}</h2>
+                        <div className="game-summary">{game.summary}</div>
+                      </Col>
+                    </Row>
+                  </Link>
+                 ); 
+              }
           }
         });
         break;
