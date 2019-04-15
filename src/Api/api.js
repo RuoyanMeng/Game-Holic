@@ -69,7 +69,7 @@ class GamesApi {
         'user-key': API_KEY
       },
       //if need more info about game attribute, go to https://api-docs.igdb.com/, you can add elements follow the API doc
-      data: "fields  total_rating, summary, cover.*, screenshots.*, keywords.*, genres.*, themes.*;" + idQuery
+      data: "fields  name, total_rating, summary, cover.*, screenshots.*, keywords.*, genres.*, themes.*;" + idQuery
     })
       .then(response => {
         //console.log(response.data);
