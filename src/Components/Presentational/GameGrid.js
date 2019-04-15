@@ -1,31 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import { Row, Col } from "antd";
-import "../Styles/gamegrid.scss";
+import "../../Styles/gamegrid.scss";
 
 class GameGrid extends Component {
-  static propTypes = {
-    games: PropTypes.array.isRequired,
-    isFetching: PropTypes.string.isRequired
-  };
 
   constructor(props) {
     super(props);
-    this.state = {
-      status: this.props.isFetching
-    };
   }
-  componentDidMount() {}
 
   render() {
     let gameList = null;
     let listNumber = 0;
-    switch (this.state.status) {
-      case "LOADING":
-        gameList = <h1 className='white'>Loading...</h1>;
-        break;
-      case "LOADED":
         gameList = this.props.games.map(game => {
           if (this.props.isIndex) {
             let filterList = [22422, 16309, 22472, 26163, 68049, 114455, 37419];
@@ -79,11 +65,6 @@ class GameGrid extends Component {
             );
           }
         });
-        break;
-      default:
-        gameList = <b>Failed to load data, please try again</b>;
-        break;
-    }
 
     return (
       <div className="Game-wrap">

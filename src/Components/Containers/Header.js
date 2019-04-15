@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Redirect } from "react-router-dom";
 
-import { signOut } from "../Actions/authActions";
-import * as actions from "../Actions/index";
+import { signOut } from "../../Actions/authActions";
+import * as actions from "../../Actions/index";
 
 import { Row, Col, Affix, Input, Button, Avatar } from "antd";
-import "../Styles/header.scss";
+import "../../Styles/header.scss";
 
-import logo1 from '../img/logo1.png'
+import logo1 from '../../img/logo1.png'
 
 const Search = Input.Search;
 

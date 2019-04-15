@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import * as actions from "../Actions/index";
+import * as actions from "../../Actions/index";
 import Header from "./Header";
-import GameGrid from "./GameGrid";
-import "../Styles/search.scss";
+import GameGrid from "../Presentational/GameGrid";
+import "../../Styles/search.scss";
 
 class Search extends Component {
   static propTypes = {
@@ -65,7 +65,6 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.allGames.searchResults);
   return {
     isFetching: state.allGames.isFetching,
     searchResults: state.allGames.searchResults,

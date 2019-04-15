@@ -4,12 +4,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import * as actions from '../../Actions/index'
+import * as actions from '../../../Actions/index'
 
-class WishList extends Component {
+
+class PlayingList extends Component {
 
     static propTypes = {
-        wishlist: PropTypes.array.isRequired,
+        playingList: PropTypes.array.isRequired,
+        auth: PropTypes.object.isRequired
     }
 
     constructor(props) {
@@ -22,25 +24,25 @@ class WishList extends Component {
     componentDidMount() {
         let listType = {
             uid: this.state.uid,
-            listType: 'Wanna Play'
+            listType: 'Playing'
         }
         this.props.actions.getGameList(listType)
     }
 
 
     render() {
-        const { wishList} = this.props
-        
-        let wish_list = null;
+        const { playingList } = this.props
+
+        let playing_List = null;
         switch (this.props.isFetching) {
             case "LOADING":
-            wish_list = <em>Loading...</em>;
+                playing_List = <em>Loading...</em>;
                 break;
             case "LOADED":
-                if (wishList) {
-                    wish_list = Object.values(wishList).map(v => {
+                if (playingList) {
+                    playing_List = Object.values(playingList).map(v => {
                         return (
-                            <div  key={v.gameID}>
+                            <div key={v.gameID}>
                                 <Link to={`/GameDetails/${v.gameID}`}>    
                                     <img
                                     className="game-cover"
@@ -48,25 +50,24 @@ class WishList extends Component {
                                     width="210"
                                     height="280" />     
                                     <h2>{v.gameName}</h2> 
-                                </Link>                   
+                                </Link>
                             </div>
                         )
                     })
                 }
                 break;
             default:
-            wish_list = <b>Failed to load data, please try again</b>;
+                playing_List = <b>Failed to load data, please try again</b>;
                 break;
-
-
 
         }
 
 
+
         return (
             <div class='gamelist'>
-                {wish_list}
-            </div>
+                {playing_List}
+            </div >
         )
     }
 };
@@ -74,8 +75,8 @@ class WishList extends Component {
 const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
-        wishList: state.gameList.wishlist,
-        isFetching: state.gameList.isFetchingW
+        playingList: state.gameList.playlist,
+        isFetching: state.gameList.isFetchingP
     }
 }
 
@@ -85,4 +86,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WishList);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayingList);

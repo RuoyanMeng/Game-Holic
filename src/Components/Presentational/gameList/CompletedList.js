@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import * as actions from '../../Actions/index'
+import * as actions from '../../../Actions/index'
 
 
 class CompletedList extends Component {

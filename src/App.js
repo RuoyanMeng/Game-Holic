@@ -4,12 +4,12 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 // Import Components
-import Main from './Components/Main';
-import SingleGame from './Components/SingleGame';
-import UserIndex from './Components/UserIndex';
+import Main from './Components/Containers/Main';
+import SingleGame from './Components/Containers/SingleGame';
+import UserIndex from './Components/Containers/UserIndex';
 import SignIn from './Components/auth/SignIn';
 import SignUp from './Components/auth/SignUp';
-import Search from './Components/Search';
+import Search from './Components/Containers/Search';
 
 import './Styles/App.css';
 

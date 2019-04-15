@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import * as actions from "../Actions/index";
-import GameGrid from "./GameGrid";
-import { signOut } from "../Actions/authActions";
+import * as actions from "../../Actions/index";
+import GameGrid from "../Presentational/GameGrid";
+import { signOut } from "../../Actions/authActions";
 import Header from "./Header";
-import "../Styles/main.scss";
+
+import "../../Styles/main.scss";
 import { Row, Col } from "antd";
 
 class Main extends Component {
@@ -47,7 +48,7 @@ class Main extends Component {
           <div>
             <GameGrid
               games={this.props.games}
-              isFetching={this.props.isFetching}
+              //isFetching={this.props.isFetching}
               isIndex={true}
             />
           </div>

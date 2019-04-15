@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 
-import * as actions from '../Actions/index'
+import * as actions from '../../Actions/index'
 import Header from "./Header";
-import WishList from "./gameList/WishList"
-import PlayingList from './gameList/PlayingList'
-import CompletedList from './gameList/CompletedList'
-import '../Styles/Userindex.scss'
+import WishList from "../Presentational/gameList/WishList"
+import PlayingList from '../Presentational/gameList/PlayingList'
+import CompletedList from '../Presentational/gameList/CompletedList'
+import '../../Styles/Userindex.scss'
 
 class UserIndex extends Component {
 
