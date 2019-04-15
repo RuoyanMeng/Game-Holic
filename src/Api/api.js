@@ -7,7 +7,6 @@ class GamesApi {
      * @returns {Promise<any>}
      */
   static getAllGames = (query) => {
-    //console.log(query)
     let search = null;
     let _url = null;
     if (query === "") {
@@ -26,7 +25,7 @@ class GamesApi {
       data: 'fields *, cover.*;' + search + ' limit 33;'
     })
       .then(response => {
-        //console.log(response.data);
+
         return response.data;
       })
       .catch(err => {
@@ -35,7 +34,6 @@ class GamesApi {
   }
 
   static getSearchResults = (query) => {
-    //console.log(query)
     let _url = "/games/";
     let search = "search " + `"${query}"` + ";";
     return axios({
@@ -49,7 +47,6 @@ class GamesApi {
       data: 'fields summary, name, cover.*;' + search + ' limit 33;'
     })
       .then(response => {
-        console.log(response.data);
         return response.data;
       })
       .catch(err => {
@@ -68,43 +65,15 @@ class GamesApi {
         'Accept': 'application/json',
         'user-key': API_KEY
       },
-      //if need more info about game attribute, go to https://api-docs.igdb.com/, you can add elements follow the API doc
       data: "fields  name, total_rating, summary, cover.*, screenshots.*, keywords.*, genres.*, themes.*;" + idQuery
     })
       .then(response => {
-        //console.log(response.data);
         return response.data;
       })
       .catch(err => {
         console.error(err);
       })
   }
-
-  // static getKeywordGames = (keyword) => {
-  //   let idQuery = "search " + `"${keyword}"` + ";";
-  //   console.log(idQuery)
-  //   console.log(keyword)
-  //   return axios({
-  //     url: "/games",
-  //     baseURL: BASE_URL,
-  //     method: 'POST',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'user-key': API_KEY
-  //     },
-  //     //if need more info about game attribute, go to https://api-docs.igdb.com/, you can add elements follow the API doc
-  //     data: "fields summary, name, cover.*;"+ idQuery 
-  //   })
-  //     .then(response => {
-  //       console.log(response.data);
-  //       return response.data;
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     })
-  // }
-
-
 }
 
 export default GamesApi;

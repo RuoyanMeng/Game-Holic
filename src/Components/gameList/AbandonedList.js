@@ -1,13 +1,9 @@
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
-
-// import Header from "../Header";
 
 class AbandonedList extends Component {
 

@@ -37,8 +37,6 @@ class GameGrid extends Component {
             ) {
               listNumber++;
               return (
-                // set card styles here, add any thing you need in this div
-                //{pathname:"/GameDetails",search:`${game.id}`}
                 <Col
                   xs={12}
                   sm={8}

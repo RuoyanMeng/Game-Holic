@@ -6,8 +6,6 @@ import { bindActionCreators } from 'redux'
 
 import * as actions from '../../Actions/index'
 
-// import Header from "../Header";
-
 class WishList extends Component {
 
     static propTypes = {
@@ -41,7 +39,6 @@ class WishList extends Component {
             case "LOADED":
                 if (wishList) {
                     wish_list = Object.values(wishList).map(v => {
-                        //console.log(v)
                         return (
                             <div  key={v.gameID}>
                                 <Link to={`/GameDetails/${v.gameID}`}>    
@@ -68,8 +65,6 @@ class WishList extends Component {
 
         return (
             <div class='gamelist'>
-                {/* <Header /> */}
-                {/* <h1>this is wishList component</h1> */}
                 {wish_list}
             </div>
         )
@@ -77,7 +72,6 @@ class WishList extends Component {
 };
 
 const mapStateToProps = (state) => {
-    //console.log(state.gameList)
     return {
         auth: state.firebase.auth,
         wishList: state.gameList.wishlist,

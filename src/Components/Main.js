@@ -15,9 +15,6 @@ class Main extends Component {
     isFetching: PropTypes.string.isRequired,
     games: PropTypes.array.isRequired,
     auth: PropTypes.object.isRequired
-
-    // Injected by React Router
-    //children: PropTypes.node
   };
 
   constructor(props) {
@@ -32,7 +29,6 @@ class Main extends Component {
     window.scrollTo(0, 0);
     console.log(this.state.keyWord);
     this.props.actions.getAllGames(`${this.state.keyWord}`);
-    //console.log(this.props.allGames)
   }
 
   componentWillUnmount=()=>{
@@ -61,7 +57,6 @@ class Main extends Component {
         gameGrid = <b>Failed to load data, please try again</b>;
         break;
     }
-    //console.log(this.props.auth.uid)
 
     return (
       <div className="main-wrap">
@@ -78,10 +73,6 @@ class Main extends Component {
               </div>
             </Col>
           </Row>
-
-          {/* <div className="list-title">
-            <h2>Trendy Games</h2>
-          </div> */}
         </div>
         <Row>
         <div className="list-title">
@@ -95,8 +86,6 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => {
-  //console.log(state);
-  //console.log(state.allGames.isFetching)
   return {
     isFetching: state.allGames.isFetching,
     games: state.allGames.games,

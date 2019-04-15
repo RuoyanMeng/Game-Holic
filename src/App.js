@@ -26,10 +26,6 @@ class App extends Component {
         <Route path="/SignIn" component={SignIn}/>
         <Route path="/SignUp" component={SignUp}/>
       </div>
-
-
-
-
     )
   }
 }

@@ -30,7 +30,6 @@ class Header extends Component {
   handleSearch=(value)=>{
     this.setState({ query: value })
     this.props.actions.resetState('SEARCHRESULTS');
-    //console.log("reset")
     setTimeout(
       () => {this.props.actions.getSearchResults(`${this.state.query}`); },
       1000
@@ -81,7 +80,6 @@ class Header extends Component {
     let search = null;
 
     if (this.state.query !== "") {
-      //console.log(this.state.query);
       let path = "/Search/" + this.state.query;
       search = <Redirect to={path} />;
     }
@@ -117,8 +115,6 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => {
-  //console.log(state.firebase.auth)
-  //console.log(state.allGames.isFetching)
   return {
     isFetching: state.allGames.isFetching,
     auth: state.firebase.auth,

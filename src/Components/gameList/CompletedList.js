@@ -33,7 +33,6 @@ class CompletedList extends Component {
         const { completedList } = this.props
 
         let completed_List = null;
-        //why if statement not working?
         switch (this.props.isFetching) {
             case "LOADING":
             completed_List = <em>Loading...</em>;
@@ -41,7 +40,6 @@ class CompletedList extends Component {
             case "LOADED":
                 if (completedList) {
                     completed_List = Object.values(completedList).map(v => {
-                        //console.log(v)
                         return (
                             <div key={v.gameID}>
                                 <Link to={`/GameDetails/${v.gameID}`}>    
@@ -68,8 +66,6 @@ class CompletedList extends Component {
 
         return (
             <div class='gamelist'>
-                {/* <Header /> */}
-                {/* <h1>this is CompletedList component</h1> */}
                 {completed_List}
             </div>
         )

@@ -15,7 +15,6 @@ export function loadGameSuccess(games) {
 }
 
 export function getAllGames(inputValue) {
-    //console.log(inputValue)
     return function (dispatch) {
         gamesApi.getAllGames(inputValue).then(games => {
             console.log("get success")
@@ -36,7 +35,6 @@ export function loadSearchResultsSuccess(searchResults) {
 }
 
 export function getSearchResults(inputValue) {
-    //console.log(inputValue)
     return function (dispatch) {
         gamesApi.getSearchResults(inputValue).then(searchResults => {
             console.log("get search success")
@@ -60,7 +58,6 @@ export function loadSingleGameSuccess(game) {
 export function getSingleGame(id) {
     return (dispatch) => {
         gamesApi.getGame(id).then(game => {
-            //console.log(game)
             dispatch(loadSingleGameSuccess(game));
         }).catch(error => {
             dispatch(errorMessage);
@@ -73,7 +70,6 @@ export const addItemToList = (briefGameInfo) => {
     let uid = briefGameInfo.uid;
     let gameId = briefGameInfo.gameID;
     let playStatus = briefGameInfo.playStatus;
-    //console.log(briefGameInfo.gameName)
     return (dispatch, getState, { getFirestore }) => {
         const firestore = getFirestore();
 
@@ -115,7 +111,6 @@ export function getPlayStatus(id) {
                     })
                 }
             }).catch(err => {
-                //dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
             });
         }
 
@@ -128,7 +123,6 @@ export function getGameList(listType) {
         const firestore = getFirestore();
         var gameList = [];
         firestore.collection('users').doc(listType.uid).collection('games').where('playStatus', '==', listType.listType).get().then(games => {
-            //console.log(games.size);
             if (games.size === 0) {
                 console.log("GET LIST SUCCESS: None!");
                 gameList = {}
@@ -138,12 +132,11 @@ export function getGameList(listType) {
                     console.log("GET_GAME_LIST_SUCCESS!");
                     gameList.push(game.data());
                 })
-                //console.log(gameList)
                 console.log("GET_" + listType.listType + "_SUCCESS");
                 dispatch({ type: "GET_" + listType.listType + "_SUCCESS", gameList });
             }
         }).catch(err => {
-            //dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
+            dispatch({ type: 'GET_PLAYSTATUS_ERROR' }, err);
         });
     }
 }

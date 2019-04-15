@@ -12,7 +12,6 @@ import './Styles/index.css';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// import configureStore from './Store/configureStore';
 import rootReducer from './Reducers/Index';
 
 

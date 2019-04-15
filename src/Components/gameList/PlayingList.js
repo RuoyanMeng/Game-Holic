@@ -7,8 +7,6 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../../Actions/index'
 
 
-// import Header from "../Header";
-
 class PlayingList extends Component {
 
     static propTypes = {
@@ -36,7 +34,6 @@ class PlayingList extends Component {
         const { playingList } = this.props
 
         let playing_List = null;
-        //why if statement not working?
         switch (this.props.isFetching) {
             case "LOADING":
                 playing_List = <em>Loading...</em>;
@@ -44,7 +41,6 @@ class PlayingList extends Component {
             case "LOADED":
                 if (playingList) {
                     playing_List = Object.values(playingList).map(v => {
-                        //console.log(v)
                         return (
                             <div key={v.gameID}>
                                 <Link to={`/GameDetails/${v.gameID}`}>    
@@ -72,8 +68,6 @@ class PlayingList extends Component {
 
         return (
             <div class='gamelist'>
-                {/* <Header /> */}
-                {/* < h1 > this is playing List component</h1 > */}
                 {playing_List}
             </div >
         )
@@ -81,7 +75,6 @@ class PlayingList extends Component {
 };
 
 const mapStateToProps = (state) => {
-    //console.log(state.gameList.playlist)
     return {
         auth: state.firebase.auth,
         playingList: state.gameList.playlist,

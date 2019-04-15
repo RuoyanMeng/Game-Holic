@@ -19,15 +19,11 @@ class UserIndex extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
-
     }
+
     componentDidMount() {
 
     }
-
 
     render() {
         return (
@@ -46,7 +42,6 @@ class UserIndex extends Component {
 };
 
 const mapStateToProps = (state) => { 
-    //console.log(state.firestore)
     return {
         auth: state.firebase.auth
     }
@@ -57,7 +52,5 @@ const mapDispatchToProps = (dispatch) => {
         actions: bindActionCreators(actions, dispatch)
     }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserIndex);

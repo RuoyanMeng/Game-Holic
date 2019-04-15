@@ -52,8 +52,6 @@ class SingleGame extends Component {
       gameID: this.state.currentId,
       gameName: this.props.game.name,
       gameCover: this.props.game.cover,
-      // rating:this.props.game.rating,
-      // platforms:this.props.game.platforms
     };
     this.props.actions.addItemToList(briefGameInfo);
   }
@@ -113,7 +111,6 @@ class SingleGame extends Component {
   }
 
   render() {
-    //console.log(this.state.playStatus)
     const { visible, loading } = this.state;
     const {
       game,
@@ -124,11 +121,6 @@ class SingleGame extends Component {
       authError
     } = this.props;
 
-
-    // let rating = this.props.game.total_rating
-    //   ? this.props.game.total_rating.toFixed(0) / 20
-    //   : 2.5;
-
     let rating = this.props.game.total_rating
       ? game.total_rating.toFixed(2) : 50;
 
@@ -136,22 +128,18 @@ class SingleGame extends Component {
     let getGenres = null;
     let playStatusModal = null;
     let gameDetails = null;
-    //console.log(this.props.isFetching);
-
+    
     switch (isFetching) {
       case "LOADING":
         gameDetails = <h1 className='white'>Loading...</h1>;
         break;
       case "LOADED":
         //edit all the elements and layout of gamedetails card here
-        //console.log(this.props.isFetching);
         if (auth.isEmpty) {
           {
             /* change play ststus here, the style below only for function test */
           }
           let signUp = <Link to="/SignUp">Sign Up</Link>;
-          //let path =<Link to={"/GameDetails/"+game.id}>Sign In</Link>
-          //console.log("aaaaa" + this.props.isFetching);
 
           playStatusModal = (
             <div>
@@ -207,16 +195,13 @@ class SingleGame extends Component {
               uid: this.props.auth.uid,
               gameID: this.state.currentId
             };
-            //console.log(id.uid)
             this.props.actions.getPlayStatus(id);
-            //console.log(this.props.game.playStatus)
           }
           switch (isGetingPlayStatus) {
             case "LOADING":
               gameDetails = <em>Loading...</em>;
               break;
             case "GET_PLAYSTATUS_SUCCESS":
-              //console.log(visible);
               playStatusModal = (
                 <div>
                   <button id='button' className='f6 br3 dark-green no-underline ba grow pv2 ph3 dib' onClick={this.showModal}>
@@ -339,12 +324,10 @@ class SingleGame extends Component {
       <div className="game-wrap">
         <Header />
         <div className="game-center clearfix">
-          {/* <Link to="/" className="back-to"> */}
           <button onClick={e => { this.goBack(e) }} className='bg-transparent blue b--blue'>
             <Icon type="double-left" style={{ fontSize: '13px', color: '#1890ff' }} />
             &nbsp;Back
             </button>
-          {/* </Link> */}
           {game.name && <h1 className="single-game-title">{game.name} </h1>}
           <Row>
             <Col xs={24} sm={24} lg={8}>
@@ -383,8 +366,6 @@ class SingleGame extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.singleGame.game);
-  //console.log(state.firestore.ordered.users);
   return {
     playStatus: state.singleGame.playStatus,
     isFetching: state.singleGame.isFetching,

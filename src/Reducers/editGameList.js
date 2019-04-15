@@ -10,10 +10,8 @@ const initialState = {
 export default function editGameList(state = initialState, action) {
     switch (action.type) {
         case 'ADD_LIST_SUCCESS':
-            //console.log('add wishlist success');
             return state;
         case 'ADD_LIST_SUCCESS':
-            //console.log('REMOVE FROM wishlist success');
             return state;
         case 'GET_Playing_SUCCESS':
             return {
@@ -39,4 +37,3 @@ export default function editGameList(state = initialState, action) {
 
 }
 
-  //types.ERROR_MESSAGE

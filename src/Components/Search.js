@@ -19,23 +19,7 @@ class Search extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    //console.log(this.state.query);
-    //this.props.actions.getSearchResults(`${this.state.query}`);
-  }
-
-  componentWillUnmount() {
-    //this.props.actions.resetState();
-  }
-
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   if (nextProps.match.params.query !== prevState.query) {
-  //     return { query: nextProps.match.params.query };
-  //   } else return null;
-  // }
-
   render() {
-    //console.log(this.state.query);
     const {isFetching,searchResults } = this.props
     let gameGrid = null;
     switch (isFetching) {
@@ -81,7 +65,6 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => {
-  //console.log(state.firebase.auth)
   console.log(state.allGames.searchResults);
   return {
     isFetching: state.allGames.isFetching,

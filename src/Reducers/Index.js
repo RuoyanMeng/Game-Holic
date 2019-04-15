@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import { firestoreReducer } from 'redux-firestore';
 import { firebaseReducer } from 'react-redux-firebase'
-//import { routerReducer } from 'react-router-redux';
 
 import authReducers from './authReducers'
 import allGames from './getAllGames'
