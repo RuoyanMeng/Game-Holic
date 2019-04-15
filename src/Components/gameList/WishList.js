@@ -41,7 +41,7 @@ class WishList extends Component {
             case "LOADED":
                 if (wishList) {
                     wish_list = Object.values(wishList).map(v => {
-                        console.log(v)
+                        //console.log(v)
                         return (
                             <div  key={v.gameID}>
                                 <Link to={`/GameDetails/${v.gameID}`}>    
@@ -77,7 +77,7 @@ class WishList extends Component {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state.gameList)
+    //console.log(state.gameList)
     return {
         auth: state.firebase.auth,
         wishList: state.gameList.wishlist,

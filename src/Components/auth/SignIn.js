@@ -19,7 +19,7 @@ class SignIn extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        //console.log(this.state);
         this.props.signIn(this.state);
     }
     render() {
@@ -69,7 +69,7 @@ class SignIn extends Component {
 
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    //console.log(state)
     return {
         auth: state.firebase.auth,
         authError: state.auth.authError

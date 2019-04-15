@@ -41,7 +41,7 @@ class CompletedList extends Component {
             case "LOADED":
                 if (completedList) {
                     completed_List = Object.values(completedList).map(v => {
-                        console.log(v)
+                        //console.log(v)
                         return (
                             <div key={v.gameID}>
                                 <Link to={`/GameDetails/${v.gameID}`}>    

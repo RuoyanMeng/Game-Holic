@@ -46,7 +46,7 @@ class UserIndex extends Component {
 };
 
 const mapStateToProps = (state) => { 
-    console.log(state.firestore)
+    //console.log(state.firestore)
     return {
         auth: state.firebase.auth
     }

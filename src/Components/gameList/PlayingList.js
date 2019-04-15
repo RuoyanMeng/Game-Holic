@@ -44,7 +44,7 @@ class PlayingList extends Component {
             case "LOADED":
                 if (playingList) {
                     playing_List = Object.values(playingList).map(v => {
-                        console.log(v)
+                        //console.log(v)
                         return (
                             <div key={v.gameID}>
                                 <Link to={`/GameDetails/${v.gameID}`}>    
@@ -81,7 +81,7 @@ class PlayingList extends Component {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state.gameList.playlist)
+    //console.log(state.gameList.playlist)
     return {
         auth: state.firebase.auth,
         playingList: state.gameList.playlist,
