@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PlayStatusModal from './PlayStatusModal'
 
 import { Row, Col, Tag, Progress, Icon } from "antd";
+import poster from "../../img/poster.jpg"
 
 class GameDetails extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class GameDetails extends Component {
     let getScreenshots = null;
     let getGenres = null;
     let playStatusModal = null;
+    let getGamecover =null;
 
     if (auth.isEmpty) {
       playStatusModal =
@@ -106,10 +108,21 @@ class GameDetails extends Component {
         );
       });
     } else {
-      getGenres = <p>No relevant keywords</p>;
+      getGenres = <p>No relevant keywords</p>;  
     }
-
-
+    if(game.cover){
+      getGamecover =      
+        <img
+         className="game-cover"
+         src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
+         game.cover.image_id
+          }.jpg`}
+         alt={game.name}/>      
+    }else{
+      getGamecover= <img className="game-cover"
+      src={poster}
+      alt={game.name}/> 
+    }
     return (
       <div className="game-center clearfix">
         <button onClick={e => { this.goBack(e) }} className='bg-transparent blue b--blue'>
@@ -118,22 +131,13 @@ class GameDetails extends Component {
             </button>
         {game.name && <h1 className="single-game-title">{game.name} </h1>}
         <Row>
-          <Col xs={24} sm={24} lg={8}>
-
-            {game.cover && (
-              <img
-                className="game-cover"
-                src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
-                  game.cover.image_id
-                  }.jpg`}
-                alt={game.name}
-              />
-            )}
-          </Col>
+            <Col xs={24} sm={24} lg={8}>   
+            {getGamecover} 
+            </Col>
           <Col xs={24} sm={24} lg={16}>
-            {gameDetails}
-          </Col>
-        </Row>
+          {gameDetails}
+         </Col>
+          </Row>
         {getGenres && (
           <div className="more-keywords clearfix">
             <h2>Keywords</h2>
@@ -149,6 +153,8 @@ class GameDetails extends Component {
 
       </div>
     );
+    
+
   }
 }
 

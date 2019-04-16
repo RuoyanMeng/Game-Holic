@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../../../Actions/index'
+import poster from "../../../img/poster.jpg"
 
 class WishList extends Component {
 
@@ -39,18 +40,32 @@ class WishList extends Component {
             case "LOADED":
                 if (wishList) {
                     wish_list = Object.values(wishList).map(v => {
-                        return (
-                            <div  key={v.gameID}>
-                                <Link to={`/GameDetails/${v.gameID}`}>    
-                                    <img
-                                    className="game-cover"
-                                    src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${v.gameCover.image_id}.jpg`}
-                                    width="210"
-                                    height="280" />     
-                                    <h2>{v.gameName}</h2> 
-                                </Link>                   
-                            </div>
-                        )
+                        if(v.gameCover){
+                            return (
+                                <div key={v.gameID}>
+                                    <Link to={`/GameDetails/${v.gameID}`}>    
+                                        <img
+                                        className="game-cover"
+                                        src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${v.gameCover.image_id}.jpg`}
+                                        width="210"
+                                        height="280" />     
+                                        <h2>{v.gameName}</h2> 
+                                    </Link>
+                                </div>
+                            )}else{
+                                return(
+                                    <div key={v.gameID}>
+                                    <Link to={`/GameDetails/${v.gameID}`}>    
+                                        <img
+                                        className="game-cover"
+                                        src={poster}
+                                        width="210"
+                                        height="280" />     
+                                        <h2>{v.gameName}</h2> 
+                                    </Link>
+                                </div>
+                                )
+                            }
                     })
                 }
                 break;

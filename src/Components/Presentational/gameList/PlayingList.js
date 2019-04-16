@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../../../Actions/index'
-
+import poster from "../../../img/poster.jpg"
 
 class PlayingList extends Component {
 
@@ -41,6 +41,7 @@ class PlayingList extends Component {
             case "LOADED":
                 if (playingList) {
                     playing_List = Object.values(playingList).map(v => {
+                        if(v.gameCover){
                         return (
                             <div key={v.gameID}>
                                 <Link to={`/GameDetails/${v.gameID}`}>    
@@ -52,7 +53,20 @@ class PlayingList extends Component {
                                     <h2>{v.gameName}</h2> 
                                 </Link>
                             </div>
-                        )
+                        )}else{
+                            return(
+                                <div key={v.gameID}>
+                                <Link to={`/GameDetails/${v.gameID}`}>    
+                                    <img
+                                    className="game-cover"
+                                    src={poster}
+                                    width="210"
+                                    height="280" />     
+                                    <h2>{v.gameName}</h2> 
+                                </Link>
+                            </div>
+                            )
+                        }
                     })
                 }
                 break;
