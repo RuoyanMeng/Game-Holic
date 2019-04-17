@@ -1,12 +1,7 @@
 # GameHolic
 
 ## What is it?
-GameHolic is a web application where users can search for trendy games and view detailed information of games, including rating scores, game
-descriptions and etc. Users can log in the site and add the selected games to their collection lists of their own accounts, as well as edit the
-items of those lists.
-
-## What have we done so far?
-Our project is using React and Redux dealing with data and interaction, and we spend a lot of time exploring how Redux works. For now, we are able to use React Redux to process data and implement interactive functions quickly. Also, we have now finished the data flow based React Redux , UI design and most parts of the interaction like search, add wishlist etc.
+GameHolic is a web application where users can search for trendy games and view detailed information of games, including rating scores, game descriptions and etc. Users can log in the site and add the selected games to their collection lists of their own accounts, as well as edit the items of those lists. The project is using React and Redux dealing with data and interaction
 
 ## Link to running application
 [GameHolic](https://game-holic-590ee.firebaseapp.com/)
