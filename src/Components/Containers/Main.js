@@ -9,7 +9,7 @@ import { signOut } from "../../Actions/authActions";
 import Header from "./Header";
 
 import "../../Styles/main.scss";
-import { Row, Col } from "antd";
+import { Row, Col, Icon } from "antd";
 
 class Main extends Component {
   static propTypes = {
@@ -41,7 +41,8 @@ class Main extends Component {
     let gameGrid = null;
     switch (this.props.isFetching) {
       case "LOADING":
-        gameGrid = <h1 className='white'>Loading...</h1>;
+        // gameGrid = <h1 className='white'>Loading...</h1>;
+        gameGrid = <h1 className='white'><Icon type="loading" /></h1>;
         break;
       case "LOADED":
         gameGrid = (

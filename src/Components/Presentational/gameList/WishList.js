@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux'
 
 import * as actions from '../../../Actions/index'
 import poster from "../../../img/poster.jpg"
+import { Icon } from "antd";
+
 
 class WishList extends Component {
 
@@ -35,7 +37,7 @@ class WishList extends Component {
         let wish_list = null;
         switch (this.props.isFetching) {
             case "LOADING":
-            wish_list = <em>Loading...</em>;
+            wish_list = <em><Icon type="loading" /></em>;
                 break;
             case "LOADED":
                 if (wishList) {

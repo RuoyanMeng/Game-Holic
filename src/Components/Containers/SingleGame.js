@@ -12,7 +12,7 @@ import GameDetails from '../Presentational/gameDetails'
 import Header from "./Header";
 
 import "../../Styles/singlegame.scss";
-
+import { Icon } from "antd";
 
 class SingleGame extends Component {
   static propTypes = {
@@ -56,7 +56,7 @@ class SingleGame extends Component {
 
     switch (isFetching) {
       case "LOADING":
-        gameDetails = <h1 className='white mt7 ml7'>Loading...</h1>;
+        gameDetails = <h1 className='white mt7 ml7'><Icon type="loading" /></h1>;
         break;
       case "LOADED":
         if (auth.isEmpty) {

@@ -7,6 +7,7 @@ import * as actions from "../../Actions/index";
 import Header from "./Header";
 import GameGrid from "../Presentational/GameGrid";
 import "../../Styles/search.scss";
+import { Icon } from "antd";
 
 class Search extends Component {
   static propTypes = {
@@ -24,7 +25,7 @@ class Search extends Component {
     let gameGrid = null;
     switch (isFetching) {
       case "LOADING":
-        gameGrid = <h1 className='white'>Loading...</h1>;
+        gameGrid = <h1 className='white'><Icon type="loading" /></h1>;
         break;
       case "LOADED":
         if(searchResults.length !== 0){

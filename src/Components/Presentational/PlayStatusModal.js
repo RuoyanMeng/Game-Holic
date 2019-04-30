@@ -140,9 +140,9 @@ class PlayStatusModal extends Component {
             onOk={this.handleOk}
             onCancel={this.handleCancel}
             footer={[
-              <button className='white b ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib' onClick={this.handleCancel}>
-                Return
-                      </button>,
+              // <button className='white b ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib' onClick={this.handleCancel}>
+              //   Return
+              //         </button>,
               <button
                 className='b ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib white'
                 loading={loading}
