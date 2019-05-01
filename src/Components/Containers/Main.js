@@ -28,7 +28,6 @@ class Main extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    console.log(this.state.keyWord);
     this.props.actions.getAllGames(`${this.state.keyWord}`);
   }
 

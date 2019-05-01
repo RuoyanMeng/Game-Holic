@@ -99,7 +99,6 @@ class GameDetails extends Component {
 
     if (game.themes) {
       getGenres = Object.values(game.themes).map(k => {
-        // console.log(s)
         let path = "/Search/" + k.name
         return (
           <Link to={path} key={k.id} className="key-words" >

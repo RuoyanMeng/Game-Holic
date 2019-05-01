@@ -7,10 +7,10 @@ export const signIn = (credentials) => {
             credentials.email,
             credentials.password
         ).then(() => {
-            console.log("ok")
+            //console.log("ok")
             dispatch({ type: types.SIGNIN_SUCCESS });
         }).catch((err) => {
-            console.log("errr")
+            //console.log("errr")
             dispatch({ type: types.SIGNIN_ERROR, err });
         });
 
