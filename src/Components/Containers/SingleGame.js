@@ -119,6 +119,7 @@ class SingleGame extends Component {
 }
 
 const mapStateToProps = state => {
+  //console.log(state.singleGame.game)
   return {
     playStatus: state.singleGame.playStatus,
     isFetching: state.singleGame.isFetching,

@@ -26,7 +26,7 @@ export default function getAllGamesReducer(state = initialState, action) {
         searchResults: action.searchResults
       }
     case 'RESET_STATE_SEARCHRESULTS':
-      console.log('reset state')
+      //console.log('reset state')
       return {
         ...state,
         searchResults: [],

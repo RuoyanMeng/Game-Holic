@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 import PlayStatusModal from './PlayStatusModal'
-
+import * as actions from "../../Actions/index";
 import { Row, Col, Tag, Progress, Icon } from "antd";
 import poster from "../../img/poster.jpg"
 
@@ -153,8 +155,18 @@ class GameDetails extends Component {
       </div>
     );
     
-
   }
 }
+const mapStateToProps = state => {
+  return {
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: bindActionCreators(actions, dispatch),
+  };
+};
 
-export default GameDetails;
+export default connect(mapStateToProps,
+  mapDispatchToProps
+)(GameDetails);
