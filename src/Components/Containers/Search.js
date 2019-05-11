@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as actions from "../../Actions/index";
-import Header from "./Header";
+import Header from "../Header";
 import GameGrid from "../Presentational/GameGrid";
 import "../../Styles/search.scss";
 import { Icon } from "antd";
@@ -29,15 +29,13 @@ class Search extends Component {
         break;
       case "LOADED":
         if(searchResults.length !== 0){
-          gameGrid = (
-            <div>
+          gameGrid = 
               <GameGrid
                 games={searchResults}
                 isFetching={isFetching}
                 isIndex={false}
+                isSearchresults={true}
               />
-            </div>
-          );
         }else{
           gameGrid = (
             <div>
@@ -45,7 +43,6 @@ class Search extends Component {
             </div>
           );
         }
-        
         break;
       default:
         gameGrid = <b>Failed to load data, please try again</b>;

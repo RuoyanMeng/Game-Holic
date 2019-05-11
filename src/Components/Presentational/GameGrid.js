@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col } from "antd";
-import "../../Styles/gamegrid.scss";
 
+import { Row, Col, Icon} from "antd";
+import "../../Styles/gamegrid.scss";
 import poster from "../../img/poster.jpg"
 
 class GameGrid extends Component {
@@ -14,6 +14,12 @@ class GameGrid extends Component {
   render() {
     let gameList = null;
     let listNumber = 0;
+    switch (this.props.isFetching) {
+      case "LOADING":
+        // gameGrid = <h1 className='white'>Loading...</h1>;
+        gameList = <h1 className='white'><Icon type="loading" /></h1>;
+        break;
+      case "LOADED":
         gameList = this.props.games.map(game => {
           if (this.props.isIndex) {
             let filterList = [22422, 16309, 22472, 26163, 68049, 114455, 37419];
@@ -37,7 +43,7 @@ class GameGrid extends Component {
                     <img
                       src={`https://images.igdb.com/igdb/image/upload/t_thumb_2x/${
                         game.cover.image_id
-                      }.jpg`}
+                        }.jpg`}
                       className="game-img"
                     />
                   </Link>
@@ -45,7 +51,7 @@ class GameGrid extends Component {
               );
             }
           } else {
-            if (game.cover){
+            if (game.cover) {
               return (
                 <Link to={`/GameDetails/${game.id}`} className="search-game-item" key={game.id}>
                   <Row>
@@ -54,10 +60,10 @@ class GameGrid extends Component {
                         <img
                           src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${
                             game.cover.image_id
-                          }.jpg`}
+                            }.jpg`}
                           className="game-cover"
                         />
-                      )}                  
+                      )}
                     </Col>
                     <Col span={18}>
                       <h2 className="game-name">{game.name}</h2>
@@ -65,25 +71,32 @@ class GameGrid extends Component {
                     </Col>
                   </Row>
                 </Link>
-               ); 
-              }else{
-                return (
-                  <Link to={`/GameDetails/${game.id}`} className="search-game-item" key={game.id}>
-                    <Row>
-                      <Col span={6}>
-                      {<img className="game-cover" src={poster} 
-                      alt={game.name}/>}                   
-                      </Col>
-                      <Col span={18}>
-                        <h2 className="game-name">{game.name}</h2>
-                        <div className="game-summary">{game.summary}</div>
-                      </Col>
-                    </Row>
-                  </Link>
-                 ); 
-              }
+              );
+            } else {
+              return (
+                <Link to={`/GameDetails/${game.id}`} className="search-game-item" key={game.id}>
+                  <Row>
+                    <Col span={6}>
+                      {<img className="game-cover" src={poster}
+                        alt={game.name} />}
+                    </Col>
+                    <Col span={18}>
+                      <h2 className="game-name">{game.name}</h2>
+                      <div className="game-summary">{game.summary}</div>
+                    </Col>
+                  </Row>
+                </Link>
+              );
+            }
           }
         });
+
+
+        break;
+      default:
+        gameList = <b>Failed to load data, please try again</b>;
+        break;
+    }
 
     return (
       <div className="Game-wrap">

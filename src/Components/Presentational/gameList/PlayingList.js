@@ -1,33 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
-import * as actions from '../../../Actions/index'
 import poster from "../../../img/poster.jpg"
 import { Icon } from "antd";
 
 class PlayingList extends Component {
 
-    static propTypes = {
-        playingList: PropTypes.array.isRequired,
-        auth: PropTypes.object.isRequired
-    }
-
     constructor(props) {
         super(props);
-        this.state = {
-            uid: this.props.auth.uid
-        }
 
     }
     componentDidMount() {
-        let listType = {
-            uid: this.state.uid,
-            listType: 'Playing'
-        }
-        this.props.actions.getGameList(listType)
+
     }
 
 
@@ -87,18 +71,7 @@ class PlayingList extends Component {
     }
 };
 
-const mapStateToProps = (state) => {
-    return {
-        auth: state.firebase.auth,
-        playingList: state.gameList.playlist,
-        isFetching: state.gameList.isFetchingP
-    }
-}
 
-const mapDispatchToProps = dispatch => {
-    return {
-        actions: bindActionCreators(actions, dispatch),
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayingList);
+
+export default PlayingList;

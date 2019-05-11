@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 import * as actions from "../../Actions/index";
 import GameGrid from "../Presentational/GameGrid";
 import { signOut } from "../../Actions/authActions";
-import Header from "./Header";
+import Header from "../Header";
 
 import "../../Styles/main.scss";
 import { Row, Col, Icon } from "antd";
@@ -35,29 +35,16 @@ class Main extends Component {
     this.props.actions.resetState();
   }
 
-
   render() {
+    const {isFetching,games} = this.props
     let gameGrid = null;
-    switch (this.props.isFetching) {
-      case "LOADING":
-        // gameGrid = <h1 className='white'>Loading...</h1>;
-        gameGrid = <h1 className='white'><Icon type="loading" /></h1>;
-        break;
-      case "LOADED":
-        gameGrid = (
-          <div>
-            <GameGrid
-              games={this.props.games}
-              //isFetching={this.props.isFetching}
-              isIndex={true}
-            />
-          </div>
-        );
-        break;
-      default:
-        gameGrid = <b>Failed to load data, please try again</b>;
-        break;
-    }
+    gameGrid =
+        <GameGrid
+          isFetching={isFetching}
+          games={games}
+          isFetching={isFetching}
+          isIndex={true}
+        />
 
     return (
       <div className="main-wrap">

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 
 import * as actions from '../../Actions/index'
-import Header from "./Header";
+import Header from "../Header";
 import WishList from "../Presentational/gameList/WishList"
 import PlayingList from '../Presentational/gameList/PlayingList'
 import CompletedList from '../Presentational/gameList/CompletedList'
@@ -19,23 +19,46 @@ class UserIndex extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            uid: this.props.auth.uid
+        }
     }
 
     componentDidMount() {
+        let listType = {
+            uid: this.state.uid,
+            listType: 'Completed'
+        }
+        this.props.actions.getGameList(listType)
 
+        listType = {
+            uid: this.state.uid,
+            listType: 'Playing'
+        }
+        this.props.actions.getGameList(listType)
+
+        listType = {
+            uid: this.state.uid,
+            listType: 'Wanna Play'
+        }
+        this.props.actions.getGameList(listType)
     }
 
     render() {
+        const {isFetchingC, completedList, isFetchingW, wishList, isFetchingP, playingList} = this.props
+        let wish_list = <WishList wishList={wishList} isFetching={isFetchingW}/>
+        let completed_list = <CompletedList completedList={completedList} isFetching={isFetchingC}/>
+        let playing_list = <PlayingList playingList={playingList} isFetching={isFetchingP}/> 
         return (
             <div id='Userindex'>
                 <Header />
                 <h1 id='Greeting'>Good day!</h1>
                 <h1>Wish List</h1>
-                <WishList/>
+                {wish_list}
                 <h1>Playing</h1>
-                <PlayingList/> 
+                {completed_list}
                 <h1>Completed</h1>
-                <CompletedList/>
+                {playing_list}
             </div>
         )
     }
@@ -43,7 +66,13 @@ class UserIndex extends Component {
 
 const mapStateToProps = (state) => { 
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        completedList: state.gameList.completedlist,
+        playingList: state.gameList.playlist,
+        wishList: state.gameList.wishlist,
+        isFetchingC: state.gameList.isFetchingC,
+        isFetchingP: state.gameList.isFetchingP,
+        isFetchingW: state.gameList.isFetchingW
     }
 }
 

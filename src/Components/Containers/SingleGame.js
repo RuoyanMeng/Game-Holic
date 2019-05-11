@@ -9,7 +9,7 @@ import { signIn } from "../../Actions/authActions";
 import GameDetails from '../Presentational/gameDetails'
 
 
-import Header from "./Header";
+import Header from "../Header";
 
 import "../../Styles/singlegame.scss";
 import { Icon } from "antd";
@@ -93,8 +93,7 @@ class SingleGame extends Component {
                 auth={auth}
                 playStatus={playStatus}
                 gameID={this.state.currentId}
-              >
-              </GameDetails>
+              />
               break;
             default:
               break;

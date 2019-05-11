@@ -1,32 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
-import * as actions from '../../../Actions/index'
 import poster from "../../../img/poster.jpg"
 import { Icon } from "antd";
 
 class CompletedList extends Component {
 
-    static propTypes = {
-        wishlist: PropTypes.array.isRequired,
-    }
 
     constructor(props) {
         super(props);
-        this.state = {
-            uid: this.props.auth.uid
-        }
-
     }
     componentDidMount() {
-        let listType = {
-            uid: this.state.uid,
-            listType: 'Completed'
-        }
-        this.props.actions.getGameList(listType)
+
     }
 
 
@@ -74,8 +59,6 @@ class CompletedList extends Component {
             completed_List = <b>Failed to load data, please try again</b>;
                 break;
 
-
-
         }
 
 
@@ -87,22 +70,4 @@ class CompletedList extends Component {
     }
 };
 
-const mapStateToProps = (state) => {
-
-    return {
-        auth: state.firebase.auth,
-        completedList: state.gameList.completedlist,
-        isFetching: state.gameList.isFetchingP
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        actions: bindActionCreators(actions, dispatch),
-    }
-}
-
-
-export default 
-    connect(mapStateToProps,mapDispatchToProps)
-    (CompletedList);
+export default CompletedList;
