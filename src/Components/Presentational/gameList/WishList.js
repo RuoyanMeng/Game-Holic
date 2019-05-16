@@ -27,7 +27,8 @@ class WishList extends Component {
                     wish_list = Object.values(wishList).map(v => {
                         if(v.gameCover){
                             return (
-                                <div key={v.gameID}>
+                                <div key={v.gameID} className="itemOfList">
+                                    <Icon type="close-circle" theme="filled" className="deleteicon" style={{fontSize:"40px", color:"#EC7063"}} />
                                     <Link to={`/GameDetails/${v.gameID}`}>    
                                         <img
                                         className="game-cover"
@@ -39,7 +40,8 @@ class WishList extends Component {
                                 </div>
                             )}else{
                                 return(
-                                    <div key={v.gameID}>
+                                    <div key={v.gameID}className="itemOfList">
+                                    <Icon type="close-circle" theme="filled" className="deleteicon" style={{fontSize:"40px", color:"#EC7063"}} />
                                     <Link to={`/GameDetails/${v.gameID}`}>    
                                         <img
                                         className="game-cover"
