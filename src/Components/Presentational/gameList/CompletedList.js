@@ -28,7 +28,8 @@ class CompletedList extends Component {
                     completed_List = Object.values(completedList).map(v => {
                         if(v.gameCover){
                             return (
-                                <div key={v.gameID}>
+                                <div key={v.gameID} className="itemOfList">
+                                <Icon type="close-circle" theme="filled" className="deleteicon" style={{fontSize:"40px", color:"#EC7063"}} />
                                     <Link to={`/GameDetails/${v.gameID}`}>    
                                         <img
                                         className="game-cover"
@@ -40,7 +41,8 @@ class CompletedList extends Component {
                                 </div>
                             )}else{
                                 return(
-                                    <div key={v.gameID}>
+                                    <div key={v.gameID} className="itemOfList">
+                                    <Icon type="close-circle" theme="filled" className="deleteicon" style={{fontSize:"40px", color:"#EC7063"}} />
                                     <Link to={`/GameDetails/${v.gameID}`}>    
                                         <img
                                         className="game-cover"
