@@ -7,9 +7,8 @@ import { bindActionCreators } from "redux";
 import * as actions from "../../Actions/index";
 import { signIn } from "../../Actions/authActions";
 import GameDetails from '../Presentational/gameDetails'
-
-
 import Header from "../Header";
+import Comments from '../Presentational/Comments'
 
 import "../../Styles/singlegame.scss";
 import { Icon } from "antd";
@@ -34,11 +33,15 @@ class SingleGame extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.actions.getSingleGame(`${this.state.currentId}`);
+    this.props.actions.getComments(`${this.state.currentId}`);
   }
 
   componentWillUnmount = () => {
     this.props.actions.resetState('SINGLEGAME');
   }
+
+
+
 
   render() {
 
@@ -48,9 +51,12 @@ class SingleGame extends Component {
       isFetching,
       playStatus,
       isGetingPlayStatus,
-      authError
+      authError,
+      profile,
+      actions,
+      commentList,
+      isFetchingComment
     } = this.props;
-
 
     let gameDetails = null;
 
@@ -61,7 +67,6 @@ class SingleGame extends Component {
       case "LOADED":
         if (auth.isEmpty) {
           let signUp = <Link to="/SignUp">Sign Up</Link>;
-
           gameDetails = <GameDetails
             game={game}
             history={this.props.history}
@@ -99,8 +104,6 @@ class SingleGame extends Component {
               break;
           }
         }
-
-
         break;
 
       default:
@@ -108,24 +111,42 @@ class SingleGame extends Component {
         break;
     }
 
+    let commentDiv = null;
+    switch (isFetchingComment) {
+      case "LOADING":
+        commentDiv = <h1 className='white mt7 ml7'><Icon type="loading" /></h1>;
+        break;
+      case "LOADED":
+        console.log(commentList);
+        commentDiv = <Comments actions={actions} gameID={this.state.currentId} commentList={commentList} profile={profile}/>
+        break;
+      default:
+        commentDiv = <b>Failed to load data, please try again</b>
+
+    }
+
     return (
       <div className="game-wrap">
         <Header />
         {gameDetails}
+        {commentDiv}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  //console.log(state.singleGame.game)
+  console.log(state.firebase.profile)
   return {
     playStatus: state.singleGame.playStatus,
     isFetching: state.singleGame.isFetching,
     isGetingPlayStatus: state.singleGame.isGetingPlayStatus,
     game: state.singleGame.game,
     auth: state.firebase.auth,
-    authError: state.auth.authError
+    authError: state.auth.authError,
+    profile: state.firebase.profile,
+    commentList: state.commentList.commentList,
+    isFetchingComment: state.commentList.isFetchingComment
   };
 };
 
