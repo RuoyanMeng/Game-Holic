@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 
 import poster from "../../img/poster.jpg";
 import { Icon } from "antd";
-import {  Droppable, Draggable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 class GameList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameList: this.props.gameList
+      gameList: [...this.props.gameList]
     };
-    
   }
 
   componentDidMount() {}
@@ -24,7 +23,25 @@ class GameList extends Component {
     }
   }
 
+  handleDelete = gameInfo => {
+    gameInfo.playStatus = "Abandoned";
+    
+    let abandonGameInfo = this.state.gameList.filter(
+      o => o.gameID !== gameInfo.gameID
+    );
+    this.setState({
+      gameList:abandonGameInfo
+    })
+
+    setTimeout(() => {
+      console.log(this.state.gameList);
+      this.props.actions.addItemToList(gameInfo)
+    },500)
+
+  };
+
   render() {
+    console.log(this.state.gameList);
     const { gameList } = this.state;
 
     const { droppableId, isFetching } = this.props;
@@ -56,6 +73,7 @@ class GameList extends Component {
                       theme="filled"
                       className="deleteicon"
                       style={{ fontSize: "40px", color: "#EC7063" }}
+                      onClick={() => this.handleDelete(v)}
                     />
                     <Link to={`/GameDetails/${v.gameID}`}>
                       <img
@@ -84,19 +102,16 @@ class GameList extends Component {
         break;
     }
     const style = {
-        width: `${gameList.length*230}px`
-    }
+      width: `${gameList.length * 230}px`
+    };
     return (
-        <Droppable
-          droppableId={droppableId}
-          direction="horizontal"
-        >
-          {(provided, snapshot) => (
-            <div className="gamelist" ref={provided.innerRef} style={style}>
-              {game_list}
-            </div>
-          )}
-        </Droppable>
+      <Droppable droppableId={droppableId} direction="horizontal">
+        {(provided, snapshot) => (
+          <div className="gamelist" ref={provided.innerRef} style={style}>
+            {game_list}
+          </div>
+        )}
+      </Droppable>
     );
   }
 }

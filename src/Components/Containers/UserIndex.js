@@ -90,6 +90,7 @@ class UserIndex extends Component {
   }
 
   onDragEnd(result) {
+    console.log(result);
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -101,13 +102,16 @@ class UserIndex extends Component {
         result.source.index,
         result.destination.index
       );
+      console.log(newList);
       switch (result.destination.droppableId) {
         case "wishList":
+          console.log("wish");
           this.setState({
             wishList: newList
           });
           break;
         case "playingList":
+          console.log("play");
           this.setState({
             playingList: newList
           });
@@ -125,17 +129,35 @@ class UserIndex extends Component {
         result.source,
         result.destination
       );
+      let gameItemInfo = this.state[result.source.droppableId].find(
+        o => o.gameID === result.draggableId
+      );
+      switch (result.destination.droppableId) {
+        case "wishList":
+          gameItemInfo.playStatus = "Wanna Play";
+          break;
+        case "playingList":
+          gameItemInfo.playStatus = "Playing";
+          break;
+        case "completedList":
+          gameItemInfo.playStatus = "Completed";
+          break;
+      }
+      console.log(gameItemInfo);
+      this.props.actions.addItemToList(gameItemInfo);
+
       this.setState(newLists);
     }
   }
 
   render() {
-    const { isFetchingC, isFetchingW, isFetchingP } = this.props;
+    const { isFetchingC, isFetchingW, isFetchingP, actions } = this.props;
     const { completedList, wishList, playingList } = this.state;
     let wish_list = (
       <GameList
         gameList={wishList}
         isFetching={isFetchingW}
+        actions={actions}
         droppableId="wishList"
       />
     );
@@ -143,6 +165,7 @@ class UserIndex extends Component {
       <GameList
         gameList={playingList}
         isFetching={isFetchingP}
+        actions={actions}
         droppableId="playingList"
       />
     );
@@ -150,6 +173,7 @@ class UserIndex extends Component {
       <GameList
         gameList={completedList}
         isFetching={isFetchingC}
+        actions={actions}
         droppableId="completedList"
       />
     );
