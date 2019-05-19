@@ -135,7 +135,34 @@ export function resetState(section){
 }
 
 
+export function addComments(commentInfo){
+    let commentList = commentInfo.commentList
+    return(dispatch, getState, { getFirestore })=>{
+        const firestore = getFirestore();
+        firestore.collection('commentList').doc(commentInfo.gameID).set({
+            ...JSON.parse(JSON.stringify(commentList))
+        }).then(() => {
+                dispatch({ type: types.ADD_COMMENTS_SUCCESS});
+            }).catch(err => {
+                dispatch({ type: types.ADD_COMMENTS_ERROR }, err);
+            });
+    }
+}
 
+export function getComments(gameID){
+    let commentList;
+    return(dispatch, getState, { getFirestore })=>{
+        const firestore = getFirestore();
+        firestore.collection('commentList').doc(gameID).get().then(comments => {
+                
+                commentList = Object.values(comments.data());
+                
+                dispatch({ type: types.GET_COMMENTS_SUCCESS, commentList});
+            }).catch(err => {
+                dispatch({ type: types.GET_COMMENTS_ERROR }, err);
+            });
+    }
+}
 
 
 
