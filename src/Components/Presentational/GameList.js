@@ -102,7 +102,8 @@ class GameList extends Component {
         break;
     }
     const style = {
-      width: `${gameList.length * 230}px`
+      width: `${gameList.length * 230}px`,
+      minWidth: "100%"
     };
     return (
       <Droppable droppableId={droppableId} direction="horizontal">

@@ -185,15 +185,15 @@ class UserIndex extends Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           <h1>Wish List</h1>
           <div className="list-wrap">
-            {wishList && wishList.length > 0 && wish_list}
+            {wish_list}
           </div>
           <h1>Playing</h1>
           <div className="list-wrap">
-            {playingList && playingList.length > 0 && playing_list}
+            {playing_list}
           </div>
           <h1>Completed</h1>
           <div className="list-wrap">
-            {completedList && completedList.length > 0 && completed_list}
+            {completed_list}
           </div>
         </DragDropContext>
       </div>
