@@ -103,4 +103,37 @@
     color:white;
   }
 }
-
+.game-comment {
+  padding:0 10%;
+  .ant-list{
+    color:white;
+    .ant-comment-content-author-name{
+      color:#137752;
+      font-size: 16px;
+      margin-top:-2px;
+    }
+    .ant-comment{
+      background:linear-gradient(to right, #000000c2, #ffffff00);
+      margin:2% 0;
+      padding-left: 5px;
+      border-radius: 1em;
+    }
+  }
+  .ant-comment-content{
+    margin-right: 10%;
+    padding-left:2%;
+    button{
+      border-radius: 3px;
+      color: #137752;
+      background-color: #fff;
+      border: none;
+    }
+  }
+  .ant-comment-avatar{
+    padding-top:1%;
+  }
+  #comment-area{
+    border-top: solid 1px white;
+  }
+  
+}

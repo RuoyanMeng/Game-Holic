@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Comment, Avatar, Form, Button, List, Input } from "antd";
 import moment from "moment";
+import profilePic from "../../img/profile.png"
 
 const TextArea = Input.TextArea;
 
@@ -16,7 +17,7 @@ const CommentList = ({ comments }) => (
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <div>
     <Form.Item>
-      <TextArea rows={4} onChange={onChange} value={value} />
+      <TextArea rows={4} onChange={onChange} value={value} placeholder="Input your comment"/>
     </Form.Item>
     <Form.Item>
       <Button
@@ -37,7 +38,8 @@ class Comments extends Component {
     this.state = {
       comments: [...this.props.commentList],
       submitting: false,
-      value: ""
+      value: "",
+      commentavatar: profilePic,
     };
   }
 
@@ -62,7 +64,8 @@ class Comments extends Component {
           {
             author: this.props.profile.userName,
             avatar:
-              "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+              //  "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+              this.state.commentavatar,
             content: this.state.value,
             datetime: moment().format('MMMM Do YYYY, h:mm:ss a'),
           },
@@ -92,14 +95,15 @@ class Comments extends Component {
 
     console.log(comments);
     return (
-      <div>
+      <div class="game-comment">
         {comments.length > 0 && <CommentList comments={comments} />}
-        <Comment
+        <Comment id="comment-area"
           avatar={
             <Avatar
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              src= {profilePic}
               alt="Han Solo"
             />
+        
           }
           content={
             <Editor
