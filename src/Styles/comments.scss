@@ -1,0 +1,56 @@
+.game-comment {
+  .ant-list {
+    .ant-comment-avatar {
+      padding-top: 0%;
+      padding-left: 1%;
+    }
+
+    .ant-comment-content {
+      margin-right: 10%;
+      padding-left: 8px;
+
+      .ant-comment-content-author-name {
+        color: #137752;
+        font-size: 16px;
+        margin-top: 0px;
+      }
+
+      .ant-comment-content-author-time {
+        height: 18px;
+        font-size: 10px;
+        line-height: 18px;
+        color: #b7b5b5;
+        white-space: nowrap;
+        cursor: auto;
+      }
+    }
+  }
+
+  .ant-comment{
+    textarea.ant-input {
+        max-width: 100%;
+        height: auto;
+        min-height: 26px;
+        vertical-align: bottom;
+        transition: all 0.3s, height 0s;
+        background: #222222;
+        color: white;
+    }
+
+    .ant-comment-avatar {
+        position: relative;
+        -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        margin-right: 12px;
+        cursor: pointer;
+    }
+
+  }
+
+  .ant-comment-avatar {
+    padding-top: 0%;
+    padding-left: 1%;
+  }
+}
+// }

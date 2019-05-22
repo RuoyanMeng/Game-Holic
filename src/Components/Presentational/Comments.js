@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Comment, Avatar, Form, Button, List, Input } from "antd";
 import moment from "moment";
-import profilePic from "../../img/profile.png"
+import profilePic from "../../img/profile.png";
+import "../../Styles/comments.scss";
+
 
 const TextArea = Input.TextArea;
 
@@ -17,7 +19,7 @@ const CommentList = ({ comments }) => (
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <div>
     <Form.Item>
-      <TextArea rows={4} onChange={onChange} value={value} placeholder="Input your comment"/>
+      <TextArea rows={4} onChange={onChange} value={value} placeholder=" How do you think about this game? Please type your comment here..."/>
     </Form.Item>
     <Form.Item>
       <Button
@@ -63,9 +65,7 @@ class Comments extends Component {
         comments: [
           {
             author: this.props.profile.userName,
-            avatar:
-              //  "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-              this.state.commentavatar,
+            avatar: this.state.commentavatar,
             content: this.state.value,
             datetime: moment().format('MMMM Do YYYY, h:mm:ss a'),
           },
@@ -95,13 +95,12 @@ class Comments extends Component {
 
     console.log(comments);
     return (
-      <div class="game-comment">
+      <div className="game-comment">
         {comments.length > 0 && <CommentList comments={comments} />}
         <Comment id="comment-area"
           avatar={
             <Avatar
               src= {profilePic}
-              alt="Han Solo"
             />
         
           }

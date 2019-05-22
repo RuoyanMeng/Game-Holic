@@ -22,7 +22,7 @@ class GameGrid extends Component {
       case "LOADED":
         gameList = this.props.games.map(game => {
           if (this.props.isIndex) {
-            let filterList = [22422, 16309, 22472, 26163, 68049, 114455, 37419];
+            let filterList = [22422, 16309, 22472, 26163, 68049, 114455, 37419, 22490];
             if (
               game.cover &&
               game.cover.image_id &&
