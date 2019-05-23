@@ -34,8 +34,6 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </div>
 );
 
-
-
 class Comments extends Component {
   constructor(props) {
     super(props);
@@ -69,7 +67,7 @@ class Comments extends Component {
             author: this.props.profile.userName,
             avatar: this.state.commentavatar,
             content: this.state.value,
-            datetime: +moment().format('MMMM Do YYYY, h:mm:ss a'),
+            datetime: moment().format('MMMM Do YYYY, h:mm:ss a'),
           },
           ...this.state.comments
         ]
