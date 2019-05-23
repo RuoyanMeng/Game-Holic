@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Comment, Avatar, Form, Button, List, Input } from "antd";
+import { Comment, Avatar, Form, Button, List, Input, Rate } from "antd";
 import moment from "moment";
 import profilePic from "../../img/profile.png";
 import "../../Styles/comments.scss";
-
 
 const TextArea = Input.TextArea;
 
@@ -18,8 +17,9 @@ const CommentList = ({ comments }) => (
 
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <div>
+    <Form.Item><Rate allowHalf /></Form.Item>
     <Form.Item>
-      <TextArea rows={4} onChange={onChange} value={value} placeholder=" How do you think about this game? Please type your comment here..."/>
+      <TextArea rows={4} onChange={onChange} value={value} placeholder=" How do you think about this game? Please type your comments here..."/>
     </Form.Item>
     <Form.Item>
       <Button
@@ -113,6 +113,7 @@ class Comments extends Component {
             />
           }
         />
+       
       </div>
     );
   }
