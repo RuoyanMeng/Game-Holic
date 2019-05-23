@@ -23,8 +23,7 @@ class PlayStatusModal extends Component {
       playStatus: playStatus,
       uid: uid,
       gameID: JSON.stringify(this.props.game.id),
-      gameName: (this.props.game.name).toString() ,
-      
+      gameName: (this.props.game.name).toString(),
     };
     if(this.props.game.cover){
       briefGameInfo.gameCover= this.props.game.cover

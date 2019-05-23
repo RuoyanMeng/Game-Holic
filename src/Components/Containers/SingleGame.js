@@ -20,7 +20,8 @@ class SingleGame extends Component {
     isGetingPlayStatus: PropTypes.string.isRequired,
     authError: PropTypes.string.isRequired,
     auth: PropTypes.object.isRequired,
-    gameStatus: PropTypes.array.isRequired
+    gameStatus: PropTypes.array.isRequired,
+    gameRate: PropTypes.number.isRequired
   };
 
   constructor(props) {
@@ -47,6 +48,7 @@ class SingleGame extends Component {
       isFetching,
       playStatus,
       isGetingPlayStatus,
+      gameRate,
       authError,
       profile,
       actions,
@@ -55,6 +57,7 @@ class SingleGame extends Component {
     } = this.props;
 
     let gameDetails = null;
+    let commentDiv = null;
 
     switch (isFetching) {
       case "LOADING":
@@ -101,6 +104,36 @@ class SingleGame extends Component {
                   gameID={this.state.currentId}
                 />
               );
+              switch (isFetchingComment) {
+                case "LOADING":
+                  commentDiv = (
+                    <h1 className="white mt7 ml7">
+                      <Icon type="loading" />
+                    </h1>
+                  );
+                  break;
+                case "LOADED":
+                  let signUp = <Link to="/SignUp">Sign Up</Link>;
+                  //console.log(commentList);
+                  commentDiv = (
+                    <Comments
+                      authError={authError}
+                      actions={actions}
+                      gameID={this.state.currentId}
+                      commentList={commentList}
+                      profile={profile}
+                      auth={auth}
+                      signIn={this.props.signIn}
+                      signUp={signUp}
+                      game={game}
+                      playStatus={playStatus}
+                      rate={gameRate}
+                    />
+                  );
+                  break;
+                default:
+                  commentDiv = <b>Failed to load data, please try again</b>;
+              }
               break;
             default:
               break;
@@ -111,30 +144,6 @@ class SingleGame extends Component {
       default:
         gameDetails = <b>Failed to load data, please try again</b>;
         break;
-    }
-
-    let commentDiv = null;
-    switch (isFetchingComment) {
-      case "LOADING":
-        commentDiv = (
-          <h1 className="white mt7 ml7">
-            <Icon type="loading" />
-          </h1>
-        );
-        break;
-      case "LOADED":
-        console.log(commentList);
-        commentDiv = (
-          <Comments
-            actions={actions}
-            gameID={this.state.currentId}
-            commentList={commentList}
-            profile={profile}
-          />
-        );
-        break;
-      default:
-        commentDiv = <b>Failed to load data, please try again</b>;
     }
 
     return (
@@ -148,9 +157,9 @@ class SingleGame extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.commentList.isFetchingComment);
   return {
-    playStatus: state.singleGame.playStatus,
+    playStatus: state.singleGame.playStatus.playStatus,
+    gameRate: state.singleGame.playStatus.rate,
     isFetching: state.singleGame.isFetching,
     isGetingPlayStatus: state.singleGame.isGetingPlayStatus,
     game: state.singleGame.game,

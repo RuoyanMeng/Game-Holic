@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Comment, Avatar, Form, Button, List, Input, Rate } from "antd";
 import moment from "moment";
+import PlayStatusModal from "./PlayStatusModal";
 import profilePic from "../../img/profile.png";
 import "../../Styles/comments.scss";
 
@@ -15,22 +16,18 @@ const CommentList = ({ comments }) => (
   />
 );
 
-const Editor = ({ onChange, onSubmit, submitting, value }) => (
+const Editor = ({ onChange, value, buttonComment, rateComponent }) => (
   <div>
-    <Form.Item><Rate allowHalf /></Form.Item>
+    {rateComponent}
     <Form.Item>
-      <TextArea rows={4} onChange={onChange} value={value} placeholder=" How do you think about this game? Please type your comments here..."/>
+      <TextArea
+        rows={4}
+        onChange={onChange}
+        value={value}
+        placeholder=" How do you think about this game? Please type your comments here..."
+      />
     </Form.Item>
-    <Form.Item>
-      <Button
-        htmlType="submit"
-        loading={submitting}
-        onClick={onSubmit}
-        type="primary"
-      >
-        Add Comment
-      </Button>
-    </Form.Item>
+    <Form.Item>{buttonComment}</Form.Item>
   </div>
 );
 
@@ -41,13 +38,14 @@ class Comments extends Component {
       comments: [...this.props.commentList],
       submitting: false,
       value: "",
-      commentavatar: profilePic,
+      rateValue: "",
+      commentavatar: profilePic
     };
   }
 
-  componentWillUnmount=()=>{
+  componentWillUnmount = () => {
     this.props.actions.resetState("COMMENT");
-  }
+  };
 
   handleSubmit = () => {
     if (!this.state.value) {
@@ -67,21 +65,40 @@ class Comments extends Component {
             author: this.props.profile.userName,
             avatar: this.state.commentavatar,
             content: this.state.value,
-            datetime: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            datetime: moment().format("MMMM Do YYYY, h:mm:ss a")
           },
           ...this.state.comments
         ]
       });
     }, 200);
 
+    let briefGameInfo = {
+      playStatus: this.props.playStatus,
+      uid: this.props.auth.uid,
+      gameID: this.props.gameID,
+      gameName: this.props.game.name.toString(),
+      rate: this.state.rateValue
+    };
+    if (this.props.game.cover) {
+      briefGameInfo.gameCover = this.props.game.cover;
+    }
+
     setTimeout(() => {
       let commentInfo = {
         gameID: this.props.gameID,
         commentList: this.state.comments
       };
-      console.log(commentInfo.commentList);
+      //console.log(commentInfo.commentList);
+      this.props.actions.addItemToList(briefGameInfo);
       this.props.actions.addComments(commentInfo);
     }, 2000);
+  };
+
+  handleRateChange = rateValue => {
+    console.log(this.state.rateValue);
+    this.setState({
+      rateValue: rateValue
+    });
   };
 
   handleChange = e => {
@@ -91,29 +108,63 @@ class Comments extends Component {
   };
 
   render() {
-    const { comments, submitting, value } = this.state;
+    const { comments, submitting, value, rateValue } = this.state;
+    const { signUp, signIn, auth, authError, rate } = this.props;
 
-    console.log(comments);
+    console.log(this.props.gameID);
+    let buttonComment = null;
+
+    if (auth.isEmpty) {
+      buttonComment = (
+        <PlayStatusModal
+          playStatus={"Add Comment"}
+          auth={auth}
+          authError={authError}
+          signUp={signUp}
+          signIn={signIn}
+        />
+      );
+    } else {
+      buttonComment = (
+        <Button
+          htmlType="submit"
+          loading={submitting}
+          onClick={this.handleSubmit}
+          type="primary"
+        >
+          Add Comment
+        </Button>
+      );
+    }
+
+    let rateComponent = (
+      <Form.Item>
+        <Rate
+          allowHalf
+          onChange={value => {
+            this.handleRateChange(value);
+          }}
+          defaultValue={rate}
+        />
+      </Form.Item>
+    );
+
     return (
       <div className="game-comment">
         {comments.length > 0 && <CommentList comments={comments} />}
-        <Comment id="comment-area"
-          avatar={
-            <Avatar
-              src= {profilePic}
-            />
-        
-          }
+        <Comment
+          id="comment-area"
+          avatar={<Avatar src={profilePic} />}
           content={
             <Editor
+              rateComponent={rateComponent}
               onChange={this.handleChange}
-              onSubmit={this.handleSubmit}
-              submitting={submitting}
               value={value}
+              rateValue={rateValue}
+              buttonComment={buttonComment}
             />
           }
         />
-       
       </div>
     );
   }

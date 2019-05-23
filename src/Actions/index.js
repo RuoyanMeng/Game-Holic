@@ -117,7 +117,7 @@ export function getPlayStatus(id) {
             dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
           } else {
             games.forEach(game => {
-              playStatus = game.data().playStatus;
+              playStatus = game.data();
               dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
             });
           }
