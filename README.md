@@ -5,10 +5,10 @@ Up to now, we have done the following updates:
 * Reorganize the file architecture to make the separation between containers and presentational components more precise and clear
 
 * Add more functionality
-    * a. add drag and drop functionality to personal lists:
+    * add drag and drop functionality to personal lists:
         * reorder the items
         * move items to another list
-    * b. add more operation to single game:
+    * add more operation to single game:
         * add rating (users can rate the game from 0 to 5 stars) 
         * add comments (users can add comments about the game and see others' replies)
         * add hover delete button (users can delete the items in their personal lists directly)
