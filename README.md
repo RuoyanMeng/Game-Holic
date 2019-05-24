@@ -5,13 +5,13 @@ Up to now, we have done the following updates:
 * Reorganize the file architecture to make the separation between containers and presentational components more precise and clear
 
 * Add more functionality
-a. add drag and drop functionality to personal lists:
--- reorder the items
--- move items to another list
-b. add more operation to single game:
--- add rating (users can rate the game from 0 to 5 stars) 
--- add comments (users can add comments about the game and see others' replies)
--- add hover delete button (users can delete the items in their personal lists directly)
+    * a. add drag and drop functionality to personal lists:
+        * reorder the items
+        * move items to another list
+    * b. add more operation to single game:
+        * add rating (users can rate the game from 0 to 5 stars) 
+        * add comments (users can add comments about the game and see others' replies)
+        * add hover delete button (users can delete the items in their personal lists directly)
 
 ## What is it?
 GameHolic is a web application where users can search for trendy games and view detailed information of games, including rating scores, game descriptions and etc. Users can log in the site and add the selected games to their collection lists of their own accounts, as well as edit the items of those lists. The project is using React and Redux dealing with data and interaction
