@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Comment, Avatar, Form, Button, List, Input, Rate } from "antd";
+import { Comment, Avatar, Form, Button, List, Input, Rate, Alert } from "antd";
 import moment from "moment";
 import PlayStatusModal from "./PlayStatusModal";
 import profilePic from "../../img/profile.png";
@@ -39,7 +39,7 @@ class Comments extends Component {
       submitting: false,
       value: "",
       rateValue: "",
-      commentavatar: profilePic
+      commentavatar: profilePic,
     };
   }
 
@@ -49,6 +49,7 @@ class Comments extends Component {
 
   handleSubmit = () => {
     if (!this.state.value) {
+      alert("Warning: the comments can not be empty before submitting!");
       return;
     }
 
@@ -65,7 +66,7 @@ class Comments extends Component {
             author: this.props.profile.userName,
             avatar: this.state.commentavatar,
             content: this.state.value,
-            datetime: moment().format("MMMM Do YYYY, h:mm:ss a")
+            datetime: "Rating: " + this.state.rateValue + " ( " +moment().format("MMMM Do YYYY, h:mm:ss a") + " )"
           },
           ...this.state.comments
         ]
@@ -108,7 +109,7 @@ class Comments extends Component {
   };
 
   render() {
-    const { comments, submitting, value, rateValue } = this.state;
+    const { comments, submitting, value, rateValue} = this.state;
     const { signUp, signIn, auth, authError, rate } = this.props;
 
     console.log(this.props.gameID);
@@ -135,23 +136,26 @@ class Comments extends Component {
           Add Comment
         </Button>
       );
-    }
+    };
 
+  
     let rateComponent = (
       <Form.Item>
         <Rate
+          // allowClear={true}
           allowHalf
           onChange={value => {
             this.handleRateChange(value);
           }}
-          defaultValue={rate}
+          // defaultValue={rate}
+          defaultValue={0}
         />
       </Form.Item>
     );
 
     return (
       <div className="game-comment">
-        {comments.length > 0 && <CommentList comments={comments} />}
+        {comments.length > 0 && <CommentList comments={comments} />}      
         <Comment
           id="comment-area"
           avatar={<Avatar src={profilePic} />}
@@ -166,6 +170,7 @@ class Comments extends Component {
           }
         />
       </div>
+      
     );
   }
 }
