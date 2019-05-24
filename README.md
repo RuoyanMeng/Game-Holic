@@ -1,5 +1,18 @@
 # GameHolic
 
+## Updates
+Up to now, we have done the following updates:
+* Reorganize the file architecture to make the separation between containers and presentational components more precise and clear
+
+* Add more functionality
+a. add drag and drop functionality to personal lists:
+-- reorder the items
+-- move items to another list
+b. add more operation to single game:
+-- add rating (users can rate the game from 0 to 5 stars) 
+-- add comments (users can add comments about the game and see others' replies)
+-- add hover delete button (users can delete the items in their personal lists directly)
+
 ## What is it?
 GameHolic is a web application where users can search for trendy games and view detailed information of games, including rating scores, game descriptions and etc. Users can log in the site and add the selected games to their collection lists of their own accounts, as well as edit the items of those lists. The project is using React and Redux dealing with data and interaction
 
@@ -16,6 +29,7 @@ To start a local version, download and run ## npm install, ## npm start
 ### Libraries used
 * Ant Design of React
 * Tachyons
+* react-beautiful-dnd
 
 ### API used
 * IGDB API
@@ -33,31 +47,34 @@ To start a local version, download and run ## npm install, ## npm start
     │   ├── actionTypes.js
     ├   ├── authActions.js
     │   └── index.js
-    
     ├── Api // Fetch data 
     │   └── api.js
+
     ├── App.js // Router
-    ├── Components // Render different view when state changes, event listener, layput design
-    │   ├── GameGrid.js  // Components for showing trendy game list
-    │   ├── Main.js // Components for homepage
-    │   ├── Header.js   // Components for header bar
-    │   ├── SingleGame.js   // Components for game details page
-    │   ├── UserIndex.js   // Components for user index page
-    │   ├── Search.js   // Components for Searching
+    ├── Components
     │   ├── auth // Components handle signin/signup part
     │   ├    ├── SignIn.js
     │   ├    ├── SignUp.js
-    │   ├── gamelist // Components handle game collection lists
-    │   ├    ├── AbandonedList.js
-    │   ├    ├── CompletedList.js
-    │   ├    │── PlayingList.js
-    │   ├    │── WishListt.js
+    │   ├── Containers
+    │   ├    ├── Main.js
+    │   ├    ├── Search.js
+    │   ├    ├── SingleGame.js
+    │   ├    ├── UserIndex.js    
+    │   ├── Presentational
+    │   ├    ├── Comments.js
+    │   ├    ├── gameDetails.js
+    │   ├    │── GameGrid.js
+    │   ├    │── GameList.js
+    │   ├    │── PlayStatusModal.js
+    │   ├── Header.js
+
 
     ├── Reducers //Reducers specify how the state changes in response to actions sent to the store.
     │   ├── Index.js
     │   ├── editGameList.js
     │   ├── getAllGames.js
     │   ├── getSingleGame.js
+    │   ├── getComment.js    
     │   └── authReducers.js
     ├── Store // Holds state, allows state to be updated via dispatch()
     │   └── configureStore.js
@@ -70,7 +87,9 @@ To start a local version, download and run ## npm install, ## npm start
     │   ├── search.scss
     │   ├── Sign.css
     │   ├── singlegame.scss
-    │   └── UserIndex.scss
+    │   ├── UserIndex.scss
+    │   └── comments.scss
+
     │── img
     │   ├── background.png
     │   ├── bg1.jpg
