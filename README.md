@@ -68,7 +68,6 @@ To start a local version, download and run ## npm install, ## npm start
     │   ├    │── PlayStatusModal.js
     │   ├── Header.js
 
-
     ├── Reducers //Reducers specify how the state changes in response to actions sent to the store.
     │   ├── Index.js
     │   ├── editGameList.js

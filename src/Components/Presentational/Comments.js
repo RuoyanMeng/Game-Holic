@@ -128,6 +128,7 @@ class Comments extends Component {
     } else {
       buttonComment = (
         <Button
+          className="commentButton"
           htmlType="submit"
           loading={submitting}
           onClick={this.handleSubmit}
