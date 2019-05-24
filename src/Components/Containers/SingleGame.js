@@ -39,6 +39,7 @@ class SingleGame extends Component {
 
   componentWillUnmount = () => {
     this.props.actions.resetState("SINGLEGAME");
+    //this.props.actions.resetState("COMMENT");
   };
 
   render() {
@@ -81,6 +82,36 @@ class SingleGame extends Component {
               signUp={signUp}
             />
           );
+          switch (isFetchingComment) {
+            case "LOADING":
+              commentDiv = (
+                <h1 className="white mt7 ml7">
+                  <Icon type="loading" />
+                </h1>
+              );
+              break;
+            case "LOADED":
+              let signUp = <Link to="/SignUp">Sign Up</Link>;
+              //console.log(commentList);
+              commentDiv = (
+                <Comments
+                  authError={authError}
+                  actions={actions}
+                  gameID={this.state.currentId}
+                  commentList={commentList}
+                  profile={profile}
+                  auth={auth}
+                  signIn={this.props.signIn}
+                  signUp={signUp}
+                  game={game}
+                  playStatus={playStatus}
+                  rate={gameRate}
+                />
+              );
+              break;
+            default:
+              commentDiv = <b>Failed to load data, please try again</b>;
+          }
         } else {
           if (!this.props.auth.isEmpty) {
             let id = {
@@ -157,6 +188,7 @@ class SingleGame extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
     playStatus: state.singleGame.playStatus.playStatus,
     gameRate: state.singleGame.playStatus.rate,

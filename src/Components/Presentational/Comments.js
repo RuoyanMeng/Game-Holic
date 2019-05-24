@@ -44,7 +44,7 @@ class Comments extends Component {
   }
 
   componentWillUnmount = () => {
-    this.props.actions.resetState("COMMENT");
+    //this.props.actions.resetState("COMMENT");
   };
 
   handleSubmit = () => {
@@ -92,7 +92,7 @@ class Comments extends Component {
       //console.log(commentInfo.commentList);
       this.props.actions.addItemToList(briefGameInfo);
       this.props.actions.addComments(commentInfo);
-    }, 2000);
+    }, 1500);
   };
 
   handleRateChange = rateValue => {
