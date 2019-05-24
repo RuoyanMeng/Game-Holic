@@ -102,7 +102,10 @@ export function getPlayStatus(id) {
     const firestore = getFirestore();
     var playStatus = null;
     if (id.uid === null) {
-      playStatus = "Set Status";
+      playStatus = {
+        playStatus: "Set Status",
+        rate: 0
+      };
       dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
     } else {
       firestore
@@ -113,7 +116,10 @@ export function getPlayStatus(id) {
         .get()
         .then(games => {
           if (games.size === 0) {
-            playStatus = "Set Status";
+            playStatus = {
+              playStatus: "Set Status",
+              rate: 0
+            };
             dispatch({ type: "GET_PLAYSTATUS_SUCCESS", playStatus });
           } else {
             games.forEach(game => {
@@ -182,7 +188,7 @@ export function getComments(gameID) {
       .doc(gameID)
       .get()
       .then(comments => {
-        console.log(comments._document)
+        //console.log(comments._document)
         if (comments._document === null) {
           commentList = [];
         } else {
