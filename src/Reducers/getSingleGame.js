@@ -2,7 +2,10 @@ const initialState = {
   game: {},
   isFetching: "LOADING",
   isGetingPlayStatus: "LOADING",
-  playStatus: "Set Status"
+  playStatus: {
+    playStatus: "Set Status",
+    rate:0
+  }
 }
 
 export default function getSingleGameReducer(state = initialState, action) {
