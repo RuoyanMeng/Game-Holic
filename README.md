@@ -20,7 +20,9 @@ GameHolic is a web application where users can search for trendy games and view 
 [GameHolic](https://game-holic-590ee.firebaseapp.com/)
 
 ## To start a local version
-To start a local version, download and run ## npm install, ## npm start
+To start a local version, download and run:
+<pre><code>npm install</code></pre>
+<pre><code>npm start</code></pre>
   
 ### Frameworks used
 * ReactJS
