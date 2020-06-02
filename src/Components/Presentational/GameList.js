@@ -34,14 +34,12 @@ class GameList extends Component {
     })
 
     setTimeout(() => {
-      console.log(this.state.gameList);
       this.props.actions.addItemToList(gameInfo)
     },500)
 
   };
 
   render() {
-    console.log(this.state.gameList);
     const { gameList } = this.state;
 
     const { droppableId, isFetching } = this.props;

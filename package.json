@@ -8,7 +8,6 @@
     "firebase": "^5.9.2",
     "gh-pages": "^2.0.1",
     "moment": "^2.24.0",
-    "node-sass": "^4.11.0",
     "react": "^16.8.4",
     "react-beautiful-dnd": "^11.0.3",
     "react-dom": "^16.8.4",
@@ -37,5 +36,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "node-sass": "^4.12.0"
+  }
 }

@@ -20,7 +20,8 @@ class GamesApi {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'user-key': API_KEY
+        'user-key': API_KEY,
+        'Access-Control-Allow-Origin':'*'
       },
       data: 'fields *, cover.*;' + search + ' limit 33;'
     })

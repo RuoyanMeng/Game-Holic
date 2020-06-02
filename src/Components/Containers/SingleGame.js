@@ -188,7 +188,6 @@ class SingleGame extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     playStatus: state.singleGame.playStatus.playStatus,
     gameRate: state.singleGame.playStatus.rate,

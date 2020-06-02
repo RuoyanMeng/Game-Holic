@@ -44,7 +44,7 @@ class Comments extends Component {
   }
 
   componentWillUnmount = () => {
-    //this.props.actions.resetState("COMMENT");
+    this.props.actions.resetState("COMMENT");
   };
 
   handleSubmit = () => {
@@ -96,7 +96,6 @@ class Comments extends Component {
   };
 
   handleRateChange = rateValue => {
-    console.log(this.state.rateValue);
     this.setState({
       rateValue: rateValue
     });
@@ -112,7 +111,6 @@ class Comments extends Component {
     const { comments, submitting, value, rateValue} = this.state;
     const { signUp, signIn, auth, authError, rate } = this.props;
 
-    console.log(this.props.gameID);
     let buttonComment = null;
 
     if (auth.isEmpty) {

@@ -90,7 +90,6 @@ class UserIndex extends Component {
   }
 
   onDragEnd(result) {
-    console.log(result);
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -102,16 +101,13 @@ class UserIndex extends Component {
         result.source.index,
         result.destination.index
       );
-      console.log(newList);
       switch (result.destination.droppableId) {
         case "wishList":
-          console.log("wish");
           this.setState({
             wishList: newList
           });
           break;
         case "playingList":
-          console.log("play");
           this.setState({
             playingList: newList
           });
@@ -143,7 +139,6 @@ class UserIndex extends Component {
           gameItemInfo.playStatus = "Completed";
           break;
       }
-      console.log(gameItemInfo);
       this.props.actions.addItemToList(gameItemInfo);
 
       this.setState(newLists);
